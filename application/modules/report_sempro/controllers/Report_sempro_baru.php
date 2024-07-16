@@ -31,10 +31,11 @@ class Report_sempro_baru extends CI_Controller {
 
 		header('Content-Type: application/json');
 		$date1 			= $_POST['date1'];
+		$searchValue = $this->input->post('search')['value'];
 		$date2 			= $_POST['date2'];
 		$jrsn 			= $_POST['jrsn'];
 
-		$data = $this->M_report_sempro->get_data_sempro($date1, $date2, $jrsn);
+		$data = $this->M_report_sempro->get_data_sempro($date1, $date2, $jrsn,$searchValue);
 		echo $data;
 	}
 	

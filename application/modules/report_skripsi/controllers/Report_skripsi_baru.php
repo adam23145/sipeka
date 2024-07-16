@@ -35,8 +35,9 @@ class Report_skripsi_baru extends CI_Controller {
 		$date1 		= $_POST['date1'];
 		$date2 		= $_POST['date2'];
 		$group 		= $_POST['jrsn'];
+		$searchValue = $this->input->post('search')['value'];
 
-		$data = $this->M_report_skripsi->get_data_detail($date1, $date2, $group);
+		$data = $this->M_report_skripsi->get_data_detail($date1, $date2, $group,$searchValue);
 		echo $data;
 	}
 

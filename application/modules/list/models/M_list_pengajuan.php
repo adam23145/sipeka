@@ -4,7 +4,7 @@ date_default_timezone_set('Asia/Jakarta');
 
 class M_list_pengajuan extends CI_Model {
 
-	function get_data_pengajuan($stts_sub, $userlevel) {
+	function get_data_pengajuan($stts_sub, $userlevel, $searchValue = null) {
 
 
 		if($userlevel=='Wadek' || $userlevel=='Dekan'){
@@ -36,6 +36,9 @@ class M_list_pengajuan extends CI_Model {
 			");
 		$this->datatables->from("title_submission");
 		$this->datatables->where($where);
+		if (!empty($searchValue)) {
+			$this->db->like('student_name', $searchValue, 'both');
+		}
 		// $this->datatables->add_column('action','<center>
   //           <button class="btn btn-primary btn-sm btn-edit"><i style="color: white;" class="fa fa-pencil-alt"></i></button>
   //           </center>
@@ -44,7 +47,7 @@ class M_list_pengajuan extends CI_Model {
 		return $data;
 	}
 
-	function get_data_pengajuanx($stts_sub,$userlevel,$ps) {
+	function get_data_pengajuanx($stts_sub,$userlevel,$ps, $searchValue = null) {
 		if($stts_sub == 'Tolak'){
 
 			$where = "submission_status='$stts_sub' AND jurusan='$ps' " ;
@@ -66,6 +69,9 @@ class M_list_pengajuan extends CI_Model {
 			");
 		$this->datatables->from("title_submission");
 		$this->datatables->where($where);
+		if (!empty($searchValue)) {
+			$this->db->like('student_name', $searchValue, 'both');
+		}
 		$this->datatables->add_column('action','<center>
             <button class="btn btn-primary btn-sm btn-edit"><i style="color: white;" class="fa fa-pencil-alt"></i></button>
             </center>

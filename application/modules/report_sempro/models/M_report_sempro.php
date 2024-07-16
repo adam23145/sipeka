@@ -11,7 +11,7 @@ class M_report_sempro extends CI_Model {
 		return $data;
 	}
 
-	function get_data_sempro($date1, $date2, $jrsn) {
+	function get_data_sempro($date1, $date2, $jrsn, $searchValue = null) {
 
 		$where = " 1=1 ";
 
@@ -47,11 +47,15 @@ class M_report_sempro extends CI_Model {
 		$this->datatables->join("title_submission ts", "b.submission_code=ts.submission_code");
 		$this->datatables->join('m_dosen ds', 'ds.nip=b.dosbing', 'left');
 		$this->datatables->where($where);
+		
+		if (!empty($searchValue)) {
+			$this->db->like('ts.student_name', $searchValue, 'both');
+		}
 		$data = $this->datatables->generate();
 		return $data;
 	}
 
-	function get_data_sempro_proses($date1, $date2, $jrsn, $lepel) {
+	function get_data_sempro_proses($date1, $date2, $jrsn, $lepel, $searchValue = null) {
 
 		$where = " 1=1 AND b.status_bimb!='Setuju'";
 
@@ -87,11 +91,15 @@ class M_report_sempro extends CI_Model {
 		$this->datatables->join("title_submission ts", "b.submission_code=ts.submission_code");
 		$this->datatables->join('m_dosen ds', 'ds.nip=b.dosbing', 'left');
 		$this->datatables->where($where);
+		
+		if (!empty($searchValue)) {
+			$this->db->like('ts.student_name', $searchValue, 'both');
+		}
 		$data = $this->datatables->generate();
 		return $data;
 	}
 
-	function get_data_sempro_baru($date1, $date2, $jrsn, $lepel) {
+	function get_data_sempro_baru($date1, $date2, $jrsn, $lepel, $searchValue = null) {
 
 		$where = " 1=1 AND b.status_bimb!='Setuju'";
 
@@ -126,11 +134,15 @@ class M_report_sempro extends CI_Model {
 		$this->datatables->from("title_submission ts");
 		$this->datatables->join('m_dosen ds', 'ds.nip=ts.dosbing', 'left');
 		$this->datatables->where($where);
+		
+		if (!empty($searchValue)) {
+			$this->db->like('ts.student_name', $searchValue, 'both');
+		}
 		$data = $this->datatables->generate();
 		return $data;
 	}
 
-	function get_data_end_sempro($date1, $date2, $jrsn) {
+	function get_data_end_sempro($date1, $date2, $jrsn, $searchValue = null) {
 
 		$where = " 1=1 AND b.status_bimb='Setuju'";
 
@@ -166,6 +178,9 @@ class M_report_sempro extends CI_Model {
 		$this->datatables->join("title_submission ts", "b.submission_code=ts.submission_code");
 		$this->datatables->join('m_dosen ds', 'ds.nip=b.dosbing', 'left');
 		$this->datatables->where($where);
+		if (!empty($searchValue)) {
+			$this->db->like('ts.student_name', $searchValue, 'both');
+		}
 		$data = $this->datatables->generate();
 		return $data;
 	}

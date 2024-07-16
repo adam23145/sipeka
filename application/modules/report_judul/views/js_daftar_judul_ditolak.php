@@ -86,7 +86,7 @@
 			sProcessing: "loading..."
 		},
 		processing: true,
-		serverSide: true,
+		serverSide: false,
 		ajax: {
 			url: baseURL + "report_judul/daftar_judul_ditolak/data_detail",
 			type: "POST",

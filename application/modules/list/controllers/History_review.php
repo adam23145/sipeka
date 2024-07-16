@@ -57,6 +57,7 @@ class History_review extends CI_Controller {
 		$date1 		= $_POST['date1'];
 		$date2 		= $_POST['date2'];
 		$nmmhs 		= $_POST['nmmhs'];
+		$searchValue = $this->input->post('search')['value'];
 
 		$pjgmhs = strlen($nmmhs);
 		// var_dump($pjgmhs);
@@ -72,7 +73,7 @@ class History_review extends CI_Controller {
 		}
 		// $userlevel 	= $this->session->userdata['logged_in']['userlevel'];
 
-		$data = $this->M_history_review->get_data_detail($date1, $date2, $nmmhs, $userlevel, $ps,$pjgmhs);
+		$data = $this->M_history_review->get_data_detail($date1, $date2, $nmmhs, $userlevel, $ps,$pjgmhs,$searchValue);
 		echo $data;
 	}
 

@@ -96,6 +96,10 @@
 			data: function(d){
 				d.date1 		= $('#datepicker').val();
 				d.date2 		= $('#datepicker2').val();
+				var searchValue = $('#mytable_filter').val().toUpperCase();
+				d.search = {
+					value: searchValue
+				};
 				d.jrsn 			= $('#jrsn').val();
 				d.token		 	= "<?php echo $this->security->get_csrf_hash(); ?>";
 			}
@@ -150,6 +154,10 @@
 			$('td:eq(0)', row).html(index);
 		},
 
+	});
+	// Handle keyup event for search input
+	$('#mytable_filter').on('keyup', function() {
+		table.search(this.value).draw();
 	});
 
 </script>

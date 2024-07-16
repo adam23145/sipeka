@@ -1,41 +1,44 @@
-<?php 
+<?php
 if (!defined('BASEPATH')) exit('No direct script access allowed');
 date_default_timezone_set('Asia/Jakarta');
 
-class Form_response extends CI_Controller {
+class Form_response extends CI_Controller
+{
 
-	function __construct(){
+	function __construct()
+	{
 		parent::__construct();
 		$this->load->model('M_response');
 		if (!$this->session->userdata('logged_in')) {
 			redirect('login');
 		}
 
-		if($this->session->userdata['logged_in']['userlevel'] == 'Wadek' || $this->session->userdata['logged_in']['userlevel'] == 'Dekan' || $this->session->userdata['logged_in']['userlevel'] == 'Admin Prodi' ){
+		if ($this->session->userdata['logged_in']['userlevel'] == 'Wadek' || $this->session->userdata['logged_in']['userlevel'] == 'Dekan' || $this->session->userdata['logged_in']['userlevel'] == 'Admin Prodi') {
 			redirect('dasbhoard');
 		}
 	}
 
-	function edit(){
-		$this->breadcrumb->add('Form','form/form_response')
-		->add('Detail Pengajuan Judul','form/form_response');
+	function edit()
+	{
+		$this->breadcrumb->add('Form', 'form/form_response')
+			->add('Detail Pengajuan Judul', 'form/form_response');
 
 		$sub_code 	= $this->uri->segment(4);
 		$title_sub 	= $this->M_response->get_sub($sub_code);
 		$jurusan 	= $title_sub[0]['jurusan'];
 		$data_dosen = $this->M_global->get_dosen($jurusan);
-		
-		if($title_sub[0]['code_status']=='Proses'){
+
+		if ($title_sub[0]['code_status'] == 'Proses') {
 			$stts_skrip = 'Pengajuan Baru';
-		}else if($title_sub[0]['code_status']=='Submit revisi'){
+		} else if ($title_sub[0]['code_status'] == 'Submit revisi') {
 			$stts_skrip = 'Pengajuan Revisi';
-		}else{
+		} else {
 			$stts_skrip = 'Diteruskan';
 		}
 
-		if($title_sub[0]['submission_status']!='In Review Koorprodi'){
+		if ($title_sub[0]['submission_status'] != 'In Review Koorprodi') {
 			$dosbing = $title_sub[0]['dosbing'];
-		}else{
+		} else {
 			$dosbing = '';
 		}
 
@@ -60,14 +63,40 @@ class Form_response extends CI_Controller {
 		$this->parser->parse('template/template', $data);
 	}
 
-	function data_status(){
+	function data_status()
+	{
 		$sub_code 			= $_POST['subcode'];
 		header('Content-Type: application/json');
 		$data = $this->M_response->get_data_status($sub_code);
 		echo $data;
 	}
+	function update_title()
+	{
+		$submission_code = $this->input->post('submission_code');
+		$new_title = $this->input->post('new_title');
+		$judul = $this->input->post('judul2');
+		$username = $this->session->userdata['logged_in']['username'];
 
-	function save(){
+		// Mendapatkan judul lama sebelum melakukan update
+		// $old_title = $this->M_response->get_current_title($submission_code);
+
+		if ($submission_code && $new_title && $judul && $username) {
+			$update = $this->M_response->update_title($submission_code, $new_title, $judul,$username);
+
+			if ($update) {
+				$response = array('status' => 'success', 'message' => 'Title updated successfully');
+			} else {
+				$response = array('status' => 'error', 'message' => 'Failed to update title');
+			}
+		} else {
+			$response = array('status' => 'error', 'message' => 'Invalid input data');
+		}
+
+		echo json_encode($response);
+	}
+
+	function save()
+	{
 		$userid 			= $this->session->userdata['logged_in']['userid'];
 		$sub_code 			= $_POST['sub_code'];
 
@@ -77,41 +106,40 @@ class Form_response extends CI_Controller {
 		$loker_grp			= $_POST['loker_grp'];
 		$nim				= $_POST['nim'];
 		$judul				= $_POST['judul'];
-		
-		if($stats=='Terima'){			
+
+		if ($stats == 'Terima') {
 			$dosen 				= $_POST['dsen'];
 			$aksi_stat			= 'New';
 			$aksi_log			= 'Acc';
 			// $stats				= 'In Review '.$loker_grp;
-			$stats				= 'Acc '.$loker;
+			$stats				= 'Acc ' . $loker;
 			// if($loker_grp=='Dosen'){
 			// 	$stats				= 'Bimbingan '.$loker_grp;
 			// }
-		}else if($stats=='Tolak'){
+		} else if ($stats == 'Tolak') {
 			$loker_grp			= 'mahasiswa';
 			$dosen 				= 'None';
 			$aksi_stat			= $_POST['aksi_stat'];
 			$aksi_log			= 'Revisi';
 		}
 		$reason				= $_POST['reason'];
-		
+
 
 		$update = $this->M_response->update($userid, $sub_code, $id_sub, $stats, $loker_grp, $dosen, $aksi_stat, $reason);
-		if($update){
-			$update = $this->M_response->update_log($userid, $sub_code, $stats, $loker_grp, $reason, $aksi_stat,$aksi_log);
+		if ($update) {
+			$update = $this->M_response->update_log($userid, $sub_code, $stats, $loker_grp, $reason, $aksi_stat, $aksi_log);
 
 			if ($update) {
-				if($_POST['stats']=='Terima'){
-					if($loker_grp=='Dosen'){
+				if ($_POST['stats'] == 'Terima') {
+					if ($loker_grp == 'Dosen') {
 						$insertdok = $this->M_response->insertdok($userid, $nim, $judul, $dosen, $sub_code);
-					}					
+					}
 				}
-				
+
 				$result['feedback'] = 'Berhasil Approve Pengajuan Judul';
 			}
-		}		
-		
+		}
+
 		echo json_encode($result);
 	}
-
 }

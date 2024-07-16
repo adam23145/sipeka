@@ -6,52 +6,38 @@
 <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.html5.min.js"></script>
 
 <script type="text/javascript">
+	$("#nama_mhs").on("select2:select select2:unselect", function(e) {
+		var items = $('#nama_mhs option:selected').toArray().map(item => item.value).join();
+		$('#nmmhs').val(items);
+	});
 
-	$("#nama_mhs").on("select2:select select2:unselect", function (e) {
-    var items= $('#nama_mhs option:selected').toArray().map(item => item.value).join();
-
-    $('#nmmhs').val(items);
-
-	})
-
-	$(document).ready(function(){
+	$(document).ready(function() {
 		$('.select2').select2();
-		  bsCustomFileInput.init();
-		  
-		  $( "#datepicker").datepicker({
-			    dateFormat: 'yy-mm-dd',
-			    changeMonth:true,
-			    format: 'yyyy-mm-dd',
-			    changeYear:true,
-			    todayHighlight: true,
-			    autoclose: true,
-			    endDate: new Date
-			}).on('keypress', function(e){ e.preventDefault(); });
+		bsCustomFileInput.init();
 
-		  $( "#datepicker2").datepicker({
-			    dateFormat: 'yy-mm-dd',
-			    changeMonth:true,
-			    format: 'yyyy-mm-dd',
-			    changeYear:true,
-			    todayHighlight: true,
-			    autoclose: true,
-			    endDate: new Date
-			}).on('keypress', function(e){ e.preventDefault(); });
+		$("#datepicker, #datepicker2").datepicker({
+			dateFormat: 'yy-mm-dd',
+			changeMonth: true,
+			changeYear: true,
+			todayHighlight: true,
+			autoclose: true,
+			endDate: new Date()
+		}).on('keypress', function(e) {
+			e.preventDefault();
+		});
 	});
 
 	$('#form-search-report').on('submit', function(e) {
-		
 		e.preventDefault();
-
 		$('#card-table-judul').hide();
 
 		var table = $("#table-judul").DataTable();
-		table.ajax.reload(function(){
+		table.ajax.reload(function() {
 			$('#card-table-judul').fadeIn();
 		});
 	});
 
-	$.fn.dataTableExt.oApi.fnPagingInfo = function (oSettings) {
+	$.fn.dataTableExt.oApi.fnPagingInfo = function(oSettings) {
 		return {
 			"iStart": oSettings._iDisplayStart,
 			"iEnd": oSettings.fnDisplayEnd(),
@@ -63,88 +49,110 @@
 		};
 	};
 
-
 	var table = $("#table-judul").DataTable({
+		// searching: true,
+		// search: {
+		// 	caseInsensitive: true // Membuat pencarian case insensitive
+		// },
 		lengthChange: true,
-		lengthMenu: [[100, 500, 1000, 5000], [100, 500, 1000, 5000]],
-  		initComplete: function () {
+		lengthMenu: [
+			[100, 500, 1000, 5000],
+			[100, 500, 1000, 5000]
+		],
+		initComplete: function() {
 			var api = this.api();
 			$('#mytable_filter input')
-			.off('.DT')
-			.on('keyup.DT', function (e) {
-				if (e.keyCode == 13) {
-					api.search(this.value).draw();
-				}
-			});
-			table.buttons().container()
-			.appendTo('#disini');
+				.off('.DT')
+				.on('keyup.DT', function(e) {
+					if (e.keyCode == 13) {
+						api.search(this.value).draw();
+					}
+				});
+			table.buttons().container().appendTo('#disini');
 		},
 		oLanguage: {
 			sProcessing: "loading..."
 		},
 		processing: true,
 		serverSide: true,
+		searching: false,
 		ajax: {
 			url: baseURL + "list/history_review/data_detail",
 			type: "POST",
-			data: function(d){
-				d.date1 		= $('#datepicker').val();
-				d.date2 		= $('#datepicker2').val();
-				d.nmmhs 		= $('#nmmhs').val();
-				d.lpl 		= $('#lpl').val();
-				d.token		 	= "<?php echo $this->security->get_csrf_hash(); ?>";
+			data: function(d) {
+				d.date1 = $('#datepicker').val();
+				d.date2 = $('#datepicker2').val();
+				d.nmmhs = $('#nmmhs').val();
+				d.lpl = $('#lpl').val();
+				var searchValue = $('#mytable_filter2').val().toUpperCase();
+
+				// Mengatur nilai pencarian ke dalam objek 'd.search'
+				d.search = {
+					value: searchValue
+				};
+				d.token = "<?php echo $this->security->get_csrf_hash(); ?>";
 			}
 		},
+
 		columns: [{
-			"data": "id",
-			"searchable" : false
-		},
-		{
-			"data" : "nim",
-			"searchable" : false
-		},
-		{
-			"data" : "student_name"
-		},
-		{
-			"data" : "jurusan"
-		},
-		{
-			"data" : "title"
-		},
-		{
-			"data" : "createddate",
-			"searchable" : false
-		},
-		{
-			"data" : "dosbing"
-		},
-		{
-			"data" : "nama"
-		},
-		{
-			"data" : "submission_status"
-		}
+				"data": "id",
+				"searchable": false
+			},
+			{
+				"data": "nim",
+				"searchable": false
+			},
+			{
+				"data": "student_name",
+				"searchable": true
+			},
+			{
+				"data": "jurusan",
+				"searchable": false
+			},
+			{
+				"data": "title",
+				"searchable": false
+			},
+			{
+				"data": "createddate",
+				"searchable": false
+			},
+			{
+				"data": "dosbing",
+				"searchable": false
+			},
+			{
+				"data": "nama",
+				"searchable": false
+			},
+			{
+				"data": "submission_status",
+				"searchable": false
+			}
 		],
- 		buttons: [
-		{
+		buttons: [{
 			extend: 'excelHtml5',
-			messageTop: function(){
-				return 'Daftar Judul :'+ $('#datepicker').val() + ' to ' + $('#datepicker2').val()
+			messageTop: function() {
+				return 'Daftar Judul :' + $('#datepicker').val() + ' to ' + $('#datepicker2').val();
 			},
 			exportOptions: {
-				columns: [0,1,2,3,4,5,6,7,8]
+				columns: [0, 1, 2, 3, 4, 5, 6, 7, 8]
 			}
-		}
-		],
-		rowCallback: function (row, data, iDisplayIndex) {
+		}],
+		rowCallback: function(row, data, iDisplayIndex) {
 			var info = this.fnPagingInfo();
 			var page = info.iPage;
 			var length = info.iLength;
 			var index = page * length + (iDisplayIndex + 1);
 			$('td:eq(0)', row).html(index);
-		},
-
+		}
 	});
 
+	// Handle keyup event for search input
+	$('#mytable_filter2').on('keyup', function() {
+		table.search(this.value).draw();
+		var searchValue = $(this).val().toUpperCase();
+		console.log('Nilai pencarian: ' + searchValue);
+	});
 </script>

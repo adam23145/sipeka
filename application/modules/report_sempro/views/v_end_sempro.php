@@ -63,6 +63,14 @@
                 <div class="card card-primary card-outline">
                     <div class="card-body">
                         <div id="disini" class="col-md-12"></div>
+                        <div class="row">
+                            <div class="col-10">
+                            </div>
+                            <div class="col-2">
+                                <label for="mytable_filter">Search:</label>
+                                <input type="search" class="form-control form-control-sm" id="mytable_filter">
+                            </div>
+                        </div>
                         <div id="card-table-sempro" class="table-responsive">
                             <table id="table-sempro" class="table table-hover table-striped table-bordered" width="100%">
                                 <thead>

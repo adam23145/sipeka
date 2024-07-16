@@ -4,8 +4,8 @@
             <div class="card card-primary card-outline">
                 <div class="card-header">
                     <h3 class="card-title">
-                      <i class="fas fa-file"></i>
-                      Search Skripsi
+                        <i class="fas fa-file"></i>
+                        Search Skripsi
                     </h3>
                 </div>
                 <div class="card-body">
@@ -19,19 +19,19 @@
                                             <div class="form-group row">
                                                 <label style="text-align: right;" class="col-form-label col-md-3">Tanggal</label>
                                                 <div class="col-md-3">
-                                                    <input id="datepicker" name="datepicker" class="form-control" >
+                                                    <input id="datepicker" name="datepicker" class="form-control">
                                                 </div>
                                                 <label style="text-align: center;" class="col-form-label col-md-1">s.d</label>
                                                 <div class="col-md-3">
-                                                    <input id="datepicker2" name="datepicker2" class="form-control" >
+                                                    <input id="datepicker2" name="datepicker2" class="form-control">
                                                 </div>
-                                            </div>                                            
+                                            </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group row">
                                                 <label style="text-align: right;" class="col-form-label col-md-3">Prodi</label>
                                                 <div class="col-md-7">
-                                                    <select class="custom-select d-block w-100" name="jurusan" id="jurusan" >
+                                                    <select class="custom-select d-block w-100" name="jurusan" id="jurusan">
                                                         <option value="">-- Pilih Prodi --</option>
                                                         {jurusan}
                                                         <option value="{major_name}">{major_name}</option>
@@ -40,8 +40,8 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <input id="nmmhs" name="nmmhs" class="form-control" type="hidden" readonly="true" value="0" >
-                                        <input id="jrsn" name="jrsn" class="form-control" type="hidden" readonly="true" value="0" >
+                                        <input id="nmmhs" name="nmmhs" class="form-control" type="hidden" readonly="true" value="0">
+                                        <input id="jrsn" name="jrsn" class="form-control" type="hidden" readonly="true" value="0">
                                     </div>
                                 </div>
                                 <div class="card-footer bg-light" style="text-align: center;">
@@ -54,6 +54,14 @@
                 <div class="card card-primary card-outline">
                     <div class="card-body table-responsive p-0">
                         <div id="disini" class="col-md-12"></div>
+                        <div class="row">
+                            <div class="col-10">
+                            </div>
+                            <div class="col-2">
+                                <label for="mytable_filter">Search:</label>
+                                <input type="search" class="form-control form-control-sm" id="mytable_filter">
+                            </div>
+                        </div>
                         <div id="card-table-skripsi" class="table-responsive">
                             <table id="table-skripsi" class="table table-hover table-striped table-bordered" width="100%">
                                 <thead>
@@ -77,6 +85,6 @@
                     </div>
                 </div>
             </div>
-        </div>        
+        </div>
     </div>
 </div>

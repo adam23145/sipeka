@@ -33,6 +33,7 @@ class Report_selesai_sempro extends CI_Controller {
 		$date1 			= $_POST['date1'];
 		$date2 			= $_POST['date2'];
 		
+		$searchValue = $this->input->post('search')['value'];
 		$lepel 			= $_POST['lepel'];
 		// var_dump($lepel);
 		// return;
@@ -45,7 +46,7 @@ class Report_selesai_sempro extends CI_Controller {
 			$jrsn 			= $_POST['jrsn'];
 		}
 
-		$data = $this->M_report_sempro->get_data_end_sempro($date1, $date2, $jrsn);
+		$data = $this->M_report_sempro->get_data_end_sempro($date1, $date2, $jrsn,$searchValue);
 		echo $data;
 	}
 	

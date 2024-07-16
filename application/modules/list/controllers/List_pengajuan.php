@@ -27,6 +27,7 @@ class List_pengajuan extends CI_Controller {
 		$stts_s = $_POST['data_sub'];
 		$userlevel = $this->session->userdata['logged_in']['userlevel'];
 		$userid = $this->session->userdata['logged_in']['userid'];
+		$searchValue = $this->input->post('search')['value'];
 		if($stts_s == 'Revisi'){
 			$stts_sub = 'Submit revisi';
 		}else{			
@@ -39,12 +40,12 @@ class List_pengajuan extends CI_Controller {
 			$datax	= $this->M_list_pengajuan->get_data_koor($userid);
 			$ps 	= $datax[0]['program_study'];
 
-			$data = $this->M_list_pengajuan->get_data_pengajuanx($stts_sub,$userlevel,$ps);
+			$data = $this->M_list_pengajuan->get_data_pengajuanx($stts_sub,$userlevel,$ps,$searchValue);
 		}else if($userlevel=='Sekjur' || $userlevel=='Kajur' ){
-			$data = $this->M_list_pengajuan->get_data_pengajuan($stts_sub,$userlevel);
+			$data = $this->M_list_pengajuan->get_data_pengajuan($stts_sub,$userlevel,$searchValue);
 			
 		}else{
-			$data = $this->M_list_pengajuan->get_data_pengajuan($stts_sub,$userlevel);
+			$data = $this->M_list_pengajuan->get_data_pengajuan($stts_sub,$userlevel,$searchValue);
 		}
 				
 		echo $data;

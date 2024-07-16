@@ -88,7 +88,7 @@
 			sProcessing: "loading..."
 		},
 		processing: true,
-		serverSide: true,
+		serverSide: false,
 		ajax: {
 			url: baseURL + "report/daftar_judul/data_detail",
 			type: "POST",

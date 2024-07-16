@@ -89,6 +89,7 @@
 		},
 		processing: true,
 		serverSide: true,
+		searching: false,
 		ajax: {
 			url: baseURL + "report_sempro/report_baru_sempro/data_detail",
 			type: "POST",
@@ -96,6 +97,10 @@
 				d.date1 		= $('#datepicker').val();
 				d.date2 		= $('#datepicker2').val();
 				d.jrsn 		= $('#jrsn').val();
+				var searchValue = $('#mytable_filter').val().toUpperCase();
+				d.search = {
+					value: searchValue
+				};
 				d.lepel 		= "<?php echo $this->session->userdata['logged_in']['userlevel']?>";
 				d.token		 	= "<?php echo $this->security->get_csrf_hash(); ?>";
 			}
@@ -146,6 +151,10 @@
 			$('td:eq(0)', row).html(index);
 		},
 
+	});
+	// Handle keyup event for search input
+	$('#mytable_filter').on('keyup', function() {
+		table.search(this.value).draw();
 	});
 
 </script>

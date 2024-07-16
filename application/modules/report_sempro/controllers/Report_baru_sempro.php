@@ -33,6 +33,7 @@ class Report_baru_sempro extends CI_Controller {
 		$date1 			= $_POST['date1'];
 		$date2 			= $_POST['date2'];
 		
+		$searchValue = $this->input->post('search')['value'];
 		$lepel 			= $_POST['lepel'];
 		$userid 		= $this->session->userdata['logged_in']['userid'];
 
@@ -43,7 +44,7 @@ class Report_baru_sempro extends CI_Controller {
 			$jrsn 			= $_POST['jrsn'];
 		}
 
-		$data = $this->M_report_sempro->get_data_sempro_baru($date1, $date2, $jrsn,$lepel);
+		$data = $this->M_report_sempro->get_data_sempro_baru($date1, $date2, $jrsn,$lepel,$searchValue);
 		echo $data;
 	}
 	
