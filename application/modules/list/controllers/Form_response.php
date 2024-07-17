@@ -67,6 +67,31 @@ class Form_response extends CI_Controller {
 		echo $data;
 	}
 
+	function update_title()
+	{
+		$submission_code = $this->input->post('submission_code');
+		$new_title = $this->input->post('new_title');
+		$judul = $this->input->post('judul2');
+		$username = $this->session->userdata['logged_in']['username'];
+
+		// Mendapatkan judul lama sebelum melakukan update
+		// $old_title = $this->M_response->get_current_title($submission_code);
+
+		if ($submission_code && $new_title && $judul && $username) {
+			$update = $this->M_response->update_title($submission_code, $new_title, $judul,$username);
+
+			if ($update) {
+				$response = array('status' => 'success', 'message' => 'Title updated successfully');
+			} else {
+				$response = array('status' => 'error', 'message' => 'Failed to update title');
+			}
+		} else {
+			$response = array('status' => 'error', 'message' => 'Invalid input data');
+		}
+
+		echo json_encode($response);
+	}
+
 	function save(){
 		$userid 			= $this->session->userdata['logged_in']['userid'];
 		$sub_code 			= $_POST['sub_code'];

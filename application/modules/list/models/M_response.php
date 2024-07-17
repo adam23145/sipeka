@@ -4,16 +4,19 @@ date_default_timezone_set('Asia/Jakarta');
 /**
  * 
  */
-class M_response extends CI_Model {
+class M_response extends CI_Model
+{
 
-	function get_sub($sub_code){
+	function get_sub($sub_code)
+	{
 		$query 		= "SELECT id, submission_code, nim, student_name, title, rms_maslh, jurusan, TO_CHAR(createddate,'YYYY-MM-DD HH24:II:SS')AS createddate, submission_status, loker, urgensi,code_status, dosbing FROM title_submission WHERE submission_code='$sub_code'";
 		$data 		= $this->db->query($query)->result_array();
 		return $data;
 	}
 
 
-	function update($userid, $sub_code, $id_sub, $stats, $loker, $dosen, $aksi_stat, $reason){
+	function update($userid, $sub_code, $id_sub, $stats, $loker, $dosen, $aksi_stat, $reason)
+	{
 		$query 		= " UPDATE title_submission 
 								SET submission_status = '$stats',
 								code_status = '$aksi_stat',
@@ -28,14 +31,16 @@ class M_response extends CI_Model {
 		return $update;
 	}
 
-	function update_log($userid, $sub_code, $stats, $loker, $reason, $aksi_stat,$aksi_log){
+	function update_log($userid, $sub_code, $stats, $loker, $reason, $aksi_stat, $aksi_log)
+	{
 		$query 		= "INSERT INTO trans_title_submission(submission_code,submission_status,loker,upd_by,keterangan_upd, code_status)
 						VALUES('$sub_code','$stats','$loker','$userid','$reason','$aksi_log')";
 		$insert 	= $this->db->query($query);
 		return $insert;
 	}
 
-	function updateforurl($userid, $sub_code, $id_sub, $stats2, $loker_grp, $dosen, $aksi_stat, $reason,$statusurl){
+	function updateforurl($userid, $sub_code, $id_sub, $stats2, $loker_grp, $dosen, $aksi_stat, $reason, $statusurl)
+	{
 		$query 		= " UPDATE title_submission 
 								SET submission_status = '$stats2',
 								code_status = '$aksi_stat',
@@ -50,8 +55,39 @@ class M_response extends CI_Model {
 		$update 	= $this->db->query($query);
 		return $update;
 	}
+	function update_title($submission_code, $new_title, $old_title, $username)
+	{
+		$data = array(
+			'title' => $new_title,
+			// tambahkan field yang ingin di-update
+		);
 
-	function update_2($userid, $sub_code, $id_sub, $stats2, $loker_grp, $dosen, $aksi_stat, $reason){
+		$this->db->where('submission_code', $submission_code);
+		$this->db->update('title_submission', $data);
+
+		if ($this->db->affected_rows() > 0) {
+			$this->insert_title_log($submission_code, $old_title, $new_title, $username);
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	function insert_title_log($submission_code, $old_title, $new_title, $username)
+	{
+		$log_data = array(
+			'submission_code' => $submission_code,
+			'old_title' => $old_title,
+			'new_title' => $new_title,
+			'username' => $username,
+		);
+
+		$this->db->insert('title_submission_log', $log_data);
+
+		return ($this->db->affected_rows() > 0) ? true : false;
+	}
+	function update_2($userid, $sub_code, $id_sub, $stats2, $loker_grp, $dosen, $aksi_stat, $reason)
+	{
 		$query 		= " UPDATE title_submission 
 								SET submission_status = '$stats',
 								code_status = '$aksi_stat',
@@ -66,14 +102,16 @@ class M_response extends CI_Model {
 		return $update;
 	}
 
-	function update_log2($userid, $sub_code, $stats2, $loker_grp, $reason, $aksi_stat,$aksi_log){
+	function update_log2($userid, $sub_code, $stats2, $loker_grp, $reason, $aksi_stat, $aksi_log)
+	{
 		$query 		= "INSERT INTO trans_title_submission(submission_code,submission_status,loker,upd_by,keterangan_upd, code_status)
 						VALUES('$sub_code','$stats','$loker_grp','$userid','$reason','$aksi_log')";
 		$insert 	= $this->db->query($query);
 		return $insert;
 	}
 
-	function insertdok($userid, $nim, $judul, $dosen, $sub_code){
+	function insertdok($userid, $nim, $judul, $dosen, $sub_code)
+	{
 		$query 		= "INSERT INTO dokumen(submission_code, nim, title, dokumen, dosbing, upd, createddate,file_dok)
 									VALUES('$sub_code','$nim','$judul','Cetak form kesediaan menjadi dosen pembimbing','$dosen','$userid', current_timestamp,'Form Kesediaan Menjadi Dosen Pembimbing.docx')";
 		$insert 	= $this->db->query($query);
@@ -81,7 +119,8 @@ class M_response extends CI_Model {
 	}
 
 
-	function get_data_status($sub_code) {
+	function get_data_status($sub_code)
+	{
 		$this->datatables->select("
 			id,
 			submission_status,
@@ -96,5 +135,4 @@ class M_response extends CI_Model {
 		$data = $this->datatables->generate();
 		return $data;
 	}
-
 }

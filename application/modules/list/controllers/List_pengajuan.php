@@ -50,7 +50,7 @@ class List_pengajuan extends CI_Controller {
 				
 		echo $data;
 	}
-
+	
 	function save(){
 		$upd 				= $this->session->userdata['logged_in']['userid'];
 		$id 				= $_POST['id'];
