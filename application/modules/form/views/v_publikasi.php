@@ -36,17 +36,22 @@
 
                         <div class="form-group">
                             <label>NIM:</label>
-                            <input type="text" class="form-control" value="<?php echo substr($this->session->userdata['logged_in']['userid'], 0,12) ?>"  name="nim" readonly="true" required>
+                            <input type="text" class="form-control" value="<?php echo substr($this->session->userdata['logged_in']['userid'], 0, 12) ?>" name="nim" readonly="true" required>
                         </div>
 
                         <div class="form-group">
-                            <label>Dosen Pembimbing Utama:</label>
-                            <input type="text" class="form-control" name="dosen_pembimbing_utama" required>
+                            <label for="dosen_pembimbing_utama">Dosen Pembimbing Utama:</label>
+                            <select class="form-control" id="dosen_pembimbing_utama" name="dosen_pembimbing_utama" required>
+                                <!-- Options will be added dynamically via Ajax -->
+                            </select>
                         </div>
 
+                        <!-- Dropdown for Dosen Pembimbing Kedua -->
                         <div class="form-group">
-                            <label>Dosen Pembimbing Kedua:</label>
-                            <input type="text" class="form-control" name="dosen_pembimbing_kedua">
+                            <label for="dosen_pembimbing_kedua">Dosen Pembimbing Kedua:</label>
+                            <select class="form-control" id="dosen_pembimbing_kedua" name="dosen_pembimbing_kedua">
+                                <!-- Options will be added dynamically via Ajax -->
+                            </select>
                         </div>
 
                         <div class="form-group">
@@ -54,11 +59,21 @@
                             <input type="date" class="form-control" name="tanggal_pengajuan" required>
                         </div>
 
-                        <div class="form-group">
+                        <!-- <div class="form-group">
                             <label>Dokumen Pendukung:</label>
                             <input type="text" class="form-control" name="dokumen_pendukung" required>
+                        </div> -->
+                        <div class="form-group">
+                            <label>Dokumen Pendukung :</label>
+                            <div class="form-group p-t-15">
+                                <div class="input-group">
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input" multiple="" name="dokumen_pendukung" id="dokumen_pendukung" required="">
+                                        <label class="custom-file-label" for="validatedCustomFile">Pilih file...</label>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-
                         <div class="form-group">
                             <label>Kategori Riset:</label>
                             <input type="text" class="form-control" name="kategori_riset" required>
