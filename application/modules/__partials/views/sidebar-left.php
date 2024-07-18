@@ -404,6 +404,12 @@
                   <p>Form Sempro</p>
                 </a>
               </li>
+              <li class="nav-item">
+                <a href="<?php echo base_url();?>form/form_publikasi" <?= ($seg2 == "form_publikasi") ? 'class="nav-link active"' : 'class="nav-link"'; ?> >
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Form Publikasi</p>
+                </a>
+              </li>
             </ul>
           </li>
           <li <?= ($seg1 == "history") ? 'class="nav-item has-treeview menu-open"' : 'class="nav-item has-treeview"'; ?> >
