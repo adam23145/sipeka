@@ -3,7 +3,7 @@
         <div class="col-md-12">
             <div class="card card-primary">
                 <div class="card-header">
-                    <h3 class="card-title">Form Pengajuan Judul</h3>
+                    <h3 class="card-title">Form Publikasi</h3>
                 </div>
                 <form id="form-submtitle" method="POST">
                     <input type="hidden" name="token" id="token" value="<?php echo $this->security->get_csrf_hash(); ?>">
