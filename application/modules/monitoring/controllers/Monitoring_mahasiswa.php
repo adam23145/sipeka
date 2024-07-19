@@ -31,19 +31,21 @@ class Monitoring_mahasiswa extends CI_Controller
         $limit = $this->input->post('length', true);
         $start = $this->input->post('start', true);
         $search = $this->input->post('search')['value'];
+        $year = $this->input->post('year'); // Get the year filter
 
         // Fetch data from the model
-        $list = $this->M_mahasiswa->get_guidance_count_per_student($limit, $start, $search);
-        $totalData = $this->M_mahasiswa->count_all_students();
-        $totalFiltered = $this->M_mahasiswa->count_filtered_students($search);
+        $list = $this->M_mahasiswa->get_guidance_count_per_student($limit, $start, $search, $year);
+        $totalData = $this->M_mahasiswa->count_all_students($year);
+        $totalFiltered = $this->M_mahasiswa->count_filtered_students($search, $year);
 
         // Prepare data for DataTables
         $data = array();
         foreach ($list as $item) {
             $row = array();
             $row[] = $item->nim;
-            $row[] = $item->student_name;
-            $row[] = $item->jumlah_bimbingan;
+            $row[] = $item->nama;
+            $row[] = $item->tahun_masuk;
+            $row[] = $item->bimbingan_ke;
             $data[] = $row;
         }
 
@@ -58,5 +60,12 @@ class Monitoring_mahasiswa extends CI_Controller
 
         // Send JSON response
         echo json_encode($json_data);
+    }
+
+
+    public function get_years()
+    {
+        $years = $this->M_mahasiswa->get_unique_years();
+        echo json_encode($years);
     }
 }
