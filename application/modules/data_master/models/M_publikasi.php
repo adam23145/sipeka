@@ -19,9 +19,9 @@ class M_publikasi extends CI_Model
 
     public function get_all($limit, $start, $search = null, $status = null)
     {
-        
+
         $this->db->limit($limit, $start);
-        
+
         if ($status) {
             $this->db->where('status_pengajuan', $status); // Filter by status
         }
@@ -53,8 +53,8 @@ class M_publikasi extends CI_Model
 
         if ($search) {
             $this->db->group_start(); // Start a group for the LIKE conditions
-            $this->db->like('judul_tugas_akhir', $search);
-            $this->db->or_like('nama_mahasiswa', $search);
+            $this->db->like('LOWER(judul_tugas_akhir)', strtolower($search));
+            $this->db->or_like('LOWER(nama_mahasiswa)', strtolower($search));
             $this->db->group_end(); // End the group
         }
 
