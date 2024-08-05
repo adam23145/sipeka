@@ -31,7 +31,8 @@ class Data_dosen extends CI_Controller {
 	
 	function list_data(){
 		header('Content-Type: application/json');
-		$data = $this->M_dosen->get_data_dosen();
+		$searchValue = $this->input->post('search')['value'];
+		$data = $this->M_dosen->get_data_dosen($searchValue);
 		echo $data;
 	}
 

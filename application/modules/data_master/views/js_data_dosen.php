@@ -55,6 +55,11 @@
 			type: "POST",
 			data: function(d){
 				d.token		 	= "<?php echo $this->security->get_csrf_hash(); ?>";
+				d.status = $('#status-filter').val();
+				d.search = {
+					value: d.search.value 
+				};
+				console.log('Search value sent to server:', d.search.value);
 			}
 		},
 		columns: [{

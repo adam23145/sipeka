@@ -32,12 +32,11 @@
                 <div class="row">
                     <div class="col-10">
                     </div>
-                    <div class="col-2">
-                        <label for="mytable_filter">Search:</label>
+                    <!-- <div class="col-2 p-3">
                         <input type="search" class="form-control form-control-sm" id="mytable_filter">
-                    </div>
+                    </div> -->
                 </div>
-                <div class="card-body table-responsive p-0">
+                <div class="card-body table-responsive p-3">
                     <table id="tableMahasiswa" class="table table-bordered table-striped">
                         <thead>
                             <tr>

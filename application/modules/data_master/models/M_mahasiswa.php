@@ -27,7 +27,7 @@ class M_mahasiswa extends CI_Model
 		}
 
 		if (!empty($searchValue)) {
-			$this->db->like('mhs.nama', $searchValue, 'both');
+			$this->datatables->like('mhs.nama', $searchValue, 'both');
 		}
 
 		$this->datatables->add_column('action', '<center>

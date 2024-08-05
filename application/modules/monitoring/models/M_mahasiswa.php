@@ -13,12 +13,12 @@ class M_mahasiswa extends CI_Model
     /**
      * Get the count of guidance sessions per student.
      */
-    public function get_guidance_count_per_student($limit, $start, $search = null, $year = null)
+    public function get_guidance_count_per_student($limit, $start, $search = null, $year = null, $jurusan = null)
     {
-        $this->db->select('b.nim, m.nama, m.tahun_masuk,b.bimbingan_ke');
+        $this->db->select('b.nim, m.nama, m.tahun_masuk,m.jurusan,b.title,b.bimbingan_ke');
         $this->db->from('bimbingan b');
         $this->db->join('m_mahasiswa m', 'b.nim = m.nim');
-        $this->db->group_by('b.nim, m.nama, m.tahun_masuk,b.bimbingan_ke');
+        $this->db->group_by('b.nim, m.nama, m.tahun_masuk,m.jurusan,b.title,b.bimbingan_ke');
 
         if ($search) {
             $this->db->like('LOWER(m.nama)', strtolower($search));
@@ -27,7 +27,9 @@ class M_mahasiswa extends CI_Model
         if ($year) {
             $this->db->where('m.tahun_masuk', $year); // Add year filter
         }
-
+        if ($jurusan) {
+            $this->db->where('m.jurusan', $jurusan); // Add jurusan filter
+        }
         $this->db->limit($limit, $start);
 
         $query = $this->db->get();
@@ -48,7 +50,7 @@ class M_mahasiswa extends CI_Model
         return $this->db->count_all_results();
     }
 
-    public function count_filtered_students($search = null, $year = null)
+    public function count_filtered_students($search = null, $year = null, $jurusan = null)
     {
         $this->db->select('b.nim');
         $this->db->from('bimbingan b');
@@ -61,6 +63,9 @@ class M_mahasiswa extends CI_Model
 
         if ($year) {
             $this->db->where('m.tahun_masuk', $year); // Add year filter
+        }
+        if ($jurusan) {
+            $this->db->where('m.jurusan', $jurusan); // Add jurusan filter
         }
 
         $query = $this->db->get();

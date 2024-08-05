@@ -45,7 +45,7 @@
 		serverSide: true,
 		paging: true,
 		lengthChange: false,
-		searching: true,
+		searching: false,
 		ordering: true,
 		info: true,
 		autoWidth: false,
@@ -56,14 +56,10 @@
 			data: function(d) {
 				d.token = "<?php echo $this->security->get_csrf_hash(); ?>";
 				d.status = $('#status-filter').val(); // Send the status filter value to the server
-				// var searchValue = $('#mytable_filter').val().toUpperCase();
-				// d.search = {
-				// 	value: searchValue
-				// };
+				var searchValue = $('#mytable_filter').val().toUpperCase();
 				d.search = {
-					value: d.search.value.toUpperCase() // Convert search value to lowercase
+					value: searchValue
 				};
-				// console.log('Search value sent to server:', d.search.value);
 			}
 		},
 		columns: [{
