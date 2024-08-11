@@ -59,7 +59,7 @@
 				d.search = {
 					value: d.search.value 
 				};
-				console.log('Search value sent to server:', d.search.value);
+				// console.log('Search value sent to server:', d.search.value);
 			}
 		},
 		columns: [{

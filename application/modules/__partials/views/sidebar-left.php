@@ -63,6 +63,12 @@
                 </a>
               </li>
               <li class="nav-item">
+                <a href="<?php echo base_url(); ?>data_master/data_sidang" <?= ($seg2 == "data_sidang") ? 'class="nav-link active"' : 'class="nav-link"'; ?>>
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Master Sidang</p>
+                </a>
+              </li>
+              <li class="nav-item">
                 <a href="<?php echo base_url(); ?>data_master/data_group" <?= ($seg2 == "data_group") ? 'class="nav-link active"' : 'class="nav-link"'; ?>>
                   <i class="far fa-circle nav-icon"></i>
                   <p>Master Group</p>
@@ -216,6 +222,12 @@
                 <a href="<?php echo base_url(); ?>data_master/data_publikasi" <?= ($seg2 == "data_publikasi") ? 'class="nav-link active"' : 'class="nav-link"'; ?>>
                   <i class="far fa-circle nav-icon"></i>
                   <p>Master Publikasi</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?php echo base_url(); ?>data_master/data_sidang" <?= ($seg2 == "data_sidang") ? 'class="nav-link active"' : 'class="nav-link"'; ?>>
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Master Sidang</p>
                 </a>
               </li>
               <li class="nav-item">
@@ -422,6 +434,12 @@
                   <p>Form Publikasi</p>
                 </a>
               </li>
+              <li class="nav-item">
+                <a href="<?php echo base_url(); ?>form/form_sidang" <?= ($seg2 == "form_sidang") ? 'class="nav-link active"' : 'class="nav-link"'; ?>>
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Form Sidang</p>
+                </a>
+              </li>
             </ul>
           </li>
           <li <?= ($seg1 == "history") ? 'class="nav-item has-treeview menu-open"' : 'class="nav-item has-treeview"'; ?>>
@@ -443,6 +461,12 @@
                 <a href="<?php echo base_url(); ?>history/publikasi" <?= ($seg2 == "publikasi") ? 'class="nav-link active"' : 'class="nav-link"'; ?>>
                   <i class="far fa-circle nav-icon"></i>
                   <p>Historis Publikasi</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?php echo base_url(); ?>history/sidang" <?= ($seg2 == "sidang") ? 'class="nav-link active"' : 'class="nav-link"'; ?>>
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Historis Pengajuan Sidang</p>
                 </a>
               </li>
               <li class="nav-item">

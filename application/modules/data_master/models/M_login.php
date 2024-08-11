@@ -26,9 +26,6 @@ class M_login extends CI_Model {
 		return $data;
 	}
 
-
-	
-
 	function update($id, $userid, $full_name, $email, $password, $status, $level){
 		$query	= "UPDATE m_login SET userid='".$userid."', username='".$full_name."', email='".$email."', pass='".$password."',  status='".$status."', userlevel='".$level."' WHERE id='".$id."' ";
 		$update = $this->db->query($query);
