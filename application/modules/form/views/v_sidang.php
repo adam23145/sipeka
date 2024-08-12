@@ -11,16 +11,16 @@
                     <div class="card-body">
                         <div class="form-group">
                             <label for="judul_sidang">Judul Sidang:</label>
-                            <input type="text" name="judul_sidang" class="form-control" id="judul_sidang" />
+                            <input type="text" name="judul_sidang" class="form-control" id="judul_sidang" value="<?php echo $judul; ?>" required readonly="true" />
                         </div>
                         <div class="form-group">
                             <label>Nama Mahasiswa:</label>
-                            <input type="text" class="form-control" value="<?php echo $this->session->userdata['logged_in']['username'] ?>" name="nama_mahasiswa" readonly="true" required>
+                            <input type="text" class="form-control" value="<?php echo $this->session->userdata['logged_in']['username'] ?>" name="nama_mahasiswa" readonly="true" required />
                         </div>
 
                         <div class="form-group">
                             <label>NIM:</label>
-                            <input type="text" class="form-control" value="<?php echo substr($this->session->userdata['logged_in']['userid'], 0, 12) ?>" name="nim" readonly="true" required>
+                            <input type="text" class="form-control" value="<?php echo substr($this->session->userdata['logged_in']['userid'], 0, 12) ?>" name="nim" readonly="true" required />
                         </div>
                     </div>
                     <div class="card-footer">

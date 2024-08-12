@@ -24,6 +24,7 @@ class form_sidang extends CI_Controller
         $token = random_string('numeric', 3);
         $subm_id = 'FKIS1605-' . $majorcode . $token . date("dhs");
         $major_name = $this->M_global->get_jurusan2($nim);
+        $submission = $this->M_global->get_submission_code_by_nim($nim);
 
         $data = array(
             'thisContent' => 'form/v_sidang',
@@ -31,7 +32,8 @@ class form_sidang extends CI_Controller
             'subm_id' => $subm_id,
             'majorname' => $major_name[0]['jurusan'],
             'csrf_token_name' => $this->security->get_csrf_token_name(),
-            'csrf_token_hash' => $this->security->get_csrf_hash()
+            'csrf_token_hash' => $this->security->get_csrf_hash(),
+            'judul' => isset($submission['title']) ? $submission['title'] : ''
         );
         $this->parser->parse('template/template', $data);
     }

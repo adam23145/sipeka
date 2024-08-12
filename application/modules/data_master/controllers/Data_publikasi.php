@@ -20,7 +20,7 @@ class Data_publikasi extends CI_Controller
 	function index()
 	{
 		$this->breadcrumb->add('Settings', 'data_master/data_publikasi')
-			->add('Data Mahasiswa', 'data_master/data_publikasi');
+			->add('Data Publikasi', 'data_master/data_publikasi');
 		$data = array(
 			'thisContent' 	=> 'data_master/v_publikasi',
 			'thisJs'		=> 'data_master/js_data_publikasi',
