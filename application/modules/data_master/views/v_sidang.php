@@ -52,6 +52,11 @@
                         <label for="edit_tempat_sidang">Tempat Sidang</label>
                         <input type="text" class="form-control" id="edit_tempat_sidang" name="tempat_sidang">
                     </div>
+                    <div class="form-group">
+                        <label for="edit_pembimbing">Pembimbing</label>
+                        <select class="form-control" id="edit_pembimbing" name="pembimbing">
+                        </select>
+                    </div>
                     <button type="submit" class="btn btn-primary">Save changes</button>
                 </form>
             </div>

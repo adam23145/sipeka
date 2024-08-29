@@ -188,17 +188,17 @@ class M_global extends CI_Model
 		$data = $this->db->get('m_matkul')->result_array();
 		return $data;
 	}
-	public function get_submission_code_by_nim($nim)
+	public function get_submission_details_by_nim($nim)
 	{
 		// Define the raw SQL query
-		$query = "SELECT submission_code FROM title_submission WHERE nim = ?";
+		$query = "SELECT title, submission_code FROM title_submission WHERE nim = ?";
 
 		// Execute the query with parameter binding
 		$result = $this->db->query($query, array($nim))->row_array();
 
 		// Check if a result was returned
 		if (!empty($result)) {
-			return $result['submission_code'];
+			return $result; // Return the result as an associative array
 		} else {
 			return null; // Return null if no result found
 		}

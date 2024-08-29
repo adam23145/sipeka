@@ -53,6 +53,17 @@
                     $('#edit_tanggal_sidang').val(data.tanggal_sidang);
                     $('#edit_tempat_sidang').val(data.tempat_sidang);
 
+                    // Clear the current options in the dropdown
+                    $('#edit_pembimbing').empty();
+
+                    // Populate the dropdown with data from the server
+                    $.each(data.data_dosen, function(index, dosen) {
+                        $('#edit_pembimbing').append(new Option(dosen.name, dosen.id));
+                    });
+
+                    // Select the current pembimbing
+                    $('#edit_pembimbing').val(data.pembimbing_id).change();
+
                     // Show/hide fields based on status
                     if (data.status == 2) { // Diterima
                         $('#tanggal_sidang_group').show();
@@ -64,6 +75,7 @@
 
                     $('#editModal').modal('show');
                 }
+
             });
         });
 

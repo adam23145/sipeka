@@ -76,6 +76,12 @@
 			"data" : "status"
 		},
 		{
+			"data" : "nip"
+		},
+		{
+			"data" : "nama"
+		},
+		{
 			"data" : "action",
 			"searchable" : false
 		}
@@ -106,11 +112,15 @@
 		id 					= data['id'];
 		major_code			= data['major_code'];
 		major_name			= data['major_name'];
+		nip					= data['nip'];
+		nama				= data['nama'];
 		status 				= data['status'];
 
 		$('#id').val(id);
 		$('#major_code').val(major_code);
 		$('#major_name').val(major_name);
+		$('#nip').val(nip);
+		$('#nama').val(nama);
 		$('#status').val(status);
 		$('#modalProdi').modal('show');
 		$('#addprodi').hide();

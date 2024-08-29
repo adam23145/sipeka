@@ -12,6 +12,8 @@ class M_prodi extends CI_Model {
 			j.id,
 			j.major_code,
 			j.major_name,
+			j.nip,
+			j.nama,
 			j.status
 			');
 		$this->datatables->from('m_jurusan j');

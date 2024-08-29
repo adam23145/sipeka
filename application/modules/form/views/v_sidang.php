@@ -8,6 +8,7 @@
                 <form id="form-pengajuan">
                     <input type="hidden" name="<?php echo $csrf_token_name; ?>" value="<?php echo $csrf_token_hash; ?>" />
                     <input type="hidden" name="subm_id" value="<?php echo $subm_id; ?>" />
+                    <input type="hidden" name="submission_code" value="<?php echo $submission_code; ?>" />
                     <div class="card-body">
                         <div class="form-group">
                             <label for="judul_sidang">Judul Sidang:</label>
@@ -27,7 +28,7 @@
                         <div class="row">
                             <div class="col-md-9"></div>
                             <div class="col-md-3">
-                                <button id="btn-submit" type="submit" class="btn btn-info float-right">Kirim</button>
+                                <button id="btn-submit" type="submit" class="btn btn-info float-right">Ajukan Sidang</button>
                             </div>
                         </div>
                     </div>

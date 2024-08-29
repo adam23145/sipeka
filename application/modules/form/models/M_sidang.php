@@ -18,10 +18,19 @@ class M_sidang extends CI_Model
         $query = $this->db->get('pengajuan_sidang'); // Ganti dengan nama tabel yang sesuai
         return $query->row_array();
     }
-    
+
 
     public function simpan_pengajuan($data)
     {
         return $this->db->insert('pengajuan_sidang', $data); // Ganti dengan nama tabel yang sesuai
+    }
+    public function check_submission_approval($submission_code)
+    {
+        $query = $this->db->get_where('log_bimbingan_skripsi', [
+            'submission_code' => $submission_code,
+            'status_bimb' => 'Setuju Sidang'
+        ]);
+
+        return $query->num_rows() > 0;
     }
 }
