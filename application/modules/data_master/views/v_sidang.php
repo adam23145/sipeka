@@ -37,6 +37,7 @@
             <div class="modal-body">
                 <form id="editForm">
                     <input type="hidden" id="sidang_id" name="sidang_id">
+
                     <div class="form-group">
                         <label for="edit_status">Status</label>
                         <select class="form-control" id="edit_status" name="status">
@@ -44,19 +45,35 @@
                             <option value="0">Ditolak</option>
                         </select>
                     </div>
+
                     <div class="form-group" id="tanggal_sidang_group">
                         <label for="edit_tanggal_sidang">Tanggal Sidang</label>
                         <input type="date" class="form-control" id="edit_tanggal_sidang" name="tanggal_sidang">
                     </div>
+
                     <div class="form-group" id="tempat_sidang_group">
                         <label for="edit_tempat_sidang">Tempat Sidang</label>
                         <input type="text" class="form-control" id="edit_tempat_sidang" name="tempat_sidang">
                     </div>
-                    <div class="form-group">
-                        <label for="edit_pembimbing">Pembimbing</label>
-                        <select class="form-control" id="edit_pembimbing" name="pembimbing">
+
+                    <div class="form-group" id="edit_pembimbing_group">
+                        <label for="edit_pembimbing">Dosen Pembimbing 2</label>
+                        <select class="form-control select2" id="edit_pembimbing" name="pembimbing">
                         </select>
                     </div>
+
+                    <div class="form-group" id="edit_penguji1_group">
+                        <label for="edit_penguji1">Dosen Penguji 1</label>
+                        <select class="form-control select2" id="edit_penguji1" name="penguji1">
+                        </select>
+                    </div>
+
+                    <div class="form-group" id="edit_penguji2_group">
+                        <label for="edit_penguji2">Dosen Penguji 2</label>
+                        <select class="form-control select2" id="edit_penguji2" name="penguji2">
+                        </select>
+                    </div>
+
                     <button type="submit" class="btn btn-primary">Save changes</button>
                 </form>
             </div>

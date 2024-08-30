@@ -66,15 +66,28 @@ class Data_sidang extends CI_Controller
 	{
 		$id = $this->input->post('id');
 		$sidang = $this->M_sidang->get_by_id($id);
-		echo json_encode($sidang);
+		$data_dosen = $this->M_sidang->get_dosen();
+
+		// Gabungkan data sidang dengan data dosen dalam array asosiatif
+		$response = [
+			'sidang' => $sidang,
+			'data_dosen' => $data_dosen
+		];
+
+		echo json_encode($response);
 	}
+
+
 
 	public function update()
 	{
 		$data = array(
 			'status' => $this->input->post('status'),
 			'tanggal_sidang' => $this->input->post('tanggal_sidang'),
-			'tempat_sidang' => $this->input->post('tempat_sidang')
+			'tempat_sidang' => $this->input->post('tempat_sidang'),
+			'pembimbing_2' => $this->input->post('pembimbing'),
+			'penguji_1' => $this->input->post('penguji1'),
+			'penguji_2' => $this->input->post('penguji2'),
 		);
 		$id = $this->input->post('sidang_id');
 		$this->M_sidang->update($id, $data);

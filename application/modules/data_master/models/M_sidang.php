@@ -57,4 +57,12 @@ class M_sidang extends CI_Model
         $this->db->where('id', $id);
         $this->db->update('pengajuan_sidang', $data);
     }
+    public function get_dosen()
+    {
+        $this->db->select('*');
+        $this->db->from('m_dosen');
+        $this->db->where_in('jabatan', ['Dosen', 'Kajur', 'Wadek 1']);
+        $query = $this->db->get();
+        return $query->result_array();
+    }
 }
