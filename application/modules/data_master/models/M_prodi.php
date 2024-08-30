@@ -4,9 +4,11 @@ date_default_timezone_set('Asia/Jakarta');
 /**
  * 
  */
-class M_prodi extends CI_Model {
+class M_prodi extends CI_Model
+{
 
-	function get_data_prodi() {
+	function get_data_prodi()
+	{
 		$this->datatables->select('
 			ROW_NUMBER() OVER (ORDER BY j.major_name DESC) AS no_urut,
 			j.id,
@@ -17,7 +19,7 @@ class M_prodi extends CI_Model {
 			j.status
 			');
 		$this->datatables->from('m_jurusan j');
-		$this->datatables->add_column('action','<center>
+		$this->datatables->add_column('action', '<center>
             <button class="btn btn-primary btn-sm btn-edit"><i style="color: white;" class="fa fa-pencil-alt"></i></button>
             <button class="btn btn-danger btn-sm btn-delete"><i style="color: white;" class="fa fa-trash-alt"></i></button>
             </center>
@@ -25,29 +27,36 @@ class M_prodi extends CI_Model {
 		$data = $this->datatables->generate();
 		return $data;
 	}
-
-	function update($id, $item){
-		$this->db->where('id',$id);
-		$update = $this->db->update('m_jurusan',$item);
+	public function get_all_dosen()
+	{
+		$this->db->select('id, nama');
+		$query = $this->db->get('m_dosen');
+		return $query->result_array();
+	}
+	function update($id, $item)
+	{
+		$this->db->where('id', $id);
+		$update = $this->db->update('m_jurusan', $item);
 		return $update;
 	}
 
-	function insert($item){
-		$insert 	= $this->db->insert('m_jurusan',$item);
+	function insert($item)
+	{
+		$insert 	= $this->db->insert('m_jurusan', $item);
 		return $insert;
 	}
-	
-	function insert_batch($item){
-		$insert 	= $this->db->insert_batch('m_jurusan',$item);
+
+	function insert_batch($item)
+	{
+		$insert 	= $this->db->insert_batch('m_jurusan', $item);
 		return $insert;
 	}
-	
-	function delete($id){
 
-	$this->db->where('id', $id);
-	$delete = $this->db->delete('m_jurusan');
-	return $delete;
+	function delete($id)
+	{
 
+		$this->db->where('id', $id);
+		$delete = $this->db->delete('m_jurusan');
+		return $delete;
 	}
-
 }

@@ -24,7 +24,6 @@
                                 <th>id</th>
                                 <th>Kode Prodi</th>
                                 <th>Nama Prodi</th>
-                                <th>Nip</th>
                                 <th>Nama</th>
                                 <th>Status</th>
                                 <th>Action</th>
@@ -35,8 +34,7 @@
                     </table>
                 </div>
                 <div class="form-group">
-                    <div class="modal fade text-left" id="modalProdi" tabindex="-1" role="dialog" aria-labelledby="myModalLabel35"
-                        aria-hidden="true">
+                    <div class="modal fade text-left" id="modalProdi" tabindex="-1" role="dialog" aria-labelledby="myModalLabel35" aria-hidden="true">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -51,15 +49,15 @@
                                     <div class="modal-body">
                                         <input type="hidden" class="form-control" id="id" name="id" value="0">
                                         <fieldset class="form-group floating-label-form-group">
-                                            <label for="major_code">Kode Ptrodi</label>
-                                            <input type="text" class="form-control" name="major_code" id="major_code" name="" placeholder="Kode Prodi">
+                                            <label for="major_code">Kode Prodi</label>
+                                            <input type="text" class="form-control" name="major_code" id="major_code" placeholder="Kode Prodi">
                                         </fieldset>
                                         <fieldset class="form-group floating-label-form-group">
-                                            <label for="">Program Studi</label>
+                                            <label for="major_name">Program Studi</label>
                                             <input type="text" class="form-control" name="major_name" id="major_name" placeholder="Program Studi">
                                         </fieldset>
                                         <fieldset class="form-group floating-label-form-group">
-                                            <label for="title">Status</label>
+                                            <label for="status">Status</label>
                                             <select class="custom-select d-block w-100" id="status" name="status">
                                                 <option value="" selected>-- Select Status --</option>
                                                 <option value="active">Active</option>
@@ -67,12 +65,9 @@
                                             </select>
                                         </fieldset>
                                         <fieldset class="form-group floating-label-form-group">
-                                            <label for="">nip</label>
-                                            <input type="text" class="form-control" name="nip" id="nip" placeholder="Nip">
-                                        </fieldset>
-                                        <fieldset class="form-group floating-label-form-group">
-                                            <label for="">Nama</label>
-                                            <input type="text" class="form-control" name="nama" id="nama" placeholder="Nama">
+                                            <label for="dosen">Nama Dosen</label>
+                                            <select class="custom-select d-block w-100 select2" id="dosen" name="dosen">
+                                            </select>
                                         </fieldset>
                                     </div>
                                     <div class="modal-footer">
@@ -84,6 +79,7 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="form-group">
                     <div class="modal fade text-left" id="modalUpload" tabindex="-1" role="dialog" aria-labelledby="myModalLabel35"
                         aria-hidden="true">

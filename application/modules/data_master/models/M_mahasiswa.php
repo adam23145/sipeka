@@ -10,16 +10,16 @@ class M_mahasiswa extends CI_Model
 	function get_data_mahasiswa($status = null, $searchValue = null)
 	{
 		$this->datatables->select('
-			ROW_NUMBER() OVER (ORDER BY mhs.nim DESC) AS no_urut,
-			mhs.nim,
-			mhs.nama,
-			mhs.email,
-			mhs.fakultas,
-			mhs.jurusan,
-			mhs.jenis_kelamin,
-			mhs.tahun_masuk,
-			mhs.status
-		');
+        ROW_NUMBER() OVER (ORDER BY mhs.nim DESC) AS no_urut,
+        mhs.nim,
+        mhs.nama,
+        mhs.email,
+        mhs.fakultas,
+        mhs.jurusan,
+        mhs.jenis_kelamin,
+        mhs.tahun_masuk,
+        mhs.status
+    ');
 		$this->datatables->from('m_mahasiswa mhs');
 
 		if ($status) {
@@ -31,14 +31,15 @@ class M_mahasiswa extends CI_Model
 		}
 
 		$this->datatables->add_column('action', '<center>
-				<button class="btn btn-primary btn-sm btn-edit"><i style="color: white;" class="fa fa-pencil-alt"></i></button>
-				<button class="btn btn-danger btn-sm btn-delete"><i style="color: white;" class="fa fa-trash-alt"></i></button>
-			</center>
-		');
+            <button class="btn btn-primary btn-sm btn-edit"><i style="color: white;" class="fa fa-pencil-alt"></i></button>
+            <button class="btn btn-danger btn-sm btn-delete"><i style="color: white;" class="fa fa-trash-alt"></i></button>
+        </center>
+    ');
 
 		$data = $this->datatables->generate();
 		return $data;
 	}
+
 
 
 	function update($id, $item)
