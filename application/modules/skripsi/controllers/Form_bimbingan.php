@@ -182,6 +182,13 @@ class Form_bimbingan extends CI_Controller {
 		
 		$beritaacara		= $_POST['beritaacara'];
 		
+		$latestDate = $this->M_bimbing->get_latest_bimbingan_date($sub_code);
+		if ($latestDate && strtotime($tanggal) < strtotime($latestDate)) {
+			$result['status'] = 'error';
+			$result['feedback'] = 'Tanggal tidak valid. Tanggal yang dimasukkan lebih lama dari tanggal terakhir bimbingan.';
+			echo json_encode($result);
+			return;
+		}
 
 		$update = $this->M_bimbing->update($userid, $sub_code, $nobim, $stats, $tanggal, $beritaacara);
 		if($update){
