@@ -39,6 +39,22 @@
               </p>
             </a>
           </li>
+          <li class="nav-item">
+            <a href="<?php echo base_url(); ?>verifikasi/Verifikasisempro" <?= ($seg1 == "Verifikasisempro") ? 'class="nav-link active"' : 'class="nav-link"'; ?>>
+              <i class="nav-icon fas fa-book"></i>
+              <p>
+                Verifikasi Data Sempro
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="<?php echo base_url(); ?>verifikasi/Verifikasiskripsi" <?= ($seg1 == "Verifikasiskripsi") ? 'class="nav-link active"' : 'class="nav-link"'; ?>>
+              <i class="nav-icon fas fa-book"></i>
+              <p>
+                Verifikasi Data Skripsi
+              </p>
+            </a>
+          </li>
         <?php } ?>
         <?php if ($userlevel == 'superadmin') { ?>
           <li <?= ($seg1 == "data_master") ? 'class="nav-item has-treeview menu-open"' : 'class="nav-item has-treeview"'; ?>>

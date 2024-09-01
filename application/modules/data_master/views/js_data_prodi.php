@@ -72,10 +72,10 @@
 				"data": "major_name"
 			},
 			{
-				"data": "status"
+				"data": "koordinator"
 			},
 			{
-				"data": "nama"
+				"data": "status"
 			},
 			{
 				"data": "action",
@@ -118,7 +118,7 @@
 				var dosenSelect = $('#dosen');
 				dosenSelect.empty();
 				$.each(response.dosen, function(index, dosen) {
-					dosenSelect.append('<option value="' + dosen.nama + '">' + dosen.nama + '</option>');
+					dosenSelect.append('<option value="' + dosen.id + '">' + dosen.nama + '</option>');
 				});
 			}
 		});
@@ -203,41 +203,38 @@
 		});
 	});
 
-	$('#tableProdi').on('click', '.btn-delete', function() {
-		currentRow = $(this).closest('tr');
-		data = $('#tableProdi').DataTable().row(currentRow).data();
-		id = data['id'];
-		major_name = data['major_name'];
+	$('#tableProdi').on('click', '.btn-edit', function() {
+		var currentRow = $(this).closest('tr');
+		var data = $('#tableProdi').DataTable().row(currentRow).data();
 
-		// swal({
-		//      title: 'Are you sure?',
-		//      text: "You won't be able to revert this!",
-		//      type: 'warning',
-		//      showCancelButton: true,
-		//      confirmButtonColor: '#0CC27E',
-		//      cancelButtonColor: '#FF586B',
-		//      confirmButtonText: 'Yes, delete it!',
-		//      cancelButtonText: 'No, cancel!',
-		//      confirmButtonClass: 'btn btn-success btn-raised mr-5',
-		//      cancelButtonClass: 'btn btn-danger btn-raised',
-		//      buttonsStyling: false
-		//    }).then(function () {
-		//       deleteProdi(id, major_name);
-		//     }, function (dismiss) {
-		//       // dismiss can be 'overlay', 'cancel', 'close', 'esc', 'timer'
-		//       if (dismiss === 'cancel') {
-		//         swal(
-		//           'Cancelled',
-		//           'Your login member file is safe :)',
-		//           'error'
-		//         )
-		//       }
-		//     })
+		// Isi form dengan data yang ada
+		$('#id').val(data['id']);
+		$('#major_code').val(data['major_code']);
+		$('#major_name').val(data['major_name']);
+		$('#status').val(data['status']);
 
-		$('#modal-konfirmasi').modal('show');
-		$('#major_name').val(major_name);
-		$('#id_prodi').val(id);
+		// Ubah pilihan guru (dosen) berdasarkan nama koordinator
+		var selectedGuru = data['koordinator'];
+		$.ajax({
+			url: "<?php echo site_url('data_master/data_prodi/get_all_dosen'); ?>",
+			type: "GET",
+			dataType: "json",
+			success: function(response) {
+				var dosenSelect = $('#dosen');
+				dosenSelect.empty();
+				$.each(response.dosen, function(index, dosen) {
+					var isSelected = dosen.nama === selectedGuru ? 'selected' : '';
+					dosenSelect.append('<option value="' + dosen.id + '" ' + isSelected + '>' + dosen.nama + '</option>');
+				});
+				dosenSelect.trigger('change');
+			}
+		});
+
+		$('#modalProdi').modal('show');
+		$('#addprodi').hide();
+		$('#edprodi').show();
 	});
+
 
 	$('#jadi_hapus').on('click', function() {
 		var id = $("#id_prodi").val();

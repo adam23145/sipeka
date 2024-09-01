@@ -9,7 +9,7 @@ class form_sidang extends CI_Controller
     {
         parent::__construct();
         $this->load->model('M_sidang');
-		$this->load->model('M_detail');
+        $this->load->model('M_detail');
         $this->load->helper('string');
         if (!$this->session->userdata('logged_in')) {
             redirect('login');
@@ -20,6 +20,7 @@ class form_sidang extends CI_Controller
     {
         $this->breadcrumb->add('Form', 'form/form_sidang')
             ->add('Pengajuan Sidang', 'form/form_sidang');
+
         $majorcode = substr($this->session->userdata('logged_in')['userid'], 4, 3);
         $nim = substr($this->session->userdata('logged_in')['userid'], 0, 12);
         $token = random_string('numeric', 3);
@@ -35,9 +36,18 @@ class form_sidang extends CI_Controller
             $title = '';
             $submission_code = '';
         }
-		$title_sub 	= $this->M_detail->get_sub($submission_code);
-		$dosbing 	= $title_sub[0]['dosbing'];
-		$dosen_p 	= $this->M_detail->get_nama_dosen($dosbing);
+
+        // Ambil detail pengajuan jika ada
+        $title_sub = $this->M_detail->get_sub($submission_code);
+
+        // Cek apakah data title_sub ada dan tidak kosong
+        if (!empty($title_sub) && isset($title_sub[0]['dosbing'])) {
+            $dosbing = $title_sub[0]['dosbing'];
+            $dosen_p = $this->M_detail->get_nama_dosen($dosbing);
+        } else {
+            $dosbing = '';
+            $dosen_p = '';  // Atur ini sesuai kebutuhan Anda
+        }
 
         $data = array(
             'thisContent' => 'form/v_sidang',
@@ -47,10 +57,14 @@ class form_sidang extends CI_Controller
             'csrf_token_name' => $this->security->get_csrf_token_name(),
             'csrf_token_hash' => $this->security->get_csrf_hash(),
             'judul' => $title,
-            'submission_code' => $submission_code
+            'submission_code' => $submission_code,
+            'dosbing' => $dosbing,       // Tambahkan ini jika Anda ingin menggunakannya di view
+            'dosen_p' => $dosen_p        // Tambahkan ini jika Anda ingin menggunakannya di view
         );
+
         $this->parser->parse('template/template', $data);
     }
+
 
     public function submit()
     {

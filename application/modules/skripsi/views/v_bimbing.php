@@ -73,7 +73,6 @@
 					                    <input type="hidden" class="form-control" id="nim" name="nim" value="{nim}" readonly="true">
 					                    <input type="hidden" class="form-control" id="judul" name="judul" value="{judul}" readonly="true">
 					                    <input type="hidden" class="form-control" id="dosbing" name="dosbing" value="{dosbing}" readonly="true">
-					                   
 					                </div>
 					                <div class="form-group">
 					                    <label for="sub_status">Tanggal</label>

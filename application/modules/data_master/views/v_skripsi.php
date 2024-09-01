@@ -44,7 +44,6 @@
                                 </svg>
                             </div>
                         </div>
-                        <div id="disini" class="col-md-12"></div>
                         <!-- <div id="card-loading" class="col-md-12" style="text-align: center; display: none;">
                             <div class="preloader pl-xl pls-primary">
                                 <svg class="pl-circular" viewBox="25 25 50 50">

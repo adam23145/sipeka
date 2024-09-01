@@ -46,7 +46,7 @@ class Data_prodi extends CI_Controller
 		$item = array(
 			'major_code'	=> $_POST['major_code'],
 			'major_name'	=> $_POST['major_name'],
-			'nama'			=> $_POST['dosen'],
+			'koor_id'			=> $_POST['dosen'],
 			'status'		=> $_POST['status'],
 			'upd'			=> $this->session->userdata['logged_in']['userid']
 		);

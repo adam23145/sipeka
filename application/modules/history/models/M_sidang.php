@@ -12,7 +12,7 @@ class M_sidang extends CI_Model
     public function get_all($limit, $start, $search)
     {
         $nim = substr($this->session->userdata('logged_in')['userid'], 0, 12);
-        $this->db->select('judul_sidang, nama_mahasiswa, nim, tanggal_sidang, tempat_sidang, status');
+        $this->db->select('judul_sidang, nama_mahasiswa, nim, tanggal_sidang, tempat_sidang, status,jam_mulai,jam_selesai');
         $this->db->from('pengajuan_sidang');
         $this->db->where('nim', $nim);
     

@@ -41,6 +41,8 @@ class Sidang extends CI_Controller
                 'nim' => !empty($item->nim) ? $item->nim : '-',
                 'tanggal_sidang' => !empty($item->tanggal_sidang) ? $item->tanggal_sidang : '-',
                 'tempat_sidang' => !empty($item->tempat_sidang) ? $item->tempat_sidang : '-',
+                'jam_mulai' => !empty($item->jam_mulai) ? $item->jam_mulai : '-',
+                'jam_selesai' => !empty($item->jam_selesai) ? $item->jam_selesai : '-',
                 'status' => $item->status == 1 ? 'Menunggu' : ($item->status == 2 ? 'Diterima' : 'Ditolak')
             );
         }

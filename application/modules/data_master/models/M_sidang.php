@@ -12,21 +12,24 @@ class M_sidang extends CI_Model
 
     public function get_all($limit, $start, $search = null)
     {
-        $this->db->select('id, nim, judul_sidang, nama_mahasiswa, tanggal_sidang, tempat_sidang, status');
+        $this->db->select('id, nim, judul_sidang, nama_mahasiswa, tanggal_sidang, tempat_sidang, jam_mulai, jam_selesai, status');
         $this->db->from('pengajuan_sidang');
 
-        $this->db->where('status', 1);
+        // Filter berdasarkan status
+        $this->db->where_in('status', [1, 2]);
+
+        // Pencarian
         if ($search) {
             $this->db->like('LOWER(nama_mahasiswa)', strtolower($search));
         }
-
-        // Order by `id` in descending order
-        $this->db->order_by('id', 'DESC');
+        $this->db->order_by('status', 'ASC');
+        $this->db->order_by('id', 'DESC');    
 
         $this->db->limit($limit, $start);
         $query = $this->db->get();
         return $query->result();
     }
+
 
     public function count_all()
     {

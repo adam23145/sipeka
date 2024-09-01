@@ -33,6 +33,8 @@
                 { "data": "nim" },
                 { "data": "tanggal_sidang" },
                 { "data": "tempat_sidang" },
+                { "data": "jam_mulai" },
+                { "data": "jam_selesai" },
                 { "data": "status" }
             ]
         });

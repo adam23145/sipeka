@@ -39,6 +39,11 @@ class Data_sidang extends CI_Controller
 
 		$data = array();
 		foreach ($list as $item) {
+			if ($item->status == 2) {
+				$action = ''; 
+			} else {
+				$action = '<button class="btn btn-primary edit-btn" data-id="' . $item->id . '">Edit</button>';
+			}
 			$data[] = array(
 				'id' => $item->id,
 				'nim' => $item->nim,
@@ -46,8 +51,11 @@ class Data_sidang extends CI_Controller
 				'nama_mahasiswa' => $item->nama_mahasiswa,
 				'status' => $item->status == 1 ? 'Menunggu' : ($item->status == 2 ? 'Diterima' : 'Ditolak'),
 				'tanggal_sidang' => $item->tanggal_sidang,
+				'tanggal_sidang' => $item->tanggal_sidang,
 				'tempat_sidang' => $item->tempat_sidang,
-				'action' => '<button class="btn btn-primary edit-btn" data-id="' . $item->id . '">Edit</button>',
+				'jam_mulai' => $item->jam_mulai,
+				'jam_selesai' => $item->jam_selesai,
+				'action' => $action,
 			);
 		}
 
@@ -88,6 +96,8 @@ class Data_sidang extends CI_Controller
 			'pembimbing_2' => $this->input->post('pembimbing'),
 			'penguji_1' => $this->input->post('penguji1'),
 			'penguji_2' => $this->input->post('penguji2'),
+			'jam_mulai' => $this->input->post('jam_mulai'),
+			'jam_selesai' => $this->input->post('jam_selesai'),
 		);
 		$id = $this->input->post('sidang_id');
 		$this->M_sidang->update($id, $data);

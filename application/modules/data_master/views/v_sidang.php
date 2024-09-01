@@ -5,6 +5,8 @@
                 <div class="card-header">
                     <h3 class="card-title">Data Pengajuan Sidang</h3>
                 </div>
+                
+                <div id="disini" class="col-md-12"></div>
                 <div class="card-body table-responsive p-3">
                     <table id="table_sidang" class="table table-striped table-bordered">
                         <thead>
@@ -15,6 +17,8 @@
                                 <th>Status</th>
                                 <th>Tanggal Sidang</th>
                                 <th>Tempat Sidang</th>
+                                <th>Jam Mulai</th>
+                                <th>Jam Selesai</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -24,7 +28,6 @@
         </div>
     </div>
 </div>
-<!-- Edit Modal -->
 <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -49,6 +52,16 @@
                     <div class="form-group" id="tanggal_sidang_group">
                         <label for="edit_tanggal_sidang">Tanggal Sidang</label>
                         <input type="date" class="form-control" id="edit_tanggal_sidang" name="tanggal_sidang">
+                    </div>
+
+                    <div class="form-group" id="jam_mulai_group">
+                        <label for="edit_jam_mulai">Jam Mulai</label>
+                        <input type="time" class="form-control" id="edit_jam_mulai" name="jam_mulai">
+                    </div>
+
+                    <div class="form-group" id="jam_selesai_group">
+                        <label for="edit_jam_selesai">Jam Selesai</label>
+                        <input type="time" class="form-control" id="edit_jam_selesai" name="jam_selesai">
                     </div>
 
                     <div class="form-group" id="tempat_sidang_group">

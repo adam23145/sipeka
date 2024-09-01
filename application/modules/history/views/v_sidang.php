@@ -16,6 +16,8 @@
                                 <th>NIM</th>
                                 <th>Tanggal Sidang</th>
                                 <th>Tempat Sidang</th>
+                                <th>Jam Mulai</th>
+                                <th>Jam Selesai</th>
                                 <th>Status</th>
                             </tr>
                         </thead>
