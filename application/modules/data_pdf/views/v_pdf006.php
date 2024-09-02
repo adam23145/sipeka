@@ -33,6 +33,7 @@
 
         table {
             width: 100%;
+            border-collapse: collapse;
         }
 
         .signature-table {
@@ -44,6 +45,7 @@
             text-align: center;
             vertical-align: bottom;
             height: 100px;
+            padding: 10px;
         }
 
         .signature-table .underline {
@@ -52,6 +54,27 @@
 
         .signature-spacing {
             padding-top: 40px;
+        }
+
+        .signature-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            padding: 0 10px; /* Add padding if needed */
+        }
+
+        .signature-box {
+            flex: 1;
+            text-align: center;
+            margin: 0 20px; /* Adjust margin to increase space between boxes */
+        }
+
+        .signature-box:first-child {
+            margin-right: 30px; /* Extra margin for the first signature box */
+        }
+
+        .signature-box:last-child {
+            margin-left: 30px; /* Extra margin for the last signature box */
         }
     </style>
 </head>
@@ -149,49 +172,51 @@
         </tr>
         <tr>
             <td>
-                <table width="100%">
-                    <tr>
-                        <td>Koordinator Program Studi</td>
-                        <td width="47%" colspan="2">&nbsp;</td>
-                        <td>Bangkalan,</td>
-                    </tr>
-                    <tr>
-                        <td><?= $jurusan; ?></td>
-                        <td width="47%" colspan="2">&nbsp;</td>
-                        <td>Pemohon</td>
-                    </tr>
-                    <tr>
-                        <td>&nbsp;</td>
-                    </tr>
-                    <tr>
-                        <td style="text-decoration: underline;"><?= $namakoor; ?></td>
-                        <td width="47%" colspan="2">&nbsp;</td>
-                        <td style="text-decoration: underline;"><?= $student_name; ?></td>
-                    </tr>
-                    <tr>
-                        <td>NIP: <?= $nipkoor; ?></td>
-                        <td width="47%" colspan="2">&nbsp;</td>
-                        <td>NIM: <?= $nim; ?></td>
-                    </tr>
-                </table>
+                <div class="signature-container">
+                    <div class="signature-box">
+                        <div>Pembahas</div>
+                        <br></br>
+                        <br></br>
+                        <div style="text-decoration: underline;"><?= $pembahas; ?></div>
+                        <div>NIP: <?= $nip_pembahas; ?></div>
+                    </div>
+                    <div class="signature-box">
+                        <div>Pembimbing</div>
+                        <br></br>
+                        <br></br>
+                        <div style="text-decoration: underline;"><?= $nama; ?></div>
+                        <div>NIP: <?= $dosbing; ?></div>
+                    </div>
+                </div>
             </td>
         </tr>
         <tr>
             <td>&nbsp;</td>
         </tr>
-        <tr align="center">
-            <td>Dosen Pembimbing</td>
+        <tr>
+            <td>&nbsp;</td>
         </tr>
         <tr>
             <td>&nbsp;</td>
         </tr>
+        
+        <tr align="center">
+            <td>Koordinator Ta</td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
             <td>&nbsp;</td>
         </tr>
         <tr align="center">
-            <td style="text-decoration: underline;"><?= $nama; ?></td>
+            <td style="text-decoration: underline;"><?= $namakoor; ?></td>
         </tr>
         <tr align="center">
-            <td>NIP: <?= $dosbing; ?></td>
+            <td>NIP: <?= $nipkoor; ?></td>
         </tr>
     </table>
 

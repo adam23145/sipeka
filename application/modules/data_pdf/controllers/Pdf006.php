@@ -22,7 +22,7 @@ class Pdf006 extends CI_Controller
         $subcode = base64_decode($this->input->get('subcd'));
         $userid = substr($this->session->userdata['logged_in']['userid'], 0, 12);
         $data_det = $this->M_pdf006->getdatapdf($subcode, $userid);
-
+        $data_det2 = $this->M_pdf006->getNamaDosen($subcode, $userid);
         $koordinator = $this->M_koorprodi->get_koordinator_by_major_name($data_det[0]['jurusan']);
 
         if ($koordinator) {
@@ -42,7 +42,10 @@ class Pdf006 extends CI_Controller
             'nama'          => $data_det[0]['nama'],
             'subcode'       => $subcode,
             'namakoor'      => $namakoor,
+            'namakoor'      => $namakoor,
             'nipkoor'       => $nipkoor,
+            'pembahas' => isset($data_det2['nama_dosen']) ? $data_det2['nama_dosen'] : 'N/A',
+            'nip_pembahas' => isset($data_det2['nip_dosen']) ? $data_det2['nip_dosen'] : 'N/A',
             'tanggal_sempro' => $data_det[0]['tgl_sempro'],
         );
 
