@@ -36,6 +36,7 @@ class Report_selesai_skripsi extends CI_Controller {
 		$date2 		= $_POST['date2'];
 		// $group 		= $_POST['jrsn'];
 
+		$searchValue = $this->input->post('search')['value'];
 		$lepel 			= $_POST['lepel'];
 		$userid 		= $this->session->userdata['logged_in']['userid'];
 
@@ -46,7 +47,7 @@ class Report_selesai_skripsi extends CI_Controller {
 			$group 			= $_POST['jrsn'];
 		}
 
-		$data = $this->M_report_skripsi->get_data_detail_selesai($date1, $date2, $group);
+		$data = $this->M_report_skripsi->get_data_detail_proses($date1, $date2, $group,$searchValue);
 		echo $data;
 	}
 

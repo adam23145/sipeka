@@ -96,16 +96,22 @@
 			data: function(d){
 				d.date1 		= $('#datepicker').val();
 				d.date2 		= $('#datepicker2').val();
+				var searchValue = $('#mytable_filter').val().toUpperCase();
+				d.search = {
+					value: searchValue
+				};
 				d.jrsn 			= $('#jrsn').val();
 				d.lepel 		= "<?php echo $this->session->userdata['logged_in']['userlevel']?>";
 				d.token		 	= "<?php echo $this->security->get_csrf_hash(); ?>";
 			}
 		},
 		columns: [{
-			"data": "id"
+			"data": "id",
+			"searchable" : false
 		},
 		{
-			"data" : "nim"
+			"data" : "nim",
+			"searchable" : false
 		},
 		{
 			"data" : "student_name"
@@ -117,10 +123,12 @@
 			"data" : "title"
 		},
 		{
-			"data" : "awalbimbingan"
+			"data" : "awalbimbingan",
+			"searchable" : false
 		},
 		{
-			"data" : "terakhirbimbingan"
+			"data" : "terakhirbimbingan",
+			"searchable" : false
 		},
 		{
 			"data" : "dosbing"
@@ -139,7 +147,7 @@
 		{
 			extend: 'excelHtml5',
 			messageTop: function(){
-				return 'Report selesai :'+ $('#datepicker').val() + ' to ' + $('#datepicker2').val()
+				return 'Report proses skripsi :'+ $('#datepicker').val() + ' to ' + $('#datepicker2').val()
 			},
 			exportOptions: {
 				columns: [0,1,2,3,4,5,6,7,8,9,10]
@@ -154,5 +162,9 @@
 			$('td:eq(0)', row).html(index);
 		},
 
+	});
+	// Handle keyup event for search input
+	$('#mytable_filter').on('keyup', function() {
+		table.search(this.value).draw();
 	});
 </script>

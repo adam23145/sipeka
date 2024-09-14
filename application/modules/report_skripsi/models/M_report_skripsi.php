@@ -94,7 +94,7 @@ class M_report_skripsi extends CI_Model
 		$this->datatables->where($where);
 
 		if (!empty($searchValue)) {
-			$this->db->like('ts.student_name', $searchValue, 'both');
+			$this->datatables->like('ts.student_name', $searchValue, 'both');
 		}
 
 		$data = $this->datatables->generate();
@@ -102,7 +102,7 @@ class M_report_skripsi extends CI_Model
 	}
 
 
-	function get_data_detail_selesai($date1, $date2, $group)
+	function get_data_detail_selesai($date1, $date2, $group, $searchValue = null)
 	{
 		$where = " 1=1 AND status_bimb= 'Setuju Sidang' ";
 
@@ -140,6 +140,9 @@ class M_report_skripsi extends CI_Model
 		$this->datatables->join('title_submission ts', 'bs.submission_code = ts.submission_code');
 		$this->datatables->join('m_dosen d', 'bs.dosbing = d.nip', 'left');
 		$this->datatables->where($where);
+		if (!empty($searchValue)) {
+			$this->datatables->like('ts.student_name', $searchValue, 'both');
+		}
 
 	
 		$data = $this->datatables->generate();

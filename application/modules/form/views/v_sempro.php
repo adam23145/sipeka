@@ -21,7 +21,7 @@
 				                    <input type="text" class="form-control" id="nim" name="nim" value="<?php echo substr($this->session->userdata['logged_in']['userid'], 0,12) ?>" readonly="true">
 				                </div>
 				                <div class="form-group">
-				                    <label for="majorname">Jurusan</label>
+				                    <label for="majorname">Program Studi</label>
 				                    <input type="text" class="form-control" id="majorname" name="majorname" value="{majorname}" readonly="true">
 				                </div>
 				                <div class="form-group">

@@ -13,7 +13,7 @@
             font-family: "Times New Roman", Times, serif;
         }
 
-        .barcode { 
+        .barcode {
             position: fixed;
             top: 10px;
             right: 120px;
@@ -39,6 +39,12 @@
             border-collapse: collapse;
         }
 
+        .page-break {
+            page-break-before: always;
+        }
+        .monitoring-table{
+            margin-top: 50px;
+        }
         @media print {
             .barcode {
                 display: block;
@@ -57,8 +63,10 @@
             .barcode.page-break {
                 display: none;
             }
+
         }
     </style>
+
 </head>
 
 <body>
@@ -138,68 +146,74 @@
             <tr>
                 <td>&nbsp;</td>
             </tr>
-            <tr>
-                <td>
-                    <table border="1" width="100%" style="font-size: 14px">
-                        <tr>
-                            <td colspan="13" align="center">
-                                MONITORING KEGIATAN PEMBIMBINGAN
-                            </td>
-                        </tr>
-                        <tr>
-                            <td width="30px">No</td>
-                            <td colspan="2">Tanggal</td>
-                            <td colspan="8">Topik Pembimbingan</td>
-                            <td colspan="2">Paraf Pembimbing</td>
-                        </tr>
-                        <?php $i = 0;
-                        foreach ($log_bimbingan as $row) {
-                            $i++;
-                        ?>
-                            <tr>
-                                <td><?= $i ?></td>
-                                <td colspan="2"><?= $row['tanggal'] ?></td>
-                                <td colspan="8"><?= $row['topik'] ?></td>
-                                <td colspan="2"><br></td>
-                            </tr>
-                        <?php } ?>
+        </table>
 
-                        <tr>
-                            <td colspan="13">
-                                Jumlah Pembimbingan ke Pembimbing: <?= $jumlb ?> kali
-                            </td>
-                        </tr>
-                    </table>
+
+        <div class="content">
+            <table width="100%">
+                <tr>
+                    <td align="center">Mengetahui,</td>
+                </tr>
+
+                <tr>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr>
+                    <td>
+                        <table width="100%">
+                            <tr>
+                                <td align="center" width="50%">Pembimbing</td>
+                                <td align="center" width="50%">Ketua Program Studi</td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td align="center" style="text-decoration: underline;" width="50%"><?= $nama ?></td>
+                                <td align="center" style="text-decoration: underline;" width="50%"><?= $namakoor ?></td>
+                            </tr>
+                            <tr>
+                                <td align="center" width="50%">NIP. <?= $dosbing ?></td>
+                                <td align="center" width="50%">NIP. <?= $nipkoor ?></td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="page-break"></div>
+        
+        <table border="1" width="100%" style="font-size: 14px" class="monitoring-table">
+            <tr>
+                <td colspan="13" align="center">
+                    MONITORING KEGIATAN PEMBIMBINGAN
                 </td>
             </tr>
             <tr>
-                <td>&nbsp;</td>
+                <td width="30px">No</td>
+                <td colspan="2">Tanggal</td>
+                <td colspan="8">Topik Pembimbingan</td>
+                <td colspan="2">Paraf Pembimbing</td>
             </tr>
+            <?php $i = 0;
+            foreach ($log_bimbingan as $row) {
+                $i++;
+            ?>
+                <tr>
+                    <td><?= $i ?></td>
+                    <td colspan="2"><?= $row['tanggal'] ?></td>
+                    <td colspan="8"><?= $row['topik'] ?></td>
+                    <td colspan="2"><br></td>
+                </tr>
+            <?php } ?>
+
             <tr>
-                <td align="center">Mengetahui,</td>
-            </tr>
-            <tr>
-                <td>
-                    <table width="100%">
-                        <tr>
-                            <td align="center" width="50%">Pembimbing</td>
-                            <td align="center" width="50%">Ketua Program Studi</td>
-                        </tr>
-                        <tr>
-                            <td>&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td>&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td align="center" style="text-decoration: underline;" width="50%"><?= $nama ?></td>
-                            <td align="center" style="text-decoration: underline;" width="50%"><?= $namakoor ?></td>
-                        </tr>
-                        <tr>
-                            <td align="center" width="50%">NIP. <?= $dosbing ?></td>
-                            <td align="center" width="50%">NIP. <?= $nipkoor ?></td>
-                        </tr>
-                    </table>
+                <td colspan="13">
+                    Jumlah Pembimbingan ke Pembimbing: <?= $jumlb ?> kali
                 </td>
             </tr>
         </table>

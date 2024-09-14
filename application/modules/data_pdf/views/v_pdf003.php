@@ -50,6 +50,11 @@
             border: 1px solid black;
             padding: 10px;
         }
+
+        /* Break page before monitoring section */
+        .page-break {
+            page-break-before: always;
+        }
     </style>
 </head>
 
@@ -130,54 +135,6 @@
                 </td>
             </tr>
             <tr>
-                <td>
-                    <table class="simple-table" style="font-size: 14px">
-                        <tr>
-                            <td colspan="13" align="center">
-                                MONITORING KEGIATAN PEMBIMBINGAN
-                            </td>
-                        </tr>
-                        <tr>
-                            <td width="30px">
-                                No
-                            </td>
-                            <td colspan="2">
-                                Tanggal
-                            </td>
-                            <td colspan="8">
-                                Topik Pembimbingan
-                            </td>
-                            <td colspan="2">
-                                Paraf Pembimbing
-                            </td>
-                        </tr>
-                        <?php
-                        $i = 0;
-                        foreach ($log_bimbingan as $row) {
-                            $i++;
-                        ?>
-                            <tr>
-                                <td><?php echo $i; ?></td>
-                                <td colspan="2"><?php echo $row['tanggal']; ?></td>
-                                <td colspan="8"><?php echo $row['topik']; ?></td>
-                                <td colspan="2"><br></td>
-                            </tr>
-                        <?php } ?>
-                        <tr>
-                            <td colspan="13">
-                                Jumlah Pembimbingan ke Pembimbing: <?php echo $jumlb; ?> kali
-                            </td>
-                        </tr>
-                    </table>
-                </td>
-            </tr>
-            <tr>
-                <td>&nbsp;</td>
-            </tr>
-            <tr>
-                <td>&nbsp;</td>
-            </tr>
-            <tr>
                 <td>&nbsp;</td>
             </tr>
             <tr>
@@ -215,6 +172,43 @@
             </tr>
         </table>
     </div>
+
+    <!-- Page Break for Monitoring Section -->
+    <div class="page-break"></div>
+
+    <div class="content">
+        <table class="simple-table" style="font-size: 14px">
+            <tr>
+                <td colspan="13" align="center">
+                    MONITORING KEGIATAN PEMBIMBINGAN
+                </td>
+            </tr>
+            <tr>
+                <td width="30px">No</td>
+                <td colspan="2">Tanggal</td>
+                <td colspan="8">Topik Pembimbingan</td>
+                <td colspan="2">Paraf Pembimbing</td>
+            </tr>
+            <?php
+            $i = 0;
+            foreach ($log_bimbingan as $row) {
+                $i++;
+            ?>
+                <tr>
+                    <td><?php echo $i; ?></td>
+                    <td colspan="2"><?php echo $row['tanggal']; ?></td>
+                    <td colspan="8"><?php echo $row['topik']; ?></td>
+                    <td colspan="2"><br></td>
+                </tr>
+            <?php } ?>
+            <tr>
+                <td colspan="13">
+                    Jumlah Pembimbingan ke Pembimbing: <?php echo $jumlb; ?> kali
+                </td>
+            </tr>
+        </table>
+    </div>
+
     <script type="text/javascript">
         window.onload = function() {
             window.print();
