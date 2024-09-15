@@ -11,11 +11,52 @@
                     <input type="text" id="barcode" name="barcode" class="form-control" required>
                 </div>
                 <button type="submit" class="btn btn-primary">Check</button>
-                <button type="button" id="startScanner" class="btn btn-secondary">Start Scanner</button>
+                <button type="button" id="startScanButton" class="btn btn-secondary">Start Scanner</button>
             </form>
+            <br></br>
             <div id="result" class="mt-3"></div>
-            <div id="scannerContainer" class="mt-3" style="display:none;">
-                <div id="scanner" style="width:100%; border:1px solid #ddd;"></div>
+            <script src="<?php echo base_url();?>public/qrScript.js"></script>
+            <div style="text-align: center;">
+                <div id="reader" style="width: 500px; display: none;"></div>
+                <script>
+                    const html5Qrcode = new Html5Qrcode('reader');
+
+                    const qrCodeSuccessCallback = (decodedText, decodedResult) => {
+                        if (decodedText) {
+                            // Masukkan hasil pemindaian ke input teks
+                            document.getElementById('barcode').value = decodedText;
+                            Swal.fire({
+                                title: 'Scanned Result',
+                                text: decodedText,
+                                confirmButtonText: 'OK'
+                            });
+                            html5Qrcode.stop();
+                        }
+                    };
+
+                    const config = {
+                        fps: 10,
+                        qrbox: {
+                            width: 250,
+                            height: 250
+                        }
+                    };
+
+                    document.getElementById('startScanButton').addEventListener('click', () => {
+                        document.getElementById('reader').style.display = 'block';
+                        html5Qrcode.start({
+                                facingMode: "environment"
+                            }, config, qrCodeSuccessCallback)
+                            .catch((err) => {
+                                Swal.fire({
+                                    title: 'Error',
+                                    text: `Failed to start scanning: ${err}`,
+                                    icon: 'error',
+                                    confirmButtonText: 'OK'
+                                });
+                            });
+                    });
+                </script>
             </div>
         </div>
     </div>

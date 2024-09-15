@@ -8,7 +8,7 @@
         @media print {
             @page {
                 margin: 0in 0in;
-                
+
                 margin: 10mm;
             }
 
@@ -34,15 +34,13 @@
 
             .barcode {
                 position: absolute;
-                bottom: 0;
-                left: 20px;
-                width: 100px;
-                /* Ukuran barcode yang diperkecil */
+                bottom: 10mm;
+                left: 0mm;
+                width: 50px;
             }
 
             .barcode img {
-                width: 200px !important;
-                /* Ukuran barcode yang lebih kecil */
+                width: 160%;
             }
         }
     </style>
@@ -162,7 +160,7 @@
     </table>
     <!-- Barcode di kiri bawah -->
     <div class="barcode">
-        <img src="https://barcode.tec-it.com/barcode.ashx?data=<?= urlencode($subcode); ?>&code=Code128&translate-characters=true" alt="NIM Barcode">
+        <img src="https://barcode.tec-it.com/barcode.ashx?data=<?= urlencode($subcode); ?>&code=QRCode&translate-esc=on&eclevel=L" alt="NIM Barcode">
     </div>
 
     <!-- Script untuk memunculkan dialog print otomatis -->

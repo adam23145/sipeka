@@ -18,7 +18,7 @@
             position: absolute;
             bottom: 10mm; 
             left: 0mm; 
-            width: 100px; 
+            width: 50px; 
         }
 
         .barcode img {
@@ -35,7 +35,7 @@
 
 <body>
     <div class="barcode">
-        <img src="https://barcode.tec-it.com/barcode.ashx?data=<?= urlencode($subcode); ?>&code=Code128&translate-characters=true" alt="NIM Barcode">
+        <img src="https://barcode.tec-it.com/barcode.ashx?data=<?= urlencode($subcode); ?>&code=QRCode&translate-esc=on&eclevel=L" alt="NIM Barcode">
     </div>
 
     <hr style="border-top: 1px solid black;">

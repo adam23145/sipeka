@@ -14,19 +14,18 @@
         }
 
         .barcode {
-            position: fixed;
-            bottom: 10px;
-            left: 10px;
-            width: 100px;
-            z-index: 999;
+            position: absolute;
+            bottom: 5mm;
+            left: 0mm;
+            width: 50px;
+        }
+
+        .barcode img {
+            width: 160%;
         }
 
         td {
             padding: 2px;
-        }
-
-        .barcode img {
-            width: 200px !important;
         }
 
         .content {
@@ -48,7 +47,7 @@
 
 <body>
     <div class="barcode">
-        <img src="https://barcode.tec-it.com/barcode.ashx?data=<?= urlencode($subcode); ?>&code=Code128&translate-characters=true" alt="NIM Barcode">
+        <img src="https://barcode.tec-it.com/barcode.ashx?data=<?= urlencode($subcode); ?>&code=QRCode&translate-esc=on&eclevel=L" alt="NIM Barcode">
     </div>
     <hr style="border-top: 1px solid black;">
     <hr style="border-top: 1px solid black;">

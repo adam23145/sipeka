@@ -13,21 +13,20 @@
             font-family: "Times New Roman", Times, serif;
         }
 
-        .barcode {
-            position: fixed;
-            top: 10px;
-            right: 120px;
-            width: 100px;
-            z-index: 999;
-            display: none;
-        }
 
         td {
             padding: 5px;
         }
 
+        .barcode {
+            position: absolute;
+            bottom: 5mm;
+            left: 0mm;
+            width: 50px;
+        }
+
         .barcode img {
-            width: 200px !important;
+            width: 150%;
         }
 
         .content {
@@ -42,26 +41,14 @@
         .page-break {
             page-break-before: always;
         }
-        .monitoring-table{
+
+        .monitoring-table {
             margin-top: 50px;
         }
-        @media print {
-            .barcode {
-                display: block;
-                position: absolute;
-                top: 10px;
-                right: 120px;
-                width: 100px;
-                z-index: 999;
-                page-break-before: always;
-            }
 
+        @media print {
             .content {
                 margin-top: 100px;
-            }
-
-            .barcode.page-break {
-                display: none;
             }
 
         }
@@ -71,11 +58,12 @@
 
 <body>
 
-    <div class="barcode">
-        <img src="https://barcode.tec-it.com/barcode.ashx?data=<?= urlencode($subcode); ?>&code=Code128&translate-characters=true" alt="NIM Barcode">
-    </div>
 
+    <div class="barcode">
+        <img src="https://barcode.tec-it.com/barcode.ashx?data=<?= urlencode($subcode); ?>&code=QRCode&translate-esc=on&eclevel=L" alt="NIM Barcode">
+    </div>
     <div class="content" style="margin-top: 2px;">
+
         <hr style="border-top: 1px solid black;">
         <hr style="border-top: 1px solid black;">
 
@@ -186,7 +174,7 @@
         </div>
 
         <div class="page-break"></div>
-        
+
         <table border="1" width="100%" style="font-size: 14px" class="monitoring-table">
             <tr>
                 <td colspan="13" align="center">

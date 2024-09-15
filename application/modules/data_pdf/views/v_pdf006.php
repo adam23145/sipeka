@@ -18,7 +18,7 @@
             position: absolute;
             bottom: 10mm;
             left: 0mm;
-            width: 100px;
+            width: 50px;
         }
 
         .barcode img {
@@ -60,28 +60,32 @@
             display: flex;
             justify-content: space-between;
             align-items: flex-end;
-            padding: 0 10px; /* Add padding if needed */
+            padding: 0 10px;
+            /* Add padding if needed */
         }
 
         .signature-box {
             flex: 1;
             text-align: center;
-            margin: 0 20px; /* Adjust margin to increase space between boxes */
+            margin: 0 20px;
+            /* Adjust margin to increase space between boxes */
         }
 
         .signature-box:first-child {
-            margin-right: 30px; /* Extra margin for the first signature box */
+            margin-right: 30px;
+            /* Extra margin for the first signature box */
         }
 
         .signature-box:last-child {
-            margin-left: 30px; /* Extra margin for the last signature box */
+            margin-left: 30px;
+            /* Extra margin for the last signature box */
         }
     </style>
 </head>
 
 <body>
     <div class="barcode">
-        <img src="https://barcode.tec-it.com/barcode.ashx?data=<?= urlencode($subcode); ?>&code=Code128&translate-characters=true" alt="NIM Barcode">
+        <img src="https://barcode.tec-it.com/barcode.ashx?data=<?= urlencode($subcode); ?>&code=QRCode&translate-esc=on&eclevel=L" alt="NIM Barcode">
     </div>
 
     <hr style="border-top: 1px solid black;">
@@ -199,7 +203,7 @@
         <tr>
             <td>&nbsp;</td>
         </tr>
-        
+
         <tr align="center">
             <td>Koordinator Ta</td>
         </tr>

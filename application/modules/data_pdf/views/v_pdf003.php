@@ -22,18 +22,20 @@
             padding: 5px;
         }
 
-        .barcode {
-            position: absolute;
-            top: 0px;
-            right: 20px;
-        }
 
         .content {
             margin-top: 40px;
         }
 
+        .barcode {
+            position: absolute;
+            bottom: 10mm; 
+            left: 0mm; 
+            width: 50px; 
+        }
+
         .barcode img {
-            width: 150px;
+            width: 160%;
         }
 
         /* Customizing table lines to be simple and not thick */
@@ -60,7 +62,7 @@
 
 <body>
     <div class="barcode">
-        <img src="https://barcode.tec-it.com/barcode.ashx?data=<?= urlencode($subcode); ?>&code=Code128&translate-characters=true" alt="NIM Barcode">
+        <img src="https://barcode.tec-it.com/barcode.ashx?data=<?= urlencode($subcode); ?>&code=QRCode&translate-esc=on&eclevel=L" alt="NIM Barcode">
     </div>
     <div class="content">
         <hr>
