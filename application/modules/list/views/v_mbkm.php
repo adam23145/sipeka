@@ -3,7 +3,7 @@
         <div class="col-12">
             <div class="card card-primary card-outline">
                 <div class="card-header">
-                    <h4 class="card-title">Skripsi Riset</h4>
+                    <h4 class="card-title">Mbkm Riset</h4>
                 </div>
                 <div class="card-body table-responsive p-4">
                     <table id="table-pengajuan" class="table table-bordered table-striped display nowrap" style="width:100%">
@@ -11,7 +11,7 @@
                             <tr>
                                 <th>Nama Mahasiswa</th>
                                 <th>Tanggal Pengajuan</th>
-                                <th>Skripsi/Riset</th>
+                                <th>Mbkm</th>
                                 <th>Dokumen Pendukung</th>
                                 <th>Konfirmasi</th>
                             </tr>

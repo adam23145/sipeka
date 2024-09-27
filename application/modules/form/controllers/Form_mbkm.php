@@ -2,13 +2,13 @@
 if (!defined('BASEPATH')) exit('No direct script access allowed');
 date_default_timezone_set('Asia/Jakarta');
 
-class Form_skripsiriset extends CI_Controller
+class Form_mbkm extends CI_Controller
 {
 
 	function __construct()
 	{
 		parent::__construct();
-		$this->load->model('M_skripsiriset');
+		$this->load->model('M_mbkm');
 		$this->load->helper('string');
 		if (!$this->session->userdata('logged_in')) {
 			redirect('login');
@@ -17,8 +17,8 @@ class Form_skripsiriset extends CI_Controller
 
 	function index()
 	{
-		$this->breadcrumb->add('Form', 'form/form_skripsiriset')
-			->add('Pengajuan Skripsi Riset', 'form/form_skripsiriset');
+		$this->breadcrumb->add('Form', 'form/form_mbkm')
+			->add('Pengajuan Mbkm Riset', 'form/form_mbkm');
 		$majorcode			= substr($this->session->userdata['logged_in']['userid'], 4, 3);
 		$nim				= substr($this->session->userdata['logged_in']['userid'], 0, 12);
 		$token				= random_string('numeric', 3);
@@ -27,8 +27,8 @@ class Form_skripsiriset extends CI_Controller
 		$major_name			= $this->M_global->get_jurusan2($nim);
 
 		$data = array(
-			'thisContent' 	=> 'form/v_skripsiriset',
-			'thisJs'		=> 'form/js_skripsiriset',
+			'thisContent' 	=> 'form/v_mbkm',
+			'thisJs'		=> 'form/js_mbkm',
 			'subm_id'		=> $subm_id,
 			'majorname'		=> $major_name[0]['jurusan'],
 		);
@@ -47,8 +47,8 @@ class Form_skripsiriset extends CI_Controller
 		}
 
 		$userid = $this->session->userdata['logged_in']['userid'];
-		$directory = './document/fileskpripsiriset/' . $userid;
-		$file_pth = 'document/fileskpripsiriset/' . $userid . '/';
+		$directory = './document/filembkm/' . $userid;
+		$file_pth = 'document/filembkm/' . $userid . '/';
 
 		if (!is_dir($directory)) {
 			mkdir($directory, 0755, true); // Create the directory recursively if it does not exist
@@ -73,7 +73,7 @@ class Form_skripsiriset extends CI_Controller
 
 		if (move_uploaded_file($file_tmp_name, $file_upload)) {
 			$data = array(
-				'skripsi_riset' => $this->input->post('skripsi_riset'),
+				'mbkm' => $this->input->post('mbkm'),
 				'nama_mahasiswa' => $this->input->post('nama_mahasiswa'),
 				'nim' => $this->input->post('nim'),
 				'prodi' => $this->input->post('majorname'),
@@ -84,7 +84,7 @@ class Form_skripsiriset extends CI_Controller
 				'dokumen_pendukung' => $file_pth . $file_name_new,
 			);
 
-			$insert = $this->M_skripsiriset->insert($data);
+			$insert = $this->M_mbkm->insert($data);
 
 			$response = array(
 				'status' => $insert,
@@ -105,7 +105,7 @@ class Form_skripsiriset extends CI_Controller
 
 	public function fetch_dosen_select2()
 	{
-		$dosen = $this->M_skripsiriset->get_all(); // Mengambil data dosen dari model
+		$dosen = $this->M_mbkm->get_all(); // Mengambil data dosen dari model
 
 		$data = array();
 		foreach ($dosen as $row) {

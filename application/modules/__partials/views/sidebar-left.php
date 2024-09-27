@@ -451,6 +451,12 @@
                 </a>
               </li>
               <li class="nav-item">
+                <a href="<?php echo base_url(); ?>form/Form_mbkm" <?= ($seg2 == "Form_mbkm") ? 'class="nav-link active"' : 'class="nav-link"'; ?>>
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Form Mbkm</p>
+                </a>
+              </li>
+              <li class="nav-item">
                 <a href="<?php echo base_url(); ?>form/form_publikasi" <?= ($seg2 == "form_publikasi") ? 'class="nav-link active"' : 'class="nav-link"'; ?>>
                   <i class="far fa-circle nav-icon"></i>
                   <p>Form Publikasi</p>
@@ -490,6 +496,13 @@
                 <a href="<?php echo base_url(); ?>history/skripsiriset" <?= ($seg2 == "skripsiriset") ? 'class="nav-link active"' : 'class="nav-link"'; ?>>
                   <i class="far fa-circle nav-icon"></i>
                   <p>Historis Skripsi Riset</p>
+                </a>
+              </li>
+              
+              <li class="nav-item">
+                <a href="<?php echo base_url(); ?>history/mbkm" <?= ($seg2 == "mbkm") ? 'class="nav-link active"' : 'class="nav-link"'; ?>>
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Historis Mbkm</p>
                 </a>
               </li>
               <li class="nav-item">
@@ -597,6 +610,12 @@
                 <a href="<?php echo base_url(); ?>list/skripsi_riset" <?= ($seg4 == "skripsi_riset") ? 'class="nav-link active"' : 'class="nav-link"'; ?>>
                   <i class="far fa-circle nav-icon"></i>
                   <p>Pengajuan Skripsi Riset</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?php echo base_url(); ?>list/mbkm" <?= ($seg4 == "mbkm") ? 'class="nav-link active"' : 'class="nav-link"'; ?>>
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Pengajuan Mbkm</p>
                 </a>
               </li>
               <li class="nav-item">

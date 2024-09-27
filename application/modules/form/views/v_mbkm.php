@@ -3,7 +3,7 @@
         <div class="col-md-12">
             <div class="card card-primary">
                 <div class="card-header">
-                    <h3 class="card-title">Form Skripsi Riset</h3>
+                    <h3 class="card-title">Form Mbkm</h3>
                 </div>
                 <form id="form-submtitle" method="POST">
                     <input type="hidden" name="token" id="token" value="<?php echo $this->security->get_csrf_hash(); ?>">
@@ -11,8 +11,8 @@
                         <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>">
                         <input type="hidden" name="subm_id" value="<?php echo $subm_id; ?>">
                         <div class="form-group">
-                            <label>Judul Skripsi Riset:</label>
-                            <input type="text" class="form-control" name="skripsi_riset" required>
+                            <label>Judul Mbkm:</label>
+                            <input type="text" class="form-control" name="mbkm" required>
                         </div>
 
                         <div class="form-group">

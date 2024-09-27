@@ -14,7 +14,6 @@
                             <label>Jenis Tugas Akhir:</label>
                             <select class="form-control" name="jenis_tugas_akhir" required>
                                 <option value="Publikasi Ilmiah">Publikasi Ilmiah</option>
-                                <option value="MBKM Riset">MBKM Riset</option>
                                 <option value="Lainnya">Lainnya</option>
                             </select>
                         </div>

@@ -7,14 +7,14 @@
             "processing": true,
             "serverSide": true,
             "ajax": {
-                "url": "<?php echo site_url('history/skripsiriset/get_data'); ?>",
+                "url": "<?php echo site_url('history/Mbkm/get_data'); ?>",
                 "type": "POST",
                 "data": function(d) {
                     d[csrfName] = csrfHash;
                 }
             },
             "columns": [{
-                    "data": "skripsi_riset"
+                    "data": "mbkm"
                 },
                 {
                     "data": "nama_mahasiswa"

@@ -2,13 +2,13 @@
 if (!defined('BASEPATH')) exit('No direct script access allowed');
 date_default_timezone_set('Asia/Jakarta');
 
-class Skripsi_riset extends CI_Controller
+class Mbkm extends CI_Controller
 {
 
     function __construct()
     {
         parent::__construct();
-        $this->load->model('M_skripsiriset');
+        $this->load->model('M_mbkm');
         if (!$this->session->userdata('logged_in')) {
             redirect('login');
         }
@@ -17,11 +17,11 @@ class Skripsi_riset extends CI_Controller
     function index()
     {
         $this->load->library('breadcrumb');
-        $this->breadcrumb->add('List', 'list/skripsi_riset')
-            ->add('Skripsi Riset', 'list/skripsi_riset');
+        $this->breadcrumb->add('List', 'list/mbkm')
+            ->add('Skripsi Riset', 'list/mbkm');
         $data = array(
-            'thisContent'     => 'list/v_skripsiriset',
-            'thisJs'        => 'list/js_skripsiriset',
+            'thisContent'     => 'list/v_mbkm',
+            'thisJs'        => 'list/js_mbkm',
         );
         $this->parser->parse('template/template', $data);
     }
@@ -30,7 +30,7 @@ class Skripsi_riset extends CI_Controller
         $columns = array(
             0 => 'nama_mahasiswa',
             1 => 'tanggal_pengajuan',
-            2 => 'skripsi_riset',
+            2 => 'mbkm',
             3 => 'dokumen_pendukung'
         );
 
@@ -41,16 +41,16 @@ class Skripsi_riset extends CI_Controller
         $order = isset($this->input->post('order')[0]['column']) ? $columns[$this->input->post('order')[0]['column']] : $columns[0];
         $dir = isset($this->input->post('order')[0]['dir']) ? $this->input->post('order')[0]['dir'] : 'asc';
 
-        $totalData = $this->M_skripsiriset->count_all_data();
+        $totalData = $this->M_mbkm->count_all_data();
         $totalFiltered = $totalData;
 
         // Cek apakah ada input 'search'
         if (empty($this->input->post('search')['value'])) {
-            $mahasiswa = $this->M_skripsiriset->get_all_data($limit, $start, $order, $dir);
+            $mahasiswa = $this->M_mbkm->get_all_data($limit, $start, $order, $dir);
         } else {
             $search = isset($this->input->post('search')['value']) ? $this->input->post('search')['value'] : '';
-            $mahasiswa =  $this->M_skripsiriset->search_data($limit, $start, $search, $order, $dir);
-            $totalFiltered = $this->M_skripsiriset->count_filtered_data($search);
+            $mahasiswa =  $this->M_mbkm->search_data($limit, $start, $search, $order, $dir);
+            $totalFiltered = $this->M_mbkm->count_filtered_data($search);
         }
 
         $data = array();
@@ -58,7 +58,7 @@ class Skripsi_riset extends CI_Controller
             foreach ($mahasiswa as $mhs) {
                 $nestedData['nama_mahasiswa'] = $mhs->nama_mahasiswa;
                 $nestedData['tanggal_pengajuan'] = $mhs->tanggal_pengajuan;
-                $nestedData['skripsi_riset'] = $mhs->skripsi_riset;
+                $nestedData['mbkm'] = $mhs->mbkm;
                 $nestedData['dokumen_pendukung'] = $mhs->dokumen_pendukung;
                 $nestedData['dokumen_pendukung'] = '<a href="' . base_url($mhs->dokumen_pendukung) . '" class="btn btn-success" target="_blank">Download</a>';
                 $modalHtml = '<div class="modal fade" id="modalKonfirmasi' . $mhs->id . '" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
@@ -139,7 +139,7 @@ class Skripsi_riset extends CI_Controller
 
     public function fetch_dosen_select2()
     {
-        $dosen = $this->M_skripsiriset->get_all(); // Mengambil data dosen dari model
+        $dosen = $this->M_mbkm->get_all(); // Mengambil data dosen dari model
 
         $data = array();
         foreach ($dosen as $row) {
@@ -172,7 +172,7 @@ class Skripsi_riset extends CI_Controller
         );
 
         // Update status di database
-        $update = $this->M_skripsiriset->update_status($id, $data_update);
+        $update = $this->M_mbkm->update_status($id, $data_update);
 
         if ($update) {
             // Jika update berhasil

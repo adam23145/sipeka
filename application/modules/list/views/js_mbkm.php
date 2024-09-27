@@ -5,7 +5,7 @@
             "processing": true, // Menampilkan loader
             "serverSide": true, // Server-side processing
             "ajax": {
-                "url": "<?php echo site_url('list/skripsi_riset/get_data'); ?>", // URL controller
+                "url": "<?php echo site_url('list/mbkm/get_data'); ?>", // URL controller
                 "type": "POST",
                 "data": function(d) {
                     d['<?= $this->security->get_csrf_token_name() ?>'] = '<?= $this->security->get_csrf_hash() ?>'; // CSRF token untuk keamanan
@@ -18,7 +18,7 @@
                     "data": "tanggal_pengajuan"
                 }, // Kolom tanggal_pengajuan
                 {
-                    "data": "skripsi_riset"
+                    "data": "mbkm"
                 }, // Kolom skripsi_riset
                 {
                     "data": "dokumen_pendukung",
@@ -33,7 +33,7 @@
             $(selector).select2({
                 placeholder: 'Pilih Dosen',
                 ajax: {
-                    url: "<?php echo site_url('list/skripsi_riset/fetch_dosen_select2'); ?>",
+                    url: "<?php echo site_url('list/mbkm/fetch_dosen_select2'); ?>",
                     dataType: 'json',
                     delay: 250,
                     processResults: function(data) {
@@ -52,6 +52,7 @@
             initSelect2('#dosen_pembimbing_utama_' + modalId.replace('modalKonfirmasi', ''));
             initSelect2('#dosen_pembimbing_kedua_' + modalId.replace('modalKonfirmasi', ''));
         });
+
 
     });
 </script>
@@ -87,7 +88,7 @@
         }
 
         $.ajax({
-            url: "<?= base_url('list/skripsi_riset/update_status') ?>",
+            url: "<?= base_url('list/mbkm/update_status') ?>",
             type: "POST",
             data: {
                 id: mhsId,
