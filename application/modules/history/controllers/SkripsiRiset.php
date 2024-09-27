@@ -2,7 +2,7 @@
 if (!defined('BASEPATH')) exit('No direct script access allowed');
 date_default_timezone_set('Asia/Jakarta');
 
-class SkripsiRiset extends CI_Controller
+class Skripsiriset extends CI_Controller
 {
 
     function __construct()
