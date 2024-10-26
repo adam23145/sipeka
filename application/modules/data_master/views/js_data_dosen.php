@@ -163,7 +163,7 @@
 					type: 'success',
 					title: 'Success',
 					text: data.feedback,
-					timer:500
+					timer:5000
 				});
 				$('#btn-submit').attr('disabled', false);
 			},

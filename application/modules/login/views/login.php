@@ -135,15 +135,15 @@
 						<img class="responsive" src="<?php echo base_url(); ?>public/assets/core/images/logo1.png" alt="Logo" style="width: 150px; margin-bottom: 20px;">
 						<p style="text-align: justify;">
 							<strong>Visi:</strong><br>
-							Pada tahun 2030, menjadi institusi yang mampu mewujudkan lulusan yang cerdas, berdaya saing, berakhlakul karimah, dan unggul dalam pendidikan serta riset berdasarkan potensi Madura.<br><br>
+							Unggul dalam pendidikan dan riset di bidang Ilmu Keislaman, Berkarakter Islami dan Berdaya saing Internasional pada Tahun 2030.<br><br>
 
 							<strong>Misi:</strong><br>
 						</p>
 						<ul style="text-align: justify;">
-							<li>1. Menyelenggarakan layanan pendidikan yang berkualitas, relevan, dan kompeten untuk penguatan ilmu pengetahuan, teknologi, serta iman dan takwa.</li>
-							<li>2. Menyelenggarakan kegiatan penelitian dan pengabdian masyarakat berdasarkan potensi Madura secara berkesinambungan dalam mendukung proses pembelajaran dan publikasi ilmiah.</li>
-							<li>3. Meningkatkan jejaring kerja sama dengan pemerintah, swasta, industri, pondok pesantren, alumni, dan lembaga pendidikan di dalam dan luar negeri yang dapat menunjang pengembangan potensi Madura.</li>
-							<li>4. Meningkatkan tata kelola perguruan tinggi menggunakan prinsip kredibel, transparan, akuntabel, tanggung jawab, dan adil.</li>
+							<li>1. Menyelenggarakan pendidikan yang unggul di bidang Ilmu Keislaman.</li>
+							<li>2. Meningkatkan kualitas dosen dalam bidang pengajaran, penelitian dan pengabdian masyarakat yang menunjang penerapan dan pengembangan Ilmu Keislaman.</li>
+							<li>3. Menfasilitasi terbentuknya Insan Fakultas Keislaman berkarakter Islami.</li>
+							<li>4. Mengembangkan kerjasama dengan berbagai pihak untuk meningkatkan pelaksanaan tri dharma Perguruan Tinggi.</li>
 						</ul>
 					</div>
 				</div>

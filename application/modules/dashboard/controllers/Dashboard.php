@@ -1,64 +1,81 @@
-<?php 
+<?php
 if (!defined('BASEPATH')) exit('No direct script access allowed');
 date_default_timezone_set('Asia/Jakarta');
 
-class Dashboard extends CI_Controller {
+class Dashboard extends CI_Controller
+{
 
-	function __construct(){
+	function __construct()
+	{
 		parent::__construct();
 		$this->load->model('M_dashboard');
 		if (!$this->session->userdata('logged_in')) {
 			redirect('login');
 		}
 
-		if($this->session->userdata['logged_in']['userlevel'] == 'Dosen'){
+		if ($this->session->userdata['logged_in']['userlevel'] == 'Dosen') {
 			redirect('dashboard_dosen');
 		}
 
-		if($this->session->userdata['logged_in']['userlevel'] == 'mahasiswa'){
+		if ($this->session->userdata['logged_in']['userlevel'] == 'mahasiswa') {
 			redirect('dashboard_mhs');
 		}
 	}
 
-	function index(){
+	function index()
+	{
 		$userid			= $this->session->userdata['logged_in']['userid'];
 		$lvl			= $this->session->userdata['logged_in']['userlevel'];
+		$username 		= $this->session->userdata['logged_in']['username'];
 		$data_st		= $this->M_dashboard->get_status_st($userid);
-		if($lvl=='Wadek' || $lvl=='Dekan' || $lvl=='Sekjur' || $lvl=='Kajur' || $lvl=='Admin Prodi' ){
+		if ($lvl == 'Wadek' || $lvl == 'Dekan' || $lvl == 'Sekjur' || $lvl == 'Kajur') {
 			$jur 		= '';
-		}else{
+		} else if ($lvl == 'Admin Prodi') {
+			if ($username == 'Admin Prodi HBS') {
+				$jur = 'Hukum Bisnis Syariah';
+			} else if ($username == 'Admin Prodi ES') {
+				$jur = 'Ekonomi Syariah';
+			}
+		} else if ($lvl == 'Koordinator Prodi') {
+			if ($username == 'Koordinator Prodi HBS') {
+				$jur = 'Hukum Bisnis Syariah';
+			} else if ($username == 'Koordinator Prodi ES') {
+				$jur = 'Ekonomi Syariah';
+			}
+		} else {
 			$jur 		= $data_st[0]['program_study'];
 		}
-		
 
-		$data_ds		= $this->M_dashboard->get_count($jur,$lvl);
-		$data_tl		= $this->M_dashboard->get_counttolak($jur,$lvl);
-		$data_all		= $this->M_dashboard->get_countall($jur,$lvl);
-		$data_revisi	= $this->M_dashboard->get_revisi($jur,$lvl);
-		$data_rv		= $this->M_dashboard->get_count_rev($jur,$lvl);
-		$data_app		= $this->M_dashboard->get_count_app($userid,$lvl, $jur);
+
+		$data_ds		= $this->M_dashboard->get_count($jur, $lvl);
+		$data_tl		= $this->M_dashboard->get_counttolak($jur, $lvl);
+		$data_all		= $this->M_dashboard->get_countall($jur, $lvl);
+		$data_revisi	= $this->M_dashboard->get_revisi($jur, $lvl);
+		$data_rv		= $this->M_dashboard->get_count_rev($jur, $lvl);
+		$data_app		= $this->M_dashboard->get_count_app($userid, $lvl, $jur);
 		$data_skripsiriset = $this->M_dashboard->count_skripsiriset();
-		$data_mbkm = $this->M_dashboard->count_mbkm();
-		$newsempro 		= $this->M_dashboard->get_newsempro($userid,$lvl,$jur);
+		$data_mbkm 		= $this->M_dashboard->count_mbkm($jur);
+		$data_publikasi = $this->M_dashboard->count_publikasi($jur);
+		$newsempro 		= $this->M_dashboard->get_newsempro($userid, $lvl, $jur);
 
-		$baru_sem 		= $this->M_dashboard->get_baru_sem($userid,$lvl);
-
-
-		$proses_sem		= $this->M_dashboard->get_pr_sem($userid,$lvl,$jur);
+		$baru_sem 		= $this->M_dashboard->get_baru_sem($userid, $lvl);
 
 
-		$selesai_sem	= $this->M_dashboard->get_end_sem($userid,$lvl,$jur);
+		$proses_sem		= $this->M_dashboard->get_pr_sem($userid, $lvl, $jur);
 
-		$baru 	= $this->M_dashboard->get_baru($userid,$lvl,$jur);
-		$proses	= $this->M_dashboard->get_pr($userid,$lvl,$jur);
-		$selesai= $this->M_dashboard->get_end($userid,$lvl,$jur);
-		
+
+		$selesai_sem	= $this->M_dashboard->get_end_sem($userid, $lvl, $jur);
+
+		$baru 	= $this->M_dashboard->get_baru($userid, $lvl, $jur);
+		$proses	= $this->M_dashboard->get_pr($userid, $lvl, $jur);
+		$selesai = $this->M_dashboard->get_end($userid, $lvl, $jur);
+
 		$ayat 				= $this->M_dashboard->cek_ayat("");
 		$hadist				= $this->M_dashboard->cek_hadist("");
 		$kk 				= $this->M_dashboard->cek_kk("");
 		$qq 				= $this->M_dashboard->cek_qq("");
 
-		$this->breadcrumb->add('Dashboard','dashboard/Dashboard');
+		$this->breadcrumb->add('Dashboard', 'dashboard/Dashboard');
 		$data = array(
 			'thisContent' 	=> 'dashboard/v_dashboard',
 			'thisJs'		=> 'dashboard/js_dashboard',
@@ -78,6 +95,7 @@ class Dashboard extends CI_Controller {
 			'jmlall'		=> $data_all[0]['jmlall'],
 			'jmlskripsiriset'	=> $data_skripsiriset,
 			'jmlmbkm'		=> $data_mbkm,
+			'jmlpublikasi'		=> $data_publikasi,
 			'ayat'			=> $ayat[0]['jml'],
 			'hadist'		=> $hadist[0]['jml'],
 			'kk'			=> $kk[0]['jml'],
@@ -85,7 +103,4 @@ class Dashboard extends CI_Controller {
 		);
 		$this->parser->parse('template/template', $data);
 	}
-
-	
-
 }

@@ -51,7 +51,7 @@ class form_publikasi extends CI_Controller
 		$file_pth = 'document/filepublikasi/' . $userid . '/';
 
 		if (!is_dir($directory)) {
-			mkdir($directory, 0755, true); // Create the directory recursively if it does not exist
+			mkdir($directory, 0755, true); // Buat folder jika belum ada
 		}
 
 		$allowed = array('doc', 'docx', 'ppt', 'pptx', 'pdf');
@@ -61,6 +61,7 @@ class form_publikasi extends CI_Controller
 		$file_name_new = 'publikasi-' . $file_name;
 		$file_upload = $directory . "/" . $file_name_new;
 
+		// Cek format file
 		if (!in_array($file_ext, $allowed)) {
 			$response = array(
 				'status' => false,
@@ -71,15 +72,30 @@ class form_publikasi extends CI_Controller
 			return;
 		}
 
+		// Dapatkan data dari form
+		$nim = $this->input->post('nim');
+		$jenis_tugas_akhir = $this->input->post('jenis_tugas_akhir');
+
+		// Pengecekan apakah kombinasi NIM dan jenis tugas akhir sudah ada
+		$is_exist = $this->M_publikasi->check_existing($nim, $jenis_tugas_akhir);
+		if ($is_exist) {
+			$response = array(
+				'status' => false,
+				'message' => 'Telah Melakukan Pengajuan',
+				'csrf_hash' => $this->security->get_csrf_hash()
+			);
+			echo json_encode($response);
+			return;
+		}
+
+		// Upload file jika belum ada data yang sama
 		if (move_uploaded_file($file_tmp_name, $file_upload)) {
 			$data = array(
-				'jenis_tugas_akhir' => $this->input->post('jenis_tugas_akhir'),
+				'jenis_tugas_akhir' => $jenis_tugas_akhir,
 				'judul_tugas_akhir' => $this->input->post('judul_tugas_akhir'),
 				'deskripsi_tugas_akhir' => $this->input->post('deskripsi_tugas_akhir'),
 				'nama_mahasiswa' => $this->input->post('nama_mahasiswa'),
-				'nim' => $this->input->post('nim'),
-				'dosen_pembimbing_utama' => $this->input->post('dosen_pembimbing_utama'),
-				'dosen_pembimbing_kedua' => $this->input->post('dosen_pembimbing_kedua'),
+				'nim' => $nim,
 				'tanggal_pengajuan' => date('Y-m-d'),
 				'status_pengajuan' => 'Menunggu',
 				'dokumen_pendukung' => $file_pth . $file_name_new,
@@ -110,6 +126,7 @@ class form_publikasi extends CI_Controller
 
 		echo json_encode($response);
 	}
+
 
 
 	public function fetch_dosen_select2()

@@ -30,7 +30,8 @@ class Data_login extends CI_Controller {
 
 	function data_login(){
 		header('Content-Type: application/json');
-		$data = $this->M_login->get_data_login();
+		$searchValue = $this->input->post('search')['value'];
+		$data = $this->M_login->get_data_login($searchValue);
 		echo $data;
 	}
 

@@ -52,7 +52,7 @@ class Data_dosen extends CI_Controller {
 		$program_study		= $_POST['program_study'];
 		
 
-		if ($id == '0') {
+		if ($id == '0' || $id == 0 || $id == null) {
 			$insert = $this->M_dosen->insert_data($nip, $kode_dosen, $nama, $email, $jenis_kelamin, $status, $createddate, $upd, $cp, $jabatan, $program_study);
 			if($insert){
 				$result['feedback'] = 'Berhasil menambah dosen/staf'; 
@@ -61,8 +61,14 @@ class Data_dosen extends CI_Controller {
 			}
 			
 		} else {
-			$this->M_dosen->update($nip, $kode_dosen, $nama, $email, $jenis_kelamin, $status, $createddate, $upd, $cp, $jabatan, $program_stud, $id);
-			$result['feedback'] = 'Berhasil merubah dosen/staf'; 
+			$update_result = $this->M_dosen->update($nip, $kode_dosen, $nama, $email, $jenis_kelamin, $status, $createddate, $upd, $cp, $jabatan, $program_study, $id);
+
+			// Cek apakah pembaruan berhasil
+			if ($update_result) {
+				$result['feedback'] = 'Berhasil merubah dosen/staf: ' . $nama; 
+			} else {
+				$result['feedback'] = 'Gagal merubah dosen/staf. Data tidak ditemukan atau tidak ada perubahan.' . $nama;
+			}
 		}
 		echo json_encode($result);
 	}

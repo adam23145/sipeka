@@ -28,37 +28,49 @@ class Mbkm extends CI_Controller
     public function get_data()
     {
         $columns = array(
-            0 => 'nama_mahasiswa',
-            1 => 'tanggal_pengajuan',
-            2 => 'mbkm',
-            3 => 'dokumen_pendukung'
+            0 => 'nim', // Tambahkan NIM
+            1 => 'nama_mahasiswa',
+            2 => 'tanggal_pengajuan',
+            3 => 'mbkm',
+            4 => 'dokumen_pendukung'
         );
 
+        $lvl   = $this->session->userdata['logged_in']['userlevel'];
+        $username         = $this->session->userdata['logged_in']['username'];
+        if ($lvl == 'Koordinator Prodi') {
+            if ($username == 'Koordinator Prodi HBS') {
+                $jur = 'Hukum Bisnis Syariah';
+            } else if ($username == 'Koordinator Prodi ES') {
+                $jur = 'Ekonomi Syariah';
+            }
+        }
         $limit = $this->input->post('length');
         $start = $this->input->post('start');
+        $konfirmasi_status = $this->input->post('konfirmasi_status');
 
-        // Cek apakah 'order' dan 'dir' ada di POST
         $order = isset($this->input->post('order')[0]['column']) ? $columns[$this->input->post('order')[0]['column']] : $columns[0];
         $dir = isset($this->input->post('order')[0]['dir']) ? $this->input->post('order')[0]['dir'] : 'asc';
 
-        $totalData = $this->M_mbkm->count_all_data();
+        $totalData = $this->M_mbkm->count_all_data($jur,$konfirmasi_status);
         $totalFiltered = $totalData;
 
         // Cek apakah ada input 'search'
         if (empty($this->input->post('search')['value'])) {
-            $mahasiswa = $this->M_mbkm->get_all_data($limit, $start, $order, $dir);
+            $mahasiswa = $this->M_mbkm->get_all_data($limit, $start, $order, $dir, $jur,$konfirmasi_status);
         } else {
             $search = isset($this->input->post('search')['value']) ? $this->input->post('search')['value'] : '';
-            $mahasiswa =  $this->M_mbkm->search_data($limit, $start, $search, $order, $dir);
-            $totalFiltered = $this->M_mbkm->count_filtered_data($search);
+            $mahasiswa =  $this->M_mbkm->search_data($limit, $start, $search, $order, $dir, $jur,$konfirmasi_status);
+            $totalFiltered = $this->M_mbkm->count_filtered_data($search, $jur,$konfirmasi_status);
         }
 
         $data = array();
         if (!empty($mahasiswa)) {
             foreach ($mahasiswa as $mhs) {
+                $nestedData['nim'] = strtoupper($mhs->nim); // NIM Uppercase
                 $nestedData['nama_mahasiswa'] = $mhs->nama_mahasiswa;
                 $nestedData['tanggal_pengajuan'] = $mhs->tanggal_pengajuan;
                 $nestedData['mbkm'] = $mhs->mbkm;
+                $nestedData['dosen'] = $mhs->dosen_pembimbing_utama;
                 $nestedData['dokumen_pendukung'] = $mhs->dokumen_pendukung;
                 $nestedData['dokumen_pendukung'] = '<a href="' . base_url($mhs->dokumen_pendukung) . '" class="btn btn-success" target="_blank">Download</a>';
                 $modalHtml = '<div class="modal fade" id="modalKonfirmasi' . $mhs->id . '" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
@@ -89,7 +101,7 @@ class Mbkm extends CI_Controller
                     $modalHtml .= '<label for="status_' . $mhs->id . '">Status:</label>
                    <select name="status" class="form-control status-dropdown" data-id="' . $mhs->id . '">
                        <option value="Menunggu" ' . ($mhs->status_pengajuan == 'Menunggu' ? 'selected' : '') . '>Menunggu</option>
-                       <option value="Diterima" ' . ($mhs->status_pengajuan == 'Diterima' ? 'selected' : '') . '>Diterima</option>
+                       <option value="Diproses" ' . ($mhs->status_pengajuan == 'Diproses' ? 'selected' : '') . '>Diproses</option>
                        <option value="Ditolak" ' . ($mhs->status_pengajuan == 'Ditolak' ? 'selected' : '') . '>Ditolak</option>
                    </select>';
                 } else {
@@ -139,7 +151,8 @@ class Mbkm extends CI_Controller
 
     public function fetch_dosen_select2()
     {
-        $dosen = $this->M_mbkm->get_all(); // Mengambil data dosen dari model
+        $search = $this->input->get('search'); // Get the search term from the request
+        $dosen = $this->M_mbkm->get_all($search); // Pass the search term to the model
 
         $data = array();
         foreach ($dosen as $row) {
@@ -149,8 +162,9 @@ class Mbkm extends CI_Controller
             );
         }
 
-        echo json_encode($data); // Mengirim data dalam format JSON
+        echo json_encode($data); // Send data in JSON format
     }
+
     public function update_status()
     {
         $id = $this->input->post('id');

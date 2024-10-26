@@ -5,12 +5,11 @@
                 <div class="card-header">
                     <h3 class="card-title">Judul Publikasi</h3>
                     <div class="card-tools">
+                        <label for="filter-konfirmasi" class="form-label">Filter Status Konfirmasi:</label>
                         <select id="statusFilter" class="form-control">
-                            <option value="">Semua Status</option>
                             <option value="Menunggu">Menunggu</option>
-                            <option value="Disetujui">Disetujui</option>
-                            <option value="Ditolak">Ditolak</option>
-                            <option value="Revisi">Revisi</option>
+                            <option value="Diproses">Diproses</option>
+                            <option value="Acc">Acc</option>
                         </select>
                     </div>
                 </div>
@@ -18,12 +17,15 @@
                     <table id="table_pengajuan" class="table table-striped table-bordered">
                         <thead>
                             <tr>
-                                <th>Jenis Tugas Akhir</th>
-                                <th>Judul Tugas Akhir</th>
-                                <th>Nama Mahasiswa</th>
+                                <th>No</th> 
                                 <th>NIM</th>
+                                <th>Nama Mahasiswa</th>
                                 <th>Tanggal Pengajuan</th>
-                                <th>Status Pengajuan</th>
+                                <th>Judul Tugas Akhir</th>
+                                <th>Jenis Tugas Akhir</th>
+                                <th>Dosen Pembimbing</th>
+                                <th>Dokumen Pendukung</th>
+                                <th>Konfirmasi</th>
                             </tr>
                         </thead>
                     </table>

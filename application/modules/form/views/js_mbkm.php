@@ -1,69 +1,91 @@
 <script type="text/javascript">
     $(document).ready(function() {
         bsCustomFileInput.init();
+        
         $('#form-submtitle').submit(function(e) {
-            e.preventDefault(); // Prevent the form from submitting traditionally
-
+            e.preventDefault(); // Mencegah form submit secara tradisional
+            
             let fileInput = document.getElementById('dokumen_pendukung');
             let filePath = fileInput.value;
             let allowedExtensions = /(\.doc|docx|ppt|pptx|pdf)$/i;
 
+            // Validasi file yang diunggah
             if (!allowedExtensions.exec(filePath)) {
                 swal({
-                    type: 'warning',
+                    icon: 'warning',
                     title: 'Perhatian',
                     text: 'Pastikan Anda memilih file sesuai ketentuan',
                 });
                 return;
             }
 
+            // Validasi agar program studi (majorname) tidak boleh kosong
+            let majorname = document.getElementById('majorname').value;
+            if (majorname === '' || majorname == null) {
+                swal({
+                    icon: 'warning',
+                    title: 'Perhatian',
+                    text: 'Program Studi tidak boleh kosong',
+                });
+                return;
+            }
+
             let formData = new FormData(this);
+            let submitButton = $(this).find('button[type="submit"]');
+            
+            // Nonaktifkan tombol submit untuk mencegah double submit
+            submitButton.prop('disabled', true);
+
+            // Tampilkan SweetAlert loading saat proses pengiriman
+            swal({
+                title: 'Mengirim...',
+                text: 'Silakan tunggu, data sedang diproses',
+                icon: 'info',
+                buttons: false,
+                closeOnClickOutside: false,
+                closeOnEsc: false
+            });
 
             $.ajax({
                 url: "<?php echo site_url('form/form_mbkm/submit'); ?>",
                 method: "POST",
-                data: formData, // Use FormData to send files
+                data: formData,
                 contentType: false,
                 processData: false,
-                dataType: 'json', // Expect JSON response from server
+                dataType: 'json',
                 success: function(data) {
+                    Swal.close(); // Tutup SweetAlert setelah berhasil
                     if (data.status) {
-                        // Close any open SweetAlert modals
-                        Swal.close();
-
-                        // Show success message using SweetAlert
                         swal({
-                            type: 'success',
+                            icon: 'success',
                             title: 'Sukses',
-                            text: 'Data berhasil disimpan',
+                            text: data.message,
                             allowOutsideClick: false,
-                        }).then((result) => {
-                            // Optionally redirect to a new page or perform other actions upon success
-                            $('#form-submtitle')[0].reset();
+                        }).then(() => {
+                            window.location.href = "<?php echo site_url('history/mbkm'); ?>";
                         });
                     } else {
-                        // Show error message using SweetAlert
                         swal({
-                            type: 'error',
+                            icon: 'error',
                             title: 'Error',
-                            text: 'Data gagal disimpan',
+                            text: data.message,
                             allowOutsideClick: false,
                         });
                     }
                 },
-                error: function(xhr, status, error) {
-                    console.error('Error:', error); // Log any errors to the console for debugging
-
-                    // Show generic error message using SweetAlert
+                error: function() {
+                    Swal.close(); // Tutup SweetAlert jika terjadi error
                     swal({
-                        type: 'error',
+                        icon: 'error',
                         title: 'Error',
                         text: 'Terjadi kesalahan saat menyimpan data',
                         allowOutsideClick: false,
                     });
+                },
+                complete: function() {
+                    submitButton.prop('disabled', false); // Aktifkan tombol submit kembali
                 }
             });
         });
-
     });
 </script>

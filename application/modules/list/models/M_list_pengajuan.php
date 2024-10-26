@@ -49,7 +49,6 @@ class M_list_pengajuan extends CI_Model {
 
 	function get_data_pengajuanx($stts_sub,$userlevel,$ps, $searchValue = null) {
 		if($stts_sub == 'Tolak'){
-
 			$where = "submission_status='$stts_sub' AND jurusan='$ps' " ;
 		}else{
 			$where = "code_status='$stts_sub' and loker='$userlevel' AND jurusan='$ps' " ;

@@ -7,7 +7,7 @@ date_default_timezone_set('Asia/Jakarta');
 class M_mahasiswa extends CI_Model
 {
 
-	function get_data_mahasiswa($status = null, $searchValue = null)
+	function get_data_mahasiswa($status = null, $searchValue = null, $jur = null)
 	{
 		$this->datatables->select('
         ROW_NUMBER() OVER (ORDER BY mhs.nim DESC) AS no_urut,
@@ -21,7 +21,9 @@ class M_mahasiswa extends CI_Model
         mhs.status
     ');
 		$this->datatables->from('m_mahasiswa mhs');
-
+		if ($jur) {
+			$this->datatables->where('mhs.jurusan', $jur);
+		}
 		if ($status) {
 			$this->datatables->where('mhs.status', $status);
 		}
@@ -40,12 +42,16 @@ class M_mahasiswa extends CI_Model
 		return $data;
 	}
 
-
-
 	function update($id, $item)
 	{
 		$this->db->where('nim', $id);
 		$update = $this->db->update('m_mahasiswa', $item);
+		return $update;
+	}
+	function updatePassword($id, $data)
+	{
+		$this->db->where('userid', $id);
+		$update = $this->db->update('m_login', $data);
 		return $update;
 	}
 
@@ -53,6 +59,19 @@ class M_mahasiswa extends CI_Model
 	{
 		$insert 	= $this->db->insert('m_mahasiswa', $item);
 		return $insert;
+	}
+	function insert_data($userid, $username, $password, $userlevel)
+	{
+		// Menggunakan query builder untuk menghindari SQL injection
+		$data = array(
+			'userid'    => $userid,
+			'username'  => $username,
+			'pass'      => $password, // Idealnya, enkripsi password sebelum disimpan
+			'userlevel' => $userlevel
+		);
+
+		// Gunakan insert() untuk menyisipkan data
+		return $this->db->insert('m_login', $data);
 	}
 
 	function insert_batch($item)

@@ -7,12 +7,12 @@
     <style>
         @page {
             margin: 10mm;
+            size: A4;
         }
 
         body {
             font-family: "Times New Roman", Times, serif;
         }
-
 
         td {
             padding: 5px;
@@ -30,40 +30,44 @@
         }
 
         .content {
-            padding-top: 50px;
+            padding-top: 5px;
+            page-break-inside: avoid;
         }
 
         table {
             width: 100%;
             border-collapse: collapse;
+            page-break-inside: avoid;
         }
 
         .page-break {
             page-break-before: always;
         }
 
+        table.monitoring-table td {
+            padding: 5px;
+        }
+
         .monitoring-table {
-            margin-top: 50px;
+            margin-top: 10px;
+            page-break-inside: avoid;
         }
 
         @media print {
             .content {
-                margin-top: 100px;
+                margin-top: 2px;
+                page-break-inside: avoid;
             }
-
         }
     </style>
-
 </head>
 
 <body>
-
-
     <div class="barcode">
         <img src="https://barcode.tec-it.com/barcode.ashx?data=<?= urlencode($subcode); ?>&code=QRCode&translate-esc=on&eclevel=L" alt="NIM Barcode">
     </div>
-    <div class="content" style="margin-top: 2px;">
 
+    <div class="content" style="margin-top: 2px;">
         <hr style="border-top: 1px solid black;">
         <hr style="border-top: 1px solid black;">
 
@@ -73,7 +77,7 @@
                     <table>
                         <tr>
                             <td>
-                                <img src="<?= base_url('public/assets/core/images/logotrunojoyo.png'); ?>" width="120px">
+                                <img src="<?= base_url('public/assets/core/images/logo1.png'); ?>" width="120px">
                             </td>
                             <td style="padding-left: 25px" align="center">
                                 <span style="font-size:17px;font-weight:normal;">KEMENTERIAN PENDIDIKAN DAN KEBUDAYAAN</span><br>
@@ -88,6 +92,7 @@
                 </td>
             </tr>
         </table>
+
         <hr style="border-top: 1px solid black;">
         <hr style="border-top: 1px solid black;">
 
@@ -131,18 +136,39 @@
                     </table>
                 </td>
             </tr>
-            <tr>
-                <td>&nbsp;</td>
-            </tr>
         </table>
 
+        <table border="1" width="100%" style="font-size: 14px" class="monitoring-table">
+            <tr>
+                <td colspan="13" align="center">MONITORING KEGIATAN PEMBIMBINGAN</td>
+            </tr>
+            <tr>
+                <td width="30px">No</td>
+                <td colspan="2">Tanggal</td>
+                <td colspan="8">Topik Pembimbingan</td>
+                <td colspan="2">Paraf Pembimbing</td>
+            </tr>
+            <?php $i = 0;
+            foreach ($log_bimbingan as $row) {
+                $i++;
+            ?>
+                <tr>
+                    <td><?= $i ?></td>
+                    <td colspan="2"><?= $row['tanggal'] ?></td>
+                    <td colspan="8"><?= $row['topik'] ?></td>
+                    <td colspan="2"><br></td>
+                </tr>
+            <?php } ?>
+            <tr>
+                <td colspan="13">Jumlah Pembimbingan ke Pembimbing: <?= $jumlb ?> kali</td>
+            </tr>
+        </table>
 
         <div class="content">
             <table width="100%">
                 <tr>
                     <td align="center">Mengetahui,</td>
                 </tr>
-
                 <tr>
                     <td>&nbsp;</td>
                 </tr>
@@ -172,39 +198,6 @@
                 </tr>
             </table>
         </div>
-
-        <div class="page-break"></div>
-
-        <table border="1" width="100%" style="font-size: 14px" class="monitoring-table">
-            <tr>
-                <td colspan="13" align="center">
-                    MONITORING KEGIATAN PEMBIMBINGAN
-                </td>
-            </tr>
-            <tr>
-                <td width="30px">No</td>
-                <td colspan="2">Tanggal</td>
-                <td colspan="8">Topik Pembimbingan</td>
-                <td colspan="2">Paraf Pembimbing</td>
-            </tr>
-            <?php $i = 0;
-            foreach ($log_bimbingan as $row) {
-                $i++;
-            ?>
-                <tr>
-                    <td><?= $i ?></td>
-                    <td colspan="2"><?= $row['tanggal'] ?></td>
-                    <td colspan="8"><?= $row['topik'] ?></td>
-                    <td colspan="2"><br></td>
-                </tr>
-            <?php } ?>
-
-            <tr>
-                <td colspan="13">
-                    Jumlah Pembimbingan ke Pembimbing: <?= $jumlb ?> kali
-                </td>
-            </tr>
-        </table>
     </div>
 
     <script type="text/javascript">

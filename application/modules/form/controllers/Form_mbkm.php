@@ -51,16 +51,17 @@ class Form_mbkm extends CI_Controller
 		$file_pth = 'document/filembkm/' . $userid . '/';
 
 		if (!is_dir($directory)) {
-			mkdir($directory, 0755, true); // Create the directory recursively if it does not exist
+			mkdir($directory, 0755, true); // Buat direktori jika belum ada
 		}
 
 		$allowed = array('doc', 'docx', 'ppt', 'pptx', 'pdf');
 		$file_name = $_FILES["dokumen_pendukung"]["name"];
 		$file_tmp_name = $_FILES["dokumen_pendukung"]["tmp_name"];
 		$file_ext = pathinfo($file_name, PATHINFO_EXTENSION);
-		$file_name_new = 'skprisriset-' . $file_name;
+		$file_name_new = 'mbkm-' . $file_name;
 		$file_upload = $directory . "/" . $file_name_new;
 
+		// Validasi ekstensi file
 		if (!in_array($file_ext, $allowed)) {
 			$response = array(
 				'status' => false,
@@ -71,11 +72,26 @@ class Form_mbkm extends CI_Controller
 			return;
 		}
 
+		// Cek apakah NIM sudah ada
+		$nim = $this->input->post('nim');
+		$nim_exists = $this->M_mbkm->check_nim_exists($nim); // Asumsikan Anda sudah punya fungsi check_nim_exists di model
+
+		if ($nim_exists) {
+			$response = array(
+				'status' => false,
+				'message' => 'Sudah Melakukan Pengiriman Mbkm',
+				'csrf_hash' => $this->security->get_csrf_hash()
+			);
+			echo json_encode($response);
+			return;
+		}
+
+		// Lanjutkan proses upload file jika NIM belum ada
 		if (move_uploaded_file($file_tmp_name, $file_upload)) {
 			$data = array(
 				'mbkm' => $this->input->post('mbkm'),
 				'nama_mahasiswa' => $this->input->post('nama_mahasiswa'),
-				'nim' => $this->input->post('nim'),
+				'nim' => $nim,
 				'prodi' => $this->input->post('majorname'),
 				'dosen_pembimbing_utama' => null,
 				'dosen_pembimbing_kedua' => null,
@@ -101,6 +117,7 @@ class Form_mbkm extends CI_Controller
 
 		echo json_encode($response);
 	}
+
 
 
 	public function fetch_dosen_select2()

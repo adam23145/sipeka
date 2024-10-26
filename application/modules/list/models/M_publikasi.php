@@ -17,7 +17,7 @@ class M_publikasi extends CI_Model
         return $this->db->insert('ajuan_tugas_akhir', $data);
     }
 
-    public function get_all($limit, $start, $search = null, $status = null)
+    public function get_all($limit, $start, $search = null, $status = null,$jur)
     {
 
         $this->db->limit($limit, $start);
@@ -26,6 +26,7 @@ class M_publikasi extends CI_Model
             $this->db->where('status_pengajuan', $status); // Filter by status
         }
 
+        $this->db->where('prodi', $jur); 
         if ($search) {
             $this->db->group_start(); // Memulai grup kondisi untuk LIKE
             $this->db->like('LOWER(judul_tugas_akhir)', strtolower($search));
@@ -36,12 +37,13 @@ class M_publikasi extends CI_Model
         return $query->result();
     }
 
-    public function count_all()
+    public function count_all($jur)
     {
+        $this->db->where('prodi', $jur); 
         return $this->db->count_all('ajuan_tugas_akhir');
     }
 
-    public function count_filtered($search = null, $status = null)
+    public function count_filtered($search = null, $status = null,$jur)
     {
         // $nama = $this->session->userdata['logged_in']['username'];
 
@@ -50,6 +52,7 @@ class M_publikasi extends CI_Model
         if ($status) {
             $this->db->where('status_pengajuan', $status); // Filter by status
         }
+        $this->db->where('prodi', $jur); 
 
         if ($search) {
             $this->db->group_start(); // Start a group for the LIKE conditions
@@ -61,10 +64,10 @@ class M_publikasi extends CI_Model
         $query = $this->db->get('ajuan_tugas_akhir');
         return $query->num_rows();
     }
-
-    public function update_status($id, $status)
+    
+    public function update_status($id, $data)
     {
         $this->db->where('id', $id);
-        $this->db->update('ajuan_tugas_akhir', array('status_pengajuan' => $status));
+        return $this->db->update('ajuan_tugas_akhir', $data);
     }
 }

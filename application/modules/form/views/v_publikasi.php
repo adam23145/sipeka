@@ -14,6 +14,7 @@
                             <label>Jenis Tugas Akhir:</label>
                             <select class="form-control" name="jenis_tugas_akhir" required>
                                 <option value="Publikasi Ilmiah">Publikasi Ilmiah</option>
+                                <option value="Skripsi Riset">Skripsi Riset</option>
                                 <option value="Lainnya">Lainnya</option>
                             </select>
                         </div>
@@ -43,20 +44,16 @@
                             <input type="text" class="form-control" id="majorname" name="majorname" value="{majorname}" readonly="true">
                         </div>
 
-                        <div class="form-group">
+                        <!-- <div class="form-group">
                             <label for="dosen_pembimbing_utama">Dosen Pembimbing Utama:</label>
                             <select class="form-control" id="dosen_pembimbing_utama" name="dosen_pembimbing_utama" required>
-                                <!-- Options will be added dynamically via Ajax -->
                             </select>
                         </div>
-
-                        <!-- Dropdown for Dosen Pembimbing Kedua -->
                         <div class="form-group">
                             <label for="dosen_pembimbing_kedua">Dosen Pembimbing Kedua:</label>
                             <select class="form-control" id="dosen_pembimbing_kedua" name="dosen_pembimbing_kedua">
-                                <!-- Options will be added dynamically via Ajax -->
                             </select>
-                        </div>
+                        </div> -->
 
                         <div class="form-group">
                             <label>Tanggal Pengajuan:</label>

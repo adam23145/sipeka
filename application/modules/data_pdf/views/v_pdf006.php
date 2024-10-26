@@ -95,7 +95,7 @@
             <td align="left">
                 <table>
                     <tr>
-                        <td style="padding-right: 25px"><img src="<?= base_url('public/assets/core/images/logotrunojoyo.png'); ?>" width="120px"></td>
+                        <td style="padding-right: 25px"><img src="<?= base_url('public/assets/core/images/logo1.png'); ?>" width="120px"></td>
                         <td align="center">
                             <span style="font-size:17px;font-weight:normal;">KEMENTERIAN PENDIDIKAN DAN KEBUDAYAAN</span><br>
                             <span style="font-size:17px;font-weight:bold;">UNIVERSITAS TRUNOJOYO MADURA</span><br>

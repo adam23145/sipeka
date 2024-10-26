@@ -2,7 +2,7 @@
     $(document).ready(function() {
         bsCustomFileInput.init();
         $('#form-submtitle').submit(function(e) {
-            e.preventDefault(); // Prevent the form from submitting traditionally
+            e.preventDefault(); // Mencegah form submit secara tradisional
 
             let fileInput = document.getElementById('dokumen_pendukung');
             let filePath = fileInput.value;
@@ -19,42 +19,55 @@
 
             let formData = new FormData(this);
 
+            // Tampilkan SweetAlert Loading sebelum AJAX request
+            swal({
+                title: 'Mengirim...',
+                text: 'Silakan tunggu sementara data sedang diproses',
+                icon: 'info',
+                buttons: false, // Hilangkan tombol
+                closeOnClickOutside: false, // Jangan tutup ketika di luar klik
+                closeOnEsc: false // Jangan tutup ketika ESC ditekan
+            });
+
             $.ajax({
                 url: "<?php echo site_url('form/Form_skripsiriset/submit'); ?>",
                 method: "POST",
-                data: formData, // Use FormData to send files
+                data: formData, // Gunakan FormData untuk mengirim file
                 contentType: false,
                 processData: false,
-                dataType: 'json', // Expect JSON response from server
+                dataType: 'json', // Harapkan respon JSON dari server
                 success: function(data) {
-                    if (data.status) {
-                        // Close any open SweetAlert modals
-                        Swal.close();
+                    // Tutup SweetAlert loading ketika selesai
+                    Swal.close();
 
-                        // Show success message using SweetAlert
+                    if (data.status) {
+                        // Tampilkan pesan sukses
                         swal({
                             type: 'success',
                             title: 'Sukses',
-                            text: 'Data berhasil disimpan',
+                            text: data.message, // Pesan dari server
                             allowOutsideClick: false,
                         }).then((result) => {
-                            // Optionally redirect to a new page or perform other actions upon success
+                            // Reset form setelah sukses
                             $('#form-submtitle')[0].reset();
                         });
                     } else {
-                        // Show error message using SweetAlert
+                        // Tampilkan pesan error dari server
                         swal({
                             type: 'error',
                             title: 'Error',
-                            text: 'Data gagal disimpan',
+                            text: data.message, // Pesan dari server
                             allowOutsideClick: false,
                         });
                     }
                 },
                 error: function(xhr, status, error) {
-                    console.error('Error:', error); // Log any errors to the console for debugging
+                    console.error('Error:', error); // Log error untuk debugging
 
-                    // Show generic error message using SweetAlert
+                    // Tutup SweetAlert loading ketika terjadi error
+                    Swal.close();
+
+                    // Tampilkan pesan error generik
                     swal({
                         type: 'error',
                         title: 'Error',
@@ -65,7 +78,7 @@
             });
         });
 
-        // Fetch Dosen data for Select2
+        // Fetch Dosen data untuk Select2
         function initSelect2(selector) {
             $(selector).select2({
                 placeholder: 'Pilih Dosen',

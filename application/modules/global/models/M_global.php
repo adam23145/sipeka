@@ -42,7 +42,7 @@ class M_global extends CI_Model
 
 	function get_dosen($jurusan)
 	{
-		$query 		= "SELECT * FROM m_dosen WHERE status='aktif' AND jabatan='Dosen' AND program_study='$jurusan' ORDER BY nama ";
+		$query = "SELECT DISTINCT nama, kode_dosen FROM m_dosen WHERE status='aktif' AND jabatan='Dosen' AND program_study='$jurusan' ORDER BY nama";
 		$data 		= $this->db->query($query)->result_array();
 		return $data;
 	}

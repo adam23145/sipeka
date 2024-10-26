@@ -47,4 +47,17 @@ class M_dashboard extends CI_Model {
 		return $data;
 	}
 
+	public function count_mbkm($nim)
+	{
+        $this->db->where('nim', $nim); 
+		$query = $this->db->get('mbkm_riset');
+		return $query->num_rows();
+	}
+	
+	public function count_publikasi($nim)
+	{
+        $this->db->where('nim', $nim); 
+		$query = $this->db->get('ajuan_tugas_akhir');
+		return $query->num_rows();
+	}
 }

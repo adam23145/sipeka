@@ -34,10 +34,19 @@ class Data_mahasiswa extends CI_Controller
 	{
 		header('Content-Type: application/json');
 
+		$lvl   = $this->session->userdata['logged_in']['userlevel'];
+		$username 		= $this->session->userdata['logged_in']['username'];
+		if ($lvl == 'Admin Prodi') {
+			if ($username == 'Admin Prodi HBS') {
+				$jur = 'Hukum Bisnis Syariah';
+			} else if ($username == 'Admin Prodi ES') {
+				$jur = 'Ekonomi Syariah';
+			}
+		}
 		$status = $this->input->post('status');
 		$searchValue = $this->input->post('search')['value'];
 
-		$data = $this->M_mahasiswa->get_data_mahasiswa($status, $searchValue);
+		$data = $this->M_mahasiswa->get_data_mahasiswa($status, $searchValue, $jur);
 
 		echo $data;
 	}
@@ -45,7 +54,11 @@ class Data_mahasiswa extends CI_Controller
 
 	function save()
 	{
-		$id	= $_POST['id'];
+		$id			= $_POST['id'];
+		$userid		= $_POST['email'];
+		$username	= $_POST['nama'];
+		$password	= $_POST['password'];
+
 		if ($id == 0) {
 			$item = array(
 				'nim'			=> $_POST['nim'],
@@ -58,7 +71,8 @@ class Data_mahasiswa extends CI_Controller
 				'status'		=> $_POST['status'],
 				'upd'			=> $this->session->userdata['logged_in']['userid']
 			);
-			$insert = $this->M_mahasiswa->insert($item);
+			$this->M_mahasiswa->insert_data($userid, $username, $password, 'mahasiswa');
+			$this->M_mahasiswa->insert($item);
 			$result['feedback'] = 'Successfully Added Login';
 		} else {
 			$item = array(
@@ -71,6 +85,14 @@ class Data_mahasiswa extends CI_Controller
 				'status'		=> $_POST['status'],
 				'upd'			=> $this->session->userdata['logged_in']['userid']
 			);
+			if (!empty($_POST['password'])) {
+				$email = $_POST['email'];
+				$loginData = array(
+					'pass' => $_POST['password'],
+				);
+
+				$this->M_mahasiswa->updatePassword($email, $loginData);
+			}
 			$this->M_mahasiswa->update($id, $item);
 			$result['feedback'] = 'Successfully Updated Login';
 		}

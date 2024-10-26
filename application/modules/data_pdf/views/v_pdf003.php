@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Berita Acara Bimbingan Skripsi</title>
     <style>
+        @page {
+            size: A4;
+        }
         body {
             font-family: "Times New Roman", Times, serif;
         }
@@ -73,7 +76,7 @@
                     <table>
                         <tr>
                             <td>
-                                <img src="<?= base_url('public/assets/core/images/logotrunojoyo.png'); ?>" width="120px">
+                                <img src="<?= base_url('public/assets/core/images/logo1.png'); ?>" width="120px">
                             </td>
                             <td style="padding-left: 25px" align="center">
                                 <span style="font-size:17px;font-weight:normal;">KEMENTERIAN PENDIDIKAN DAN KEBUDAYAAN</span><br>

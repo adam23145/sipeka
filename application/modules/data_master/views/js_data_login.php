@@ -57,6 +57,9 @@
 			type: "POST",
 			data: function(d){
 				d.token		 	= "<?php echo $this->security->get_csrf_hash(); ?>";
+				d.search = {
+					value: d.search.value.toUpperCase() // Convert search value to lowercase
+				};
 			}
 		},
 		columns: [{

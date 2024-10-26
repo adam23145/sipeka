@@ -11,14 +11,14 @@
 
         body {
             font-family: "Times New Roman", Times, serif;
-            margin: 0; 
+            margin: 0;
         }
 
         .barcode {
             position: absolute;
-            bottom: 10mm; 
-            left: 0mm; 
-            width: 50px; 
+            bottom: 10mm;
+            left: 0mm;
+            width: 50px;
         }
 
         .barcode img {
@@ -27,7 +27,7 @@
 
         @media print {
             .barcode {
-                display: block; 
+                display: block;
             }
         }
     </style>
@@ -45,7 +45,7 @@
             <td align="left">
                 <table>
                     <tr>
-                        <td style="padding-right: 25px"><img src="<?= base_url('public/assets/core/images/logotrunojoyo.png'); ?>" width="120px"></td>
+                        <td style="padding-right: 25px"><img src="<?= base_url('public/assets/core/images/logo1.png'); ?>" width="120px"></td>
                         <td align="center">
                             <span style="font-size:17px;font-weight:normal;">KEMENTERIAN PENDIDIKAN DAN KEBUDAYAAN</span><br>
                             <span style="font-size:17px;font-weight:bold;">UNIVERSITAS TRUNOJOYO MADURA</span><br>
@@ -159,6 +159,12 @@
                         <td>&nbsp;</td>
                     </tr>
                     <tr>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr>
                         <td style="text-decoration: underline;"><?= $namakoor; ?></td>
                         <td width="47%" colspan="2">&nbsp;</td>
                         <td style="text-decoration: underline;"><?= $student_name; ?></td>
@@ -170,6 +176,12 @@
                     </tr>
                 </table>
             </td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
         </tr>
         <tr>
             <td>&nbsp;</td>

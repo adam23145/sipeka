@@ -62,9 +62,9 @@ class M_sidang extends CI_Model
     }
     public function get_dosen()
     {
-        $this->db->select('*');
+        $this->db->distinct();
+        $this->db->where('jabatan', 'Dosen'); 
         $this->db->from('m_dosen');
-        $this->db->where_in('jabatan', ['Dosen', 'Kajur', 'Wadek 1']);
         $query = $this->db->get();
         return $query->result_array();
     }

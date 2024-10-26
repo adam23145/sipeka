@@ -1,33 +1,60 @@
 <script type="text/javascript">
     $(document).ready(function() {
         // Inisialisasi DataTables dengan server-side processing
-        $('#table-pengajuan').DataTable({
-            "processing": true, // Menampilkan loader
-            "serverSide": true, // Server-side processing
+        var table = $('#table-pengajuan').DataTable({
+            "processing": true,
+            "serverSide": true,
             "ajax": {
-                "url": "<?php echo site_url('list/mbkm/get_data'); ?>", // URL controller
+                "url": "<?php echo site_url('list/mbkm/get_data'); ?>",
                 "type": "POST",
                 "data": function(d) {
-                    d['<?= $this->security->get_csrf_token_name() ?>'] = '<?= $this->security->get_csrf_hash() ?>'; // CSRF token untuk keamanan
+                    // Kirim CSRF Token
+                    d['<?= $this->security->get_csrf_token_name() ?>'] = '<?= $this->security->get_csrf_hash() ?>';
+
+                    // Kirim nilai dari dropdown filter status konfirmasi
+                    d.konfirmasi_status = $('#filter-konfirmasi').val();
                 }
             },
             "columns": [{
+                    "data": null
+                }, // Kolom No
+                {
+                    "data": "nim"
+                }, // Kolom NIM
+                {
                     "data": "nama_mahasiswa"
-                }, // Kolom nama_mahasiswa
+                },
                 {
                     "data": "tanggal_pengajuan"
-                }, // Kolom tanggal_pengajuan
+                },
                 {
                     "data": "mbkm"
-                }, // Kolom skripsi_riset
+                },
                 {
-                    "data": "dokumen_pendukung",
-                }, // Kolom skripsi_riset
+                    "data": "dosen"
+                },
                 {
-                    "data": "konfirmasi",
+                    "data": "dokumen_pendukung"
+                },
+                {
+                    "data": "konfirmasi"
                 }
-            ]
+            ],
+            "columnDefs": [{
+                "searchable": false,
+                "orderable": false,
+                "targets": 0,
+                "render": function(data, type, row, meta) {
+                    return meta.row + meta.settings._iDisplayStart + 1; // Menambahkan No urut
+                }
+            }]
         });
+
+        // Event listener untuk Dropdown Filter
+        $('#filter-konfirmasi').on('change', function() {
+            table.ajax.reload(); // Reload tabel saat filter diubah
+        });
+
         // Fetch Dosen data for Select2
         function initSelect2(selector) {
             $(selector).select2({
@@ -36,15 +63,21 @@
                     url: "<?php echo site_url('list/mbkm/fetch_dosen_select2'); ?>",
                     dataType: 'json',
                     delay: 250,
+                    data: function(params) {
+                        return {
+                            search: params.term // Send the search term to the server
+                        };
+                    },
                     processResults: function(data) {
                         return {
-                            results: data
+                            results: data,
                         };
                     },
                     cache: true
                 }
             });
         }
+
 
         // Show modal and initialize Select2
         $(document).on('show.bs.modal', '.modal', function() {
@@ -62,7 +95,7 @@
         const kedua = $('#dosen_pembimbing_kedua_' + mhsId).val();
         const status = $('.status-dropdown[data-id="' + mhsId + '"]').val();
 
-        if (!utama) {
+        if (status != "Ditolak" && !utama) {
             Swal.fire({
                 icon: 'warning',
                 title: 'Peringatan',

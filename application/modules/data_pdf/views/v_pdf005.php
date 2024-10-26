@@ -5,56 +5,56 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Form Kelayakan Mengikuti Sidang</title>
     <style>
+        @page {
+            margin: 10mm;
+            size: A4;
+        }
+
+        body {
+            font-family: "Times New Roman", Times, serif;
+        }
+
+        .barcode {
+            position: absolute;
+            bottom: 5mm;
+            left: 0mm;
+            width: 50px;
+        }
+
+        .barcode img {
+            width: 160%;
+        }
+
+        td {
+            padding: 2px;
+        }
+
+        .content {
+            padding-top: 50px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
         @media print {
-            @page {
-                margin: 0in 0in;
-
-                margin: 10mm;
-            }
-
-            body {
-                font-family: "Times New Roman", Times, serif;
-                margin: 0;
-                padding: 0;
-            }
-
-            hr {
-                border: 1px solid black;
-                margin: 10px 0;
-            }
-
-            table {
-                width: 100%;
-                border-collapse: collapse;
-            }
-
-            td {
-                padding: 5px;
-            }
-
-            .barcode {
-                position: absolute;
-                bottom: 10mm;
-                left: 0mm;
-                width: 50px;
-            }
-
-            .barcode img {
-                width: 160%;
+            .content {
+                margin-top: 100px;
             }
         }
     </style>
 </head>
 
 <body>
-    <hr>
-    <hr>
+    <hr style="border-top: 1px solid black;">
+    <hr style="border-top: 1px solid black;">
     <table>
         <tr>
             <td align="left">
                 <table>
                     <tr>
-                        <td><img src="<?= base_url('public/assets/core/images/logotrunojoyo.png'); ?>" width="120px"></td>
+                        <td><img src="<?= base_url('public/assets/core/images/logo1.png'); ?>" width="120px"></td>
                         <td style="padding-left: 25px" align="center">
                             <span style="font-size:17px;font-weight:normal;">KEMENTERIAN PENDIDIKAN DAN KEBUDAYAAN</span><br>
                             <span style="font-size:17px;font-weight:bold;">UNIVERSITAS TRUNOJOYO MADURA</span><br>
@@ -68,8 +68,8 @@
             </td>
         </tr>
     </table>
-    <hr>
-    <hr>
+    <hr style="border-top: 1px solid black;">
+    <hr style="border-top: 1px solid black;">
 
     <table>
         <tr>
@@ -123,10 +123,16 @@
                         <td>Catatan Pembimbing</td>
                     </tr>
                     <tr>
-                        <td style="height: 100px;"></td>
+                        <td>
+                            <br><br><br><br><br><br><br><br><br><br><br><br><br>
+                            <br><br><br><br><br><br><br><br>
+                        </td>
                     </tr>
                 </table>
             </td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
         </tr>
         <tr>
             <td align="center">
@@ -139,6 +145,9 @@
                     <tr>
                         <td align="center" width="50%">Pembimbing</td>
                         <td align="center" width="50%">Ketua Program Studi</td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
                     </tr>
                     <tr>
                         <td>&nbsp;</td>

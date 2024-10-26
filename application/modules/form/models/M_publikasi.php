@@ -16,7 +16,17 @@ class M_publikasi extends CI_Model
     }
     public function get_all()
     {
-        $query = $this->db->get('m_dosen'); // Mengambil semua data dosen dari tabel 'dosen'
+        $this->db->distinct(); // Menandai query untuk mengambil data yang unik
+        $this->db->where('jabatan', 'Dosen'); // Menambahkan kondisi untuk jabatan
+        $query = $this->db->get('m_dosen'); // Mengambil semua data dosen yang unik dari tabel 'm_dosen'
         return $query->result();
+    }
+    public function check_existing($nim, $jenis_tugas_akhir)
+    {
+        $this->db->where('nim', $nim);
+        $this->db->where('jenis_tugas_akhir', $jenis_tugas_akhir);
+        $query = $this->db->get('ajuan_tugas_akhir'); // Sesuaikan nama tabel
+
+        return $query->num_rows() > 0;
     }
 }

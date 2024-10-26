@@ -7,6 +7,7 @@
     <style>
         @page {
             margin: 10mm;
+            size: A4;
         }
 
         body {
@@ -57,7 +58,7 @@
                 <table>
                     <tr>
                         <td>
-                            <img src="<?= base_url('public/assets/core/images/logotrunojoyo.png'); ?>" width="120px">
+                            <img src="<?= base_url('public/assets/core/images/logo1.png'); ?>" width="120px">
                         </td>
                         <td style="padding-left: 25px" align="center">
                             <span style="font-size:17px;font-weight:normal;">KEMENTERIAN PENDIDIKAN DAN KEBUDAYAAN</span><br>

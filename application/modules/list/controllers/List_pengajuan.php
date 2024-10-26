@@ -1,10 +1,12 @@
-<?php 
+<?php
 if (!defined('BASEPATH')) exit('No direct script access allowed');
 date_default_timezone_set('Asia/Jakarta');
 
-class List_pengajuan extends CI_Controller {
+class List_pengajuan extends CI_Controller
+{
 
-	function __construct(){
+	function __construct()
+	{
 		parent::__construct();
 		$this->load->model('M_list_pengajuan');
 		if (!$this->session->userdata('logged_in')) {
@@ -12,8 +14,9 @@ class List_pengajuan extends CI_Controller {
 		}
 	}
 
-	function list_data(){
-		$this->breadcrumb->add('List Pengajuan','list/list_pengajuan');
+	function list_data()
+	{
+		$this->breadcrumb->add('List Pengajuan', 'list/list_pengajuan');
 		$stts_sub 	= $this->uri->segment(4);
 		$data = array(
 			'thisContent' 	=> 'list/v_list_pengajuan',
@@ -23,35 +26,43 @@ class List_pengajuan extends CI_Controller {
 		$this->parser->parse('template/template', $data);
 	}
 
-	function data_submission(){	
+	function data_submission()
+	{
 		$stts_s = $_POST['data_sub'];
 		$userlevel = $this->session->userdata['logged_in']['userlevel'];
 		$userid = $this->session->userdata['logged_in']['userid'];
-		$searchValue = $this->input->post('search')['value'];
-		if($stts_s == 'Revisi'){
+		$username = $this->session->userdata['logged_in']['username'];
+		if ($stts_s == 'Revisi') {
 			$stts_sub = 'Submit revisi';
-		}else{			
-			$stts_sub = $stts_s;			
+		} else {
+			$stts_sub = $stts_s;
 		}
 
 		header('Content-Type: application/json');
 
-		if($userlevel=='Koordinator Prodi'){
+		if ($userlevel == 'Koordinator Prodi') {
 			$datax	= $this->M_list_pengajuan->get_data_koor($userid);
 			$ps 	= $datax[0]['program_study'];
 
-			$data = $this->M_list_pengajuan->get_data_pengajuanx($stts_sub,$userlevel,$ps,$searchValue);
-		}else if($userlevel=='Sekjur' || $userlevel=='Kajur' ){
-			$data = $this->M_list_pengajuan->get_data_pengajuan($stts_sub,$userlevel,$searchValue);
-			
-		}else{
-			$data = $this->M_list_pengajuan->get_data_pengajuan($stts_sub,$userlevel,$searchValue);
+			$data = $this->M_list_pengajuan->get_data_pengajuanx($stts_sub, $userlevel, $ps);
+		} else if ($userlevel == 'Sekjur' || $userlevel == 'Kajur') {
+			$data = $this->M_list_pengajuan->get_data_pengajuan($stts_sub, $userlevel);
+		} else if ($userlevel = 'Admin Prodi') {
+			if ($username == 'Admin Prodi HBS') {
+				$ps2 = 'Hukum Bisnis Syariah';
+			} else if ($username == 'Admin Prodi ES') {
+				$ps2 = 'Ekonomi Syariah';
+			}
+			$data = $this->M_list_pengajuan->get_data_pengajuanx($stts_sub, 'Koordinator Prodi', $ps2);
+		} else {
+			$data = $this->M_list_pengajuan->get_data_pengajuan($stts_sub, $userlevel);
 		}
-				
+
 		echo $data;
 	}
-	
-	function save(){
+
+	function save()
+	{
 		$upd 				= $this->session->userdata['logged_in']['userid'];
 		$id 				= $_POST['id'];
 		$submission_code	= $_POST['submission_code'];
@@ -59,10 +70,8 @@ class List_pengajuan extends CI_Controller {
 		$rms_maslh			= $_POST['rms_maslh'];
 
 		$insert = $this->M_list_pengajuan->insert($id, $submission_code, $title, $rms_maslh, $upd);
-		$result['feedback'] = 'Berhasil Update '; 
-		
+		$result['feedback'] = 'Berhasil Update ';
+
 		echo json_encode($result);
 	}
-
-	
 }

@@ -59,4 +59,27 @@ class M_publikasi extends CI_Model
         $query = $this->db->get('ajuan_tugas_akhir');
         return $query->num_rows();
     }
+    public function get_revisi_by_id($id)
+    {
+        $this->db->select('ajuan_tugas_akhir.*, bimbingan_publikasi.revisi');
+        $this->db->from('ajuan_tugas_akhir');
+        $this->db->where('ajuan_tugas_akhir.id', $id);
+        $this->db->join('bimbingan_publikasi', 'bimbingan_publikasi.id_publikasi = ajuan_tugas_akhir.id', 'left');
+        $this->db->order_by('bimbingan_publikasi.created_at', 'DESC');
+        $this->db->limit(1);
+
+        $query = $this->db->get();
+
+        if ($query->num_rows() > 0) {
+            return $query->row();
+        } else {
+            return null;
+        }
+    }
+    public function update_revisi($id, $data)
+    {
+        $data['status_pengajuan'] = 'Diproses';
+        $this->db->where('id', $id);
+        return $this->db->update('ajuan_tugas_akhir', $data);
+    }
 }

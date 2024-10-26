@@ -4,6 +4,8 @@
             e.preventDefault(); 
             var isValid = true;
             var errorMessage = '';
+
+            // Validasi input
             if ($('#judul_sidang').val().trim() === '') {
                 isValid = false;
                 errorMessage += 'Judul Sidang tidak boleh kosong.\n';
@@ -27,18 +29,28 @@
                 return; 
             }
 
+            // Disable button to prevent double submission
+            const submitButton = $(this).find('button[type="submit"]');
+            submitButton.prop('disabled', true);
+
             $.ajax({
                 url: '<?php echo site_url('form/form_sidang/submit'); ?>',
                 type: 'POST',
                 dataType: 'json',
                 data: $(this).serialize(),
                 success: function(response) {
+                    // Enable button after AJAX call
+                    submitButton.prop('disabled', false);
+
                     if (response.status === 'success') {
                         swal({
                             type: 'success',
                             title: 'Success',
                             text: response.message,
                             allowOutsideClick: false,
+                        }).then(() => {
+                            // Optionally, redirect or perform other actions here
+                            window.location.href = "<?php echo site_url('history/sidang'); ?>";
                         });
                     } else {
                         swal({
@@ -50,6 +62,9 @@
                     }
                 },
                 error: function(xhr, status, error) {
+                    // Enable button after AJAX call
+                    submitButton.prop('disabled', false);
+
                     swal({
                         type: 'error',
                         title: 'Error',

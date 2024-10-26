@@ -22,6 +22,9 @@ class M_dashboard extends CI_Model
 		} else if ($lvl == 'Sekjur' || $lvl == 'Kajur') {
 			$query 		= "SELECT count(*) as jmlrevisi FROM title_submission WHERE code_status='Submit revisi' AND loker='$lvl' ";
 			$data 		= $this->db->query($query)->result_array();
+		} else if ($lvl == 'Admin Prodi') {
+			$query 		= "SELECT count(*) as jmlrevisi FROM title_submission WHERE code_status='Submit revisi' AND jurusan='$jur'";
+			$data 		= $this->db->query($query)->result_array();
 		} else {
 			$query 		= "SELECT count(*) as jmlrevisi FROM title_submission WHERE code_status='Submit revisi' AND jurusan='$jur' AND loker='$lvl' ";
 			$data 		= $this->db->query($query)->result_array();
@@ -37,6 +40,9 @@ class M_dashboard extends CI_Model
 			$data 		= $this->db->query($query)->result_array();
 		} else if ($lvl == 'Sekjur' || $lvl == 'Kajur') {
 			$query 		= "SELECT count(*) as jmlnew FROM title_submission WHERE code_status='New' AND loker='$lvl' ";
+			$data 		= $this->db->query($query)->result_array();
+		} else if ($lvl == 'Admin Prodi') {
+			$query 		= "SELECT count(*) as jmlnew FROM title_submission WHERE code_status='New' AND jurusan='$jur' AND loker='Koordinator Prodi' ";
 			$data 		= $this->db->query($query)->result_array();
 		} else {
 			$query 		= "SELECT count(*) as jmlnew FROM title_submission WHERE code_status='New' AND jurusan='$jur' AND loker='$lvl' ";
@@ -70,7 +76,10 @@ class M_dashboard extends CI_Model
 		} else if ($lvl == 'Sekjur' || $lvl == 'Kajur') {
 			$query 		= "SELECT count(*) as jmlall FROM title_submission WHERE  loker='$lvl' ";
 			$data 		= $this->db->query($query)->result_array();
-		} else {
+		} else if ($lvl == 'Admin Prodi') {
+			$query 		= "SELECT count(*) as jmlall FROM title_submission WHERE  jurusan='$jur'";
+			$data 		= $this->db->query($query)->result_array();
+		}else {
 			$query 		= "SELECT count(*) as jmlall FROM title_submission WHERE  jurusan='$jur' AND loker='$lvl' ";
 			$data 		= $this->db->query($query)->result_array();
 		}
@@ -236,10 +245,19 @@ class M_dashboard extends CI_Model
 		$query = $this->db->get('skripsi_riset');
 		return $query->num_rows();
 	}
-	public function count_mbkm()
+	public function count_mbkm($jur)
 	{
 		$this->db->where('status_pengajuan', 'Menunggu');
+        $this->db->where('prodi', $jur); 
 		$query = $this->db->get('mbkm_riset');
+		return $query->num_rows();
+	}
+	
+	public function count_publikasi($jur)
+	{
+		$this->db->where('status_pengajuan', 'Menunggu');
+        $this->db->where('prodi', $jur); 
+		$query = $this->db->get('ajuan_tugas_akhir');
 		return $query->num_rows();
 	}
 }

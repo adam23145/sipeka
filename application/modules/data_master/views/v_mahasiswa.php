@@ -85,6 +85,17 @@
                                             <input type="text" class="form-control" name="email" id="email" placeholder="Email">
                                         </fieldset>
                                         <fieldset class="form-group floating-label-form-group">
+                                            <label for="password">Password</label>
+                                            <div class="input-group">
+                                                <input type="password" class="form-control" name="password" id="password" placeholder="Password">
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text" onclick="togglePassword()">
+                                                        <i class="fa fa-eye" id="toggle-eye"></i>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </fieldset>
+                                        <fieldset class="form-group floating-label-form-group">
                                             <label for="fakultas">Fakultas</label>
                                             <input type="text" class="form-control" name="fakultas" id="fakultas" placeholder="Fakultas">
                                         </fieldset>
@@ -128,6 +139,22 @@
                         </div>
                     </div>
                 </div>
+                <script>
+                    function togglePassword() {
+                        var passwordInput = document.getElementById('password');
+                        var toggleEyeIcon = document.getElementById('toggle-eye');
+
+                        if (passwordInput.type === 'password') {
+                            passwordInput.type = 'text';
+                            toggleEyeIcon.classList.remove('fa-eye');
+                            toggleEyeIcon.classList.add('fa-eye-slash');
+                        } else {
+                            passwordInput.type = 'password';
+                            toggleEyeIcon.classList.remove('fa-eye-slash');
+                            toggleEyeIcon.classList.add('fa-eye');
+                        }
+                    }
+                </script>
                 <div class="form-group">
                     <div class="modal fade text-left" id="modalUpload" tabindex="-1" role="dialog" aria-labelledby="myModalLabel35" aria-hidden="true">
                         <div class="modal-dialog" role="document">
