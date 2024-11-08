@@ -2,13 +2,13 @@
 if (!defined('BASEPATH')) exit('No direct script access allowed');
 date_default_timezone_set('Asia/Jakarta');
 
-class Mbkm extends CI_Controller
+class Sempro_mbkm extends CI_Controller
 {
 
     function __construct()
     {
         parent::__construct();
-        $this->load->model('M_mbkm');
+        $this->load->model('M_sempro_mbkm');
         if (!$this->session->userdata('logged_in')) {
             redirect('login');
         }
@@ -18,8 +18,8 @@ class Mbkm extends CI_Controller
     {
         $this->breadcrumb->add('History', 'history/mbkm');
         $data = array(
-            'thisContent'     => 'history/v_mbkm',
-            'thisJs'        => 'history/js_mbkm',
+            'thisContent'     => 'history/v_sempro_mbkm',
+            'thisJs'        => 'history/js_sempro_mbkm',
         );
         $this->parser->parse('template/template', $data);
     }
@@ -29,9 +29,9 @@ class Mbkm extends CI_Controller
         $start = $this->input->post('start');
         $search = $this->input->post('search')['value'];
 
-        $list = $this->M_mbkm->get_all($limit, $start, $search);
-        $totalData = $this->M_mbkm->count_all();
-        $totalFiltered = $this->M_mbkm->count_filtered($search);
+        $list = $this->M_sempro_mbkm->get_all($limit, $start, $search);
+        $totalData = $this->M_sempro_mbkm->count_all();
+        $totalFiltered = $this->M_sempro_mbkm->count_filtered($search);
 
         $data = array();
         foreach ($list as $item) {
@@ -85,7 +85,7 @@ class Mbkm extends CI_Controller
     public function get_revisi()
     {
         $id = $this->input->post('id');
-        $revisi = $this->M_mbkm->get_revisi_by_id($id);
+        $revisi = $this->M_sempro_mbkm->get_revisi_by_id($id);
 
         if ($revisi) {
             echo json_encode(array(
@@ -104,7 +104,9 @@ class Mbkm extends CI_Controller
     {
         $id = $this->input->post('id');
         $judulRevisi = $this->input->post('judulRevisi');
-        $currentData = $this->M_mbkm->get_revisi_by_id($id);
+
+        $currentData = $this->M_sempro_mbkm->get_revisi_by_id($id);
+
         $updateData = [];
 
         // Update judul revisi jika ada perubahan
@@ -112,71 +114,78 @@ class Mbkm extends CI_Controller
             $updateData['mbkm'] = $judulRevisi;
         }
 
-        // Function to handle file uploads
-        function handleFileUpload($fileInput, $fileNamePrefix, $currentFilePath, $directory)
-        {
+        // Handle uploaded document file
+        if (!empty($_FILES["dokumen_pendukung"]["name"])) {
+            $userid = $this->session->userdata['logged_in']['userid'];
+            $directory = './document/filembkm/' . $userid;
+            $file_pth = 'document/filembkm/' . $userid . '/';
+
+            // Buat direktori jika belum ada
+            if (!is_dir($directory)) {
+                mkdir($directory, 0755, true);
+            }
+
             $allowed = ['doc', 'docx', 'ppt', 'pptx', 'pdf'];
-            $file_name = $_FILES[$fileInput]["name"];
-            $file_tmp_name = $_FILES[$fileInput]["tmp_name"];
+
+            $file_name = $_FILES["dokumen_pendukung"]["name"];
+            $file_tmp_name = $_FILES["dokumen_pendukung"]["tmp_name"];
             $file_ext = pathinfo($file_name, PATHINFO_EXTENSION);
-            $file_name_new = $fileNamePrefix . '-' . $file_name;
+            $file_name_new = 'semprombkm-' . $file_name;
             $file_upload = $directory . "/" . $file_name_new;
 
-            // Validate file extension
+            // Hapus file lama jika ada
+            if (!empty($currentData->dokumen_pendukung)) {
+                $oldFilePath = './' . $currentData->dokumen_pendukung; // Ambil path file lama
+                if (file_exists($oldFilePath)) {
+                    unlink($oldFilePath); // Hapus file lama
+                }
+            }
+
+            // Validasi ekstensi file
             if (!in_array($file_ext, $allowed)) {
-                return ['status' => false, 'message' => 'Format file tidak didukung. Harap unggah file dengan format .doc, .docx, .ppt, .pptx, atau .pdf.'];
+                $response = [
+                    'status' => false,
+                    'message' => 'Format file tidak didukung. Harap unggah file dengan format .doc, .docx, .ppt, .pptx, atau .pdf.',
+                    'csrf_hash' => $this->security->get_csrf_hash()
+                ];
+                echo json_encode($response);
+                return;
             }
 
-            // Remove old file if it exists
-            if (!empty($currentFilePath) && file_exists('./' . $currentFilePath)) {
-                unlink('./' . $currentFilePath);
-            }
-
-            // Move new file
+            // Pindahkan file yang diunggah
             if (move_uploaded_file($file_tmp_name, $file_upload)) {
-                return ['status' => true, 'file_path' => $file_upload];
+                $updateData['dokumen_pendukung'] = $file_pth . $file_name_new; // Simpan path file yang baru
             } else {
-                return ['status' => false, 'message' => 'Gagal mengunggah file. Silakan coba lagi.'];
-            }
-        }
-
-        $userid = $this->session->userdata['logged_in']['userid'];
-        $directory = './document/filembkm/' . $userid;
-        $file_pth = 'document/filembkm/' . $userid . '/';
-
-        // Create directory if it doesn't exist
-        if (!is_dir($directory)) {
-            mkdir($directory, 0755, true);
-        }
-
-        // Process dokumen_pendukung
-        if (!empty($_FILES["dokumen_pendukung"]["name"])) {
-            $result = handleFileUpload("dokumen_pendukung", "mbkm", $currentData->dokumen_pendukung, $directory);
-            if ($result['status']) {
-                $updateData['dokumen_pendukung'] = $file_pth . basename($result['file_path']);
-            } else {
-                echo json_encode(['status' => false, 'message' => $result['message'], 'csrf_hash' => $this->security->get_csrf_hash()]);
+                $response = [
+                    'status' => false,
+                    'message' => 'Gagal mengunggah file. Silakan coba lagi.',
+                    'csrf_hash' => $this->security->get_csrf_hash()
+                ];
+                echo json_encode($response);
                 return;
             }
         }
 
-        // Process dokumen_pendukung2
-        if (!empty($_FILES["dokumen_pendukung2"]["name"])) {
-            $result = handleFileUpload("dokumen_pendukung2", "mbkmpenilaian", $currentData->dokumen_pendukung2, $directory);
-            if ($result['status']) {
-                $updateData['dokumen_pendukung2'] = $file_pth . basename($result['file_path']);
-            } else {
-                echo json_encode(['status' => false, 'message' => $result['message'], 'csrf_hash' => $this->security->get_csrf_hash()]);
-                return;
-            }
-        }
-
-        // Update database if there are changes
+        // Update database jika ada data yang diubah
         if (!empty($updateData)) {
-            $result = $this->M_mbkm->update_revisi($id, $updateData);
-            $response = $result ? ['status' => 'success', 'message' => 'Revisi berhasil diperbarui.'] : ['status' => 'error', 'message' => 'Gagal memperbarui revisi.'];
+            $result = $this->M_sempro_mbkm->update_revisi($id, $updateData);
+
+            if ($result) {
+                $response = [
+                    'status' => 'success',
+                    'message' => 'Revisi berhasil diperbarui.'
+                ];
+            } else {
+                $response = [
+                    'status' => 'error',
+                    'message' => 'Gagal memperbarui revisi.'
+                ];
+            }
         } else {
-            $response = ['status' => 'info', 'message' => 'Tidak ada perubahan untuk diperbarui.'];
+            $response = [
+                'status' => 'info',
+                'message' => 'Tidak ada perubahan untuk diperbarui.'
+            ];
         }
 
         echo json_encode($response);

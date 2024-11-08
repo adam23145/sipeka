@@ -4,54 +4,63 @@ date_default_timezone_set('Asia/Jakarta');
 /**
  * 
  */
-class M_dashboard_dosen extends CI_Model {
+class M_dashboard_dosen extends CI_Model
+{
 
-	function cekdosen($email){
+	function cekdosen($email)
+	{
 		$query 		= "SELECT * FROM m_dosen WHERE email='$email' AND jabatan ='Dosen' ";
 		$data 		= $this->db->query($query)->result_array();
 		return $data;
 	}
 
-	function get_baru_sem($nip,$jbt){
-		$query 		= "SELECT count(*) as jmlnew_sem FROM title_submission WHERE code_status='New' AND submission_status='In Review Dosen' AND dosbing='".$nip."' AND loker='".$jbt."' ";
+	function get_baru_sem($nip, $jbt)
+	{
+		$query 		= "SELECT count(*) as jmlnew_sem FROM title_submission WHERE code_status='New' AND submission_status='In Review Dosen' AND dosbing='" . $nip . "' AND loker='" . $jbt . "' ";
 		$data 		= $this->db->query($query)->result_array();
 		return $data;
 	}
 
-	function get_pr_sem($nip){
-		$query 		= "SELECT count(*) as jmlproses_sem FROM bimbingan WHERE dosbing='".$nip."' AND status_bimb!='Setuju' ";
+	function get_pr_sem($nip)
+	{
+		$query 		= "SELECT count(*) as jmlproses_sem FROM bimbingan WHERE dosbing='" . $nip . "' AND status_bimb!='Setuju' ";
 		$data 		= $this->db->query($query)->result_array();
 		return $data;
 	}
 
-	function get_end_sem($nip){
-		$query 		= "SELECT count(*) as jmlend_sem FROM bimbingan WHERE dosbing='".$nip."' AND status_bimb='Setuju' ";
+	function get_end_sem($nip)
+	{
+		$query 		= "SELECT count(*) as jmlend_sem FROM bimbingan WHERE dosbing='" . $nip . "' AND status_bimb='Setuju' ";
 		$data 		= $this->db->query($query)->result_array();
 		return $data;
 	}
 
-	function get_baru($nip,$jbt){
-		$query 		= "SELECT count(*) as jmlnew FROM title_submission WHERE code_status='New' AND submission_status='Bimbingan Skripsi' AND dosbing='".$nip."' AND loker='".$jbt."' ";
+	function get_baru($nip, $jbt)
+	{
+		$query 		= "SELECT count(*) as jmlnew FROM title_submission WHERE code_status='New' AND submission_status='Bimbingan Skripsi' AND dosbing='" . $nip . "' AND loker='" . $jbt . "' ";
 		$data 		= $this->db->query($query)->result_array();
 		return $data;
 	}
 
-	function get_pr($nip){
+	function get_pr($nip)
+	{
 		// $query 		= "SELECT count(*) as jmlproses FROM bimbingan_skripsi WHERE dosbing='".$nip."' AND status_bimb!='Setuju' ";
 		$query 		= "SELECT count(ba.id) as jmlproses FROM bimbingan_skripsi ba, title_submission ts WHERE ba.submission_code=ts.submission_code AND ba.status_bimb in ('new','Bimbingan Skripsi') AND ba.dosbing = '$nip' ";
 		$data 		= $this->db->query($query)->result_array();
 		return $data;
 	}
 
-	function get_end($nip){
-		$query 		= "SELECT count(bs.id) as jmlend FROM bimbingan_skripsi bs, title_submission ts WHERE bs.submission_code = ts.submission_code AND bs.dosbing='".$nip."' AND bs.status_bimb = 'Setuju Sidang' ";
+	function get_end($nip)
+	{
+		$query 		= "SELECT count(bs.id) as jmlend FROM bimbingan_skripsi bs, title_submission ts WHERE bs.submission_code = ts.submission_code AND bs.dosbing='" . $nip . "' AND bs.status_bimb = 'Setuju Sidang' ";
 		$data 		= $this->db->query($query)->result_array();
 		return $data;
 	}
 
-	function cek_ayat($nip){
+	function cek_ayat($nip)
+	{
 		$where = "";
-		if($nip <> ""){
+		if ($nip <> "") {
 			$where = " AND nip='$nip' ";
 		}
 		// $query 		= "SELECT count(id) as jml FROM title_submission WHERE nim='$nim' AND submission_status !='Tolak' ";
@@ -59,10 +68,11 @@ class M_dashboard_dosen extends CI_Model {
 		$data 		= $this->db->query($query)->result_array();
 		return $data;
 	}
-	
-	function cek_hadist($nip){
+
+	function cek_hadist($nip)
+	{
 		$where = "";
-		if($nip <> ""){
+		if ($nip <> "") {
 			$where = " AND nip='$nip' ";
 		}
 		// $query 		= "SELECT count(id) as jml FROM title_submission WHERE nim='$nim' AND submission_status !='Tolak' ";
@@ -70,10 +80,11 @@ class M_dashboard_dosen extends CI_Model {
 		$data 		= $this->db->query($query)->result_array();
 		return $data;
 	}
-	
-	function cek_kk($nip){
+
+	function cek_kk($nip)
+	{
 		$where = "";
-		if($nip <> ""){
+		if ($nip <> "") {
 			$where = " AND nip='$nip' ";
 		}
 		// $query 		= "SELECT count(id) as jml FROM title_submission WHERE nim='$nim' AND submission_status !='Tolak' ";
@@ -81,10 +92,11 @@ class M_dashboard_dosen extends CI_Model {
 		$data 		= $this->db->query($query)->result_array();
 		return $data;
 	}
-	
-	function cek_qq($nip){
+
+	function cek_qq($nip)
+	{
 		$where = "";
-		if($nip <> ""){
+		if ($nip <> "") {
 			$where = " AND nip='$nip' ";
 		}
 		// $query 		= "SELECT count(id) as jml FROM title_submission WHERE nim='$nim' AND submission_status !='Tolak' ";
@@ -92,5 +104,76 @@ class M_dashboard_dosen extends CI_Model {
 		$data 		= $this->db->query($query)->result_array();
 		return $data;
 	}
+	public function countdataMbkmNew($username)
+	{
+		$this->db->where('status_pengajuan', 'Menunggu');
+		$this->db->group_start(); 
+		$this->db->where('dosen_pembimbing_utama', $username);
+		$this->db->or_where('dosen_pembimbing_kedua', $username);
+		$this->db->group_end(); 
 
+		return $this->db->count_all_results('sempro_mbkm_riset');
+	}
+	public function publikasiNew($username)
+	{
+		$this->db->where('status_pengajuan', 'Menunggu');
+		$this->db->group_start(); 
+		$this->db->where('dosen_pembimbing_utama', $username);
+		$this->db->or_where('dosen_pembimbing_kedua', $username);
+		$this->db->group_end(); 
+
+		return $this->db->count_all_results('ajuan_tugas_akhir');
+	}
+	public function publikasi($username)
+	{
+		$this->db->where('status_pengajuan', 'Diproses');
+		$this->db->group_start(); 
+		$this->db->where('dosen_pembimbing_utama', $username);
+		$this->db->or_where('dosen_pembimbing_kedua', $username);
+		$this->db->group_end(); 
+
+		return $this->db->count_all_results('ajuan_tugas_akhir');
+	}
+	
+	public function donepublikasi($username)
+	{
+		$this->db->where('status_pengajuan', 'Acc');
+		$this->db->group_start(); 
+		$this->db->where('dosen_pembimbing_utama', $username);
+		$this->db->or_where('dosen_pembimbing_kedua', $username);
+		$this->db->group_end(); 
+
+		return $this->db->count_all_results('ajuan_tugas_akhir');
+	}
+	public function mbkmNew($username)
+	{
+		$this->db->where('status_pengajuan', 'Menunggu');
+		$this->db->group_start(); 
+		$this->db->where('dosen_pembimbing_utama', $username);
+		$this->db->or_where('dosen_pembimbing_kedua', $username);
+		$this->db->group_end(); 
+
+		return $this->db->count_all_results('sempro_mbkm_riset');
+	}
+	public function mbkm($username)
+	{
+		$this->db->where('status_pengajuan', 'Diproses');
+		$this->db->group_start(); 
+		$this->db->where('dosen_pembimbing_utama', $username);
+		$this->db->or_where('dosen_pembimbing_kedua', $username);
+		$this->db->group_end(); 
+
+		return $this->db->count_all_results('sempro_mbkm_riset');
+	}
+	
+	public function donembkm($username)
+	{
+		$this->db->where('status_pengajuan', 'Acc');
+		$this->db->group_start(); 
+		$this->db->where('dosen_pembimbing_utama', $username);
+		$this->db->or_where('dosen_pembimbing_kedua', $username);
+		$this->db->group_end(); 
+
+		return $this->db->count_all_results('sempro_mbkm_riset');
+	}
 }

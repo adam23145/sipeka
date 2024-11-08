@@ -41,6 +41,7 @@ class Publikasi extends CI_Controller
             $row['nama_mahasiswa'] = $item->nama_mahasiswa;
             $row['nim'] = $item->nim;
             $row['tanggal_pengajuan'] = $item->tanggal_pengajuan;
+            $row['dosen_pembimbing'] = $item->dosen_pembimbing_utama;
             if ($item->status_pengajuan == 'Revisi') {
                 $row['status_pengajuan'] = '<button class="btn btn-warning btn-revisi" data-toggle="modal" data-target="#modalRevisi" data-id="' . $item->id . '">Lihat Revisi</button>';
             } else {

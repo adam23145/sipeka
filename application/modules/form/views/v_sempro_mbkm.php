@@ -3,7 +3,7 @@
         <div class="col-md-12">
             <div class="card card-primary">
                 <div class="card-header">
-                    <h3 class="card-title">Form Mbkm</h3>
+                    <h3 class="card-title">Form Sempro Mbkm</h3>
                 </div>
                 <form id="form-submtitle" method="POST">
                     <input type="hidden" name="token" id="token" value="<?php echo $this->security->get_csrf_hash(); ?>">
@@ -29,24 +29,14 @@
                             <label for="majorname">Program Studi</label>
                             <input type="text" class="form-control" id="majorname" name="majorname" value="{majorname}" readonly="true">
                         </div>
+                        
                         <div class="form-group">
-                            <label>Propsal :</label>
+                            <label>Dokumen Pendukung :</label>
                             <div class="form-group p-t-15">
                                 <div class="input-group">
                                     <div class="custom-file">
-                                        <input type="file" class="custom-file-input" name="dokumen_pendukung" id="dokumen_pendukung" required="">
-                                        <label class="custom-file-label" for="dokumen_pendukung">Pilih file...</label>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label>Form Penilaian Sempro Mbkm :</label>
-                            <div class="form-group p-t-15">
-                                <div class="input-group">
-                                    <div class="custom-file">
-                                        <input type="file" class="custom-file-input" name="dokumen_pendukung2" id="dokumen_pendukung2">
-                                        <label class="custom-file-label" for="dokumen_pendukung2">Pilih file...</label>
+                                        <input type="file" class="custom-file-input" multiple="" name="dokumen_pendukung" id="dokumen_pendukung" required="">
+                                        <label class="custom-file-label" for="validatedCustomFile">Pilih file...</label>
                                     </div>
                                 </div>
                             </div>

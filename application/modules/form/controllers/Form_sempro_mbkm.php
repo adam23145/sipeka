@@ -2,13 +2,13 @@
 if (!defined('BASEPATH')) exit('No direct script access allowed');
 date_default_timezone_set('Asia/Jakarta');
 
-class Form_mbkm extends CI_Controller
+class Form_sempro_mbkm extends CI_Controller
 {
 
 	function __construct()
 	{
 		parent::__construct();
-		$this->load->model('M_mbkm');
+		$this->load->model('M_sempro_mbkm');
 		$this->load->helper('string');
 		if (!$this->session->userdata('logged_in')) {
 			redirect('login');
@@ -17,8 +17,8 @@ class Form_mbkm extends CI_Controller
 
 	function index()
 	{
-		$this->breadcrumb->add('Form', 'form/form_mbkm')
-			->add('Pengajuan Sempro Mbkm', 'form/form_mbkm');
+		$this->breadcrumb->add('Form', 'form/form_sempro_mbkm')
+			->add('Pengajuan Sempro Mbkm', 'form/form_sempro_mbkm');
 		$majorcode			= substr($this->session->userdata['logged_in']['userid'], 4, 3);
 		$nim				= substr($this->session->userdata['logged_in']['userid'], 0, 12);
 		$token				= random_string('numeric', 3);
@@ -27,8 +27,8 @@ class Form_mbkm extends CI_Controller
 		$major_name			= $this->M_global->get_jurusan2($nim);
 
 		$data = array(
-			'thisContent' 	=> 'form/v_mbkm',
-			'thisJs'		=> 'form/js_mbkm',
+			'thisContent' 	=> 'form/v_sempro_mbkm',
+			'thisJs'		=> 'form/js_sempro_mbkm',
 			'subm_id'		=> $subm_id,
 			'majorname'		=> $major_name[0]['jurusan'],
 		);
@@ -36,8 +36,7 @@ class Form_mbkm extends CI_Controller
 	}
 	public function submit()
 	{
-		// Check if both files are uploaded
-		if (empty($_FILES["dokumen_pendukung"]) || empty($_FILES["dokumen_pendukung2"])) {
+		if (empty($_FILES["dokumen_pendukung"])) {
 			$response = array(
 				'status' => false,
 				'message' => 'File dokumen pendukung tidak boleh kosong',
@@ -52,60 +51,42 @@ class Form_mbkm extends CI_Controller
 		$file_pth = 'document/filembkm/' . $userid . '/';
 
 		if (!is_dir($directory)) {
-			mkdir($directory, 0755, true); // Create directory if it doesn't exist
+			mkdir($directory, 0755, true); // Buat direktori jika belum ada
 		}
 
 		$allowed = array('doc', 'docx', 'ppt', 'pptx', 'pdf');
+		$file_name = $_FILES["dokumen_pendukung"]["name"];
+		$file_tmp_name = $_FILES["dokumen_pendukung"]["tmp_name"];
+		$file_ext = pathinfo($file_name, PATHINFO_EXTENSION);
+		$file_name_new = 'semprombkm-' . $file_name;
+		$file_upload = $directory . "/" . $file_name_new;
 
-		// First file validation and upload
-		$file_name_1 = $_FILES["dokumen_pendukung"]["name"];
-		$file_tmp_name_1 = $_FILES["dokumen_pendukung"]["tmp_name"];
-		$file_ext_1 = pathinfo($file_name_1, PATHINFO_EXTENSION);
-		$file_name_new_1 = 'mbkm-' . $file_name_1;
-		$file_upload_1 = $directory . "/" . $file_name_new_1;
-
-		if (!in_array($file_ext_1, $allowed)) {
+		// Validasi ekstensi file
+		if (!in_array($file_ext, $allowed)) {
 			$response = array(
 				'status' => false,
-				'message' => 'Format file dokumen pendukung tidak didukung.',
+				'message' => 'Format file tidak didukung. Harap unggah file dengan format .doc, .docx, .ppt, .pptx, atau .pdf.',
 				'csrf_hash' => $this->security->get_csrf_hash()
 			);
 			echo json_encode($response);
 			return;
 		}
 
-		// Second file validation and upload
-		$file_name_2 = $_FILES["dokumen_pendukung2"]["name"];
-		$file_tmp_name_2 = $_FILES["dokumen_pendukung2"]["tmp_name"];
-		$file_ext_2 = pathinfo($file_name_2, PATHINFO_EXTENSION);
-		$file_name_new_2 = 'mbkmpenilaian-' . $file_name_2;
-		$file_upload_2 = $directory . "/" . $file_name_new_2;
-
-		if (!in_array($file_ext_2, $allowed)) {
-			$response = array(
-				'status' => false,
-				'message' => 'Format file dokumen pendukung 2 tidak didukung.',
-				'csrf_hash' => $this->security->get_csrf_hash()
-			);
-			echo json_encode($response);
-			return;
-		}
-
-		// Check if NIM already exists
+		// Cek apakah NIM sudah ada
 		$nim = $this->input->post('nim');
-		$nim_exists = $this->M_mbkm->check_nim_exists($nim);
+		$nim_exists = $this->M_sempro_mbkm->check_nim_exists($nim); // Asumsikan Anda sudah punya fungsi check_nim_exists di model
 
 		if ($nim_exists) {
 			$response = array(
 				'status' => false,
-				'message' => 'Sudah melakukan pengiriman Mbkm',
+				'message' => 'Sudah Melakukan Pengiriman Mbkm',
 				'csrf_hash' => $this->security->get_csrf_hash()
 			);
 			echo json_encode($response);
 			return;
 		}
-
 		$this->load->helper('string');
+
 		do {
 			$token = random_string('numeric', 3);
 			$submission_code = 'FKIS1605-' . $token . date("dhs");
@@ -114,8 +95,7 @@ class Form_mbkm extends CI_Controller
 				->row();
 		} while ($existing_code);
 
-		// Move both files to the directory
-		if (move_uploaded_file($file_tmp_name_1, $file_upload_1) && move_uploaded_file($file_tmp_name_2, $file_upload_2)) {
+		if (move_uploaded_file($file_tmp_name, $file_upload)) {
 			$data = array(
 				'mbkm' => $this->input->post('mbkm'),
 				'nama_mahasiswa' => $this->input->post('nama_mahasiswa'),
@@ -125,12 +105,11 @@ class Form_mbkm extends CI_Controller
 				'dosen_pembimbing_kedua' => null,
 				'tanggal_pengajuan' => date('Y-m-d'),
 				'status_pengajuan' => 'Menunggu',
-				'dokumen_pendukung' => $file_pth . $file_name_new_1,
-				'dokumen_pengajuan' => $file_pth . $file_name_new_2,
+				'dokumen_pendukung' => $file_pth . $file_name_new,
 				'submission_code' => $submission_code,
 			);
 
-			$insert = $this->M_mbkm->insert($data);
+			$insert = $this->M_sempro_mbkm->insert($data);
 
 			$response = array(
 				'status' => $insert,

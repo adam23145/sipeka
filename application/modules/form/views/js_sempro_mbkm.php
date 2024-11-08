@@ -1,27 +1,25 @@
 <script type="text/javascript">
     $(document).ready(function() {
         bsCustomFileInput.init();
-
+        
         $('#form-submtitle').submit(function(e) {
             e.preventDefault(); // Mencegah form submit secara tradisional
-
-            let submitButton = $(this).find('button[type="submit"]');
-            submitButton.prop('disabled', true); // Nonaktifkan tombol submit
-
+            
             let fileInput = document.getElementById('dokumen_pendukung');
             let filePath = fileInput.value;
             let allowedExtensions = /(\.doc|docx|ppt|pptx|pdf)$/i;
 
+            // Validasi file yang diunggah
             if (!allowedExtensions.exec(filePath)) {
                 swal({
-                    type: 'warning',
+                    icon: 'warning',
                     title: 'Perhatian',
                     text: 'Pastikan Anda memilih file sesuai ketentuan',
                 });
-                submitButton.prop('disabled', false); // Aktifkan kembali tombol jika ada error
                 return;
             }
 
+            // Validasi agar program studi (majorname) tidak boleh kosong
             let majorname = document.getElementById('majorname').value;
             if (majorname === '' || majorname == null) {
                 swal({
@@ -31,7 +29,12 @@
                 });
                 return;
             }
+
             let formData = new FormData(this);
+            let submitButton = $(this).find('button[type="submit"]');
+            
+            // Nonaktifkan tombol submit untuk mencegah double submit
+            submitButton.prop('disabled', true);
 
             // Tampilkan SweetAlert loading saat proses pengiriman
             swal({
@@ -44,50 +47,45 @@
             });
 
             $.ajax({
-                url: "<?php echo site_url('form/form_publikasi/submit'); ?>",
+                url: "<?php echo site_url('form/Form_sempro_mbkm/submit'); ?>",
                 method: "POST",
                 data: formData,
                 contentType: false,
                 processData: false,
                 dataType: 'json',
                 success: function(data) {
-                    Swal.close(); // Tutup SweetAlert loading
-
+                    Swal.close(); // Tutup SweetAlert setelah berhasil
                     if (data.status) {
                         swal({
-                            type: 'success',
+                            icon: 'success',
                             title: 'Sukses',
                             text: data.message,
                             allowOutsideClick: false,
-                        }).then((result) => {
-                            window.location.href = "<?php echo site_url('history/publikasi'); ?>";
+                        }).then(() => {
+                            window.location.href = "<?php echo site_url('history/Sempro_mbkm'); ?>";
                         });
                     } else {
                         swal({
-                            type: 'error',
+                            icon: 'error',
                             title: 'Error',
                             text: data.message,
                             allowOutsideClick: false,
                         });
                     }
-
-                    submitButton.prop('disabled', false); // Aktifkan tombol kembali setelah selesai
                 },
-                error: function(xhr, status, error) {
-                    console.error('Error:', error); // Log error untuk debugging
-
-                    Swal.close(); // Tutup SweetAlert loading jika ada error
+                error: function() {
+                    Swal.close(); // Tutup SweetAlert jika terjadi error
                     swal({
-                        type: 'error',
+                        icon: 'error',
                         title: 'Error',
                         text: 'Terjadi kesalahan saat menyimpan data',
                         allowOutsideClick: false,
                     });
-
-                    submitButton.prop('disabled', false); // Aktifkan tombol kembali jika error
+                },
+                complete: function() {
+                    submitButton.prop('disabled', false); // Aktifkan tombol submit kembali
                 }
             });
         });
-
     });
 </script>

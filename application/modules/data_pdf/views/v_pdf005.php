@@ -3,7 +3,7 @@
 
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Form Kelayakan Mengikuti Sidang</title>
+    <title>Form Kelayakan Seminar Proposal</title>
     <style>
         @page {
             margin: 10mm;

@@ -13,9 +13,9 @@
                                 <th>Nama Mahasiswa</th>
                                 <th>NIM</th>
                                 <th>Tanggal Pengajuan</th>
-                                <th>Pembimbing 1</th>
-                                <th>Pembimbing 2</th>
+                                <th>Dosen Pembimbing</th>
                                 <th>Status Pengajuan</th>
+                                <th>Dokumen</th>
                             </tr>
                         </thead>
                     </table>

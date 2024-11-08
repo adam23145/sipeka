@@ -1,16 +1,18 @@
 <script type="text/javascript">
     $(document).ready(function() {
         bsCustomFileInput.init();
-        
+
         $('#form-submtitle').submit(function(e) {
-            e.preventDefault(); // Mencegah form submit secara tradisional
-            
-            let fileInput = document.getElementById('dokumen_pendukung');
-            let filePath = fileInput.value;
+            e.preventDefault(); // Prevent traditional form submission
+
+            // File validation for dokumen_pendukung
+            let fileInput1 = document.getElementById('dokumen_pendukung');
+            let fileInput2 = document.getElementById('dokumen_pendukung2');
+            let filePath1 = fileInput1.value;
+            let filePath2 = fileInput2.value;
             let allowedExtensions = /(\.doc|docx|ppt|pptx|pdf)$/i;
 
-            // Validasi file yang diunggah
-            if (!allowedExtensions.exec(filePath)) {
+            if (!allowedExtensions.exec(filePath1) || !allowedExtensions.exec(filePath2)) {
                 swal({
                     icon: 'warning',
                     title: 'Perhatian',
@@ -19,7 +21,7 @@
                 return;
             }
 
-            // Validasi agar program studi (majorname) tidak boleh kosong
+            // Validate that majorname is not empty
             let majorname = document.getElementById('majorname').value;
             if (majorname === '' || majorname == null) {
                 swal({
@@ -32,11 +34,11 @@
 
             let formData = new FormData(this);
             let submitButton = $(this).find('button[type="submit"]');
-            
-            // Nonaktifkan tombol submit untuk mencegah double submit
+
+            // Disable submit button to prevent double submission
             submitButton.prop('disabled', true);
 
-            // Tampilkan SweetAlert loading saat proses pengiriman
+            // Display SweetAlert loading during data submission
             swal({
                 title: 'Mengirim...',
                 text: 'Silakan tunggu, data sedang diproses',
@@ -47,14 +49,14 @@
             });
 
             $.ajax({
-                url: "<?php echo site_url('form/form_mbkm/submit'); ?>",
+                url: "<?php echo site_url('form/Form_mbkm/submit'); ?>",
                 method: "POST",
                 data: formData,
                 contentType: false,
                 processData: false,
                 dataType: 'json',
                 success: function(data) {
-                    Swal.close(); // Tutup SweetAlert setelah berhasil
+                    Swal.close();
                     if (data.status) {
                         swal({
                             icon: 'success',
@@ -62,7 +64,7 @@
                             text: data.message,
                             allowOutsideClick: false,
                         }).then(() => {
-                            window.location.href = "<?php echo site_url('history/mbkm'); ?>";
+                            window.location.href = "<?php echo site_url('history/Sempro_mbkm'); ?>";
                         });
                     } else {
                         swal({
@@ -74,7 +76,7 @@
                     }
                 },
                 error: function() {
-                    Swal.close(); // Tutup SweetAlert jika terjadi error
+                    Swal.close();
                     swal({
                         icon: 'error',
                         title: 'Error',
@@ -83,7 +85,7 @@
                     });
                 },
                 complete: function() {
-                    submitButton.prop('disabled', false); // Aktifkan tombol submit kembali
+                    submitButton.prop('disabled', false);
                 }
             });
         });

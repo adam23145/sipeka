@@ -15,6 +15,7 @@ class Dashboard_dosen extends CI_Controller {
 	function index(){
 		$this->breadcrumb->add('Dashboard Dosen','dashboard_dosen/Dashboard_dosen');
 		$email 	= $this->session->userdata['logged_in']['userid'];
+		$username = $this->session->userdata['logged_in']['username'];
 		$dosen 	= $this->M_dashboard_dosen->cekdosen($email);
 		$nip = "";
 		$jbt = "";
@@ -30,7 +31,12 @@ class Dashboard_dosen extends CI_Controller {
 		$baru 	= $this->M_dashboard_dosen->get_baru($nip, $jbt);
 		$proses	= $this->M_dashboard_dosen->get_pr($nip);
 		$selesai= $this->M_dashboard_dosen->get_end($nip);
-
+        $publikasiNew = $this->M_dashboard_dosen->publikasiNew($username);
+        $publikasi = $this->M_dashboard_dosen->publikasi($username);
+        $donepublikasi = $this->M_dashboard_dosen->donepublikasi($username);
+        $newmbkm = $this->M_dashboard_dosen->mbkmNew($username);
+        $mbkm = $this->M_dashboard_dosen->mbkm($username);
+        $donembkm = $this->M_dashboard_dosen->donembkm($username);
 		$ayat 				= $this->M_dashboard_dosen->cek_ayat($nip);
 		$hadist				= $this->M_dashboard_dosen->cek_hadist($nip);
 		$kk 				= $this->M_dashboard_dosen->cek_kk($nip);
@@ -49,6 +55,12 @@ class Dashboard_dosen extends CI_Controller {
 			'hadist'		=> $hadist[0]['jml'],
 			'kk'			=> $kk[0]['jml'],
 			'qq'			=> $qq[0]['jml'],
+			'newpublikasi'	=> $publikasiNew,
+			'publikasi'		=> $publikasi,
+			'donepublikasi'		=> $donepublikasi,
+			'newmbkm'		=> $newmbkm,
+			'mbkm'		=> $mbkm,
+			'donembkm'		=> $donembkm,
 		);
 		$this->parser->parse('template/template', $data);
 	}

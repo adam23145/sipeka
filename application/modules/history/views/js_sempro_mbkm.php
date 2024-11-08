@@ -7,7 +7,7 @@
             "processing": true,
             "serverSide": true,
             "ajax": {
-                "url": "<?php echo site_url('history/Mbkm/get_data'); ?>",
+                "url": "<?php echo site_url('history/Sempro_mbkm/get_data'); ?>",
                 "type": "POST",
                 "data": function(d) {
                     d[csrfName] = csrfHash;
@@ -66,7 +66,7 @@
     $(document).on('click', '.btn-revisi', function() {
         var id = $(this).data('id');
         $.ajax({
-            url: "<?php echo site_url('history/Mbkm/get_revisi'); ?>",
+            url: "<?php echo site_url('history/Sempro_mbkm/get_revisi'); ?>",
             method: 'POST',
             data: {
                 id: id,
@@ -156,7 +156,7 @@
         }
 
         $.ajax({
-            url: "<?php echo site_url('history/Mbkm/update_revisi'); ?>",
+            url: "<?php echo site_url('history/Sempro_mbkm/update_revisi'); ?>",
             method: 'POST',
             data: formData,
             processData: false,

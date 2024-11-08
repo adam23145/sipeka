@@ -29,6 +29,9 @@
                     "data": "tanggal_pengajuan"
                 },
                 {
+                    "data": "dosen_pembimbing"
+                },
+                {
                     "data": "status_pengajuan"
                 }
             ],
