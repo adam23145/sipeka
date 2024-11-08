@@ -78,19 +78,32 @@ class Bimbingan_publikasi extends CI_Controller
             'revisi' => $this->input->post('keterangan')
         ];
 
+        if (strtoupper($this->input->post('sub_status')) == 'ACC') {
+            $countBimbingan = $this->M_publikasi->countBimbingan($id_publikasi);
+            if ($countBimbingan >= 8 || $countBimbingan == null || $countBimbingan == "") {
+                $response = [
+                    'success' => false,
+                    'message' => 'Data tidak dapat disimpan karena belum mencapai 8 bimbingan.'
+                ];
+                echo json_encode($response);
+                return;
+            }
+        }
+
+
         $isSaved = $this->M_publikasi->saveBimbingan($data);
 
         if ($isSaved) {
-            if($this->input->post('sub_status') == 'Acc'){
+            if (strtoupper($this->input->post('sub_status')) == 'ACC') {
                 $isUpdated = $this->M_publikasi->updateStatus($id_publikasi, 'Acc');
-            }else{
+            } else {
                 $isUpdated = $this->M_publikasi->updateStatus($id_publikasi, 'Revisi');
             }
 
             if ($isUpdated) {
                 $response = [
                     'success' => true,
-                    'message' => 'Data berhasil disimpan dan status diperbarui menjadi Revisi.'
+                    'message' => 'Data berhasil disimpan'
                 ];
             } else {
                 $response = [
@@ -107,6 +120,7 @@ class Bimbingan_publikasi extends CI_Controller
 
         echo json_encode($response);
     }
+
     public function getLogBimbingan()
     {
         $id_bimbingan_form = $this->session->userdata('bimbingan_publikasi_id');

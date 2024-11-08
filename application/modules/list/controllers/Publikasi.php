@@ -91,20 +91,6 @@ class Publikasi extends CI_Controller
                                 </select>
                             </div>';
 
-			// Cek status_pengajuan
-			if ($item->status_pengajuan == 'Menunggu') {
-				$modalHtml .= '<label for="status_' . $item->id . '">Status:</label>
-                   <select name="status" class="form-control status-dropdown" data-id="' . $item->id . '">
-                       <option value="Menunggu" ' . ($item->status_pengajuan == 'Menunggu' ? 'selected' : '') . '>Menunggu</option>
-                       <option value="Diproses" ' . ($item->status_pengajuan == 'Diproses' ? 'selected' : '') . '>Diproses</option>
-                       <option value="Ditolak" ' . ($item->status_pengajuan == 'Ditolak' ? 'selected' : '') . '>Ditolak</option>
-                   </select>';
-			} else {
-				$modalHtml .= '<div class="alert alert-info" role="alert">
-                        Status Pengajuan: ' . $item->status_pengajuan . '
-                   </div>';
-			}
-
 			$modalHtml .= '</div>
                         <div class="modal-footer">';
 			if ($item->status_pengajuan == 'Menunggu') {
@@ -117,13 +103,13 @@ class Publikasi extends CI_Controller
             </div>';
 			$row[] = '<a href="' . base_url($item->dokumen_pendukung) . '" class="btn btn-success" target="_blank">Download</a>';
 
-			if ($item->status_pengajuan == 'Menunggu') {
+			if ($item->status_pengajuan == 'Menunggu'&& $item->dosen_pembimbing_utama == null) {
 				$row[] = '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalKonfirmasi' . $item->id . '">
 							Konfirmasi
 							</button>' . $modalHtml;
 			} else {
 				$row[] = '<div class="alert alert-info" role="alert">
-							Status Pengajuan: ' . $item->status_pengajuan . '
+							Status Pengajuan: ' . $item->status_pengajuan . ' dosen konfirmasi
 						</div>';
 			}
 			$data[] = $row;
@@ -143,31 +129,22 @@ class Publikasi extends CI_Controller
 	public function update_status()
 	{
 		$id = $this->input->post('id');
-		$status = $this->input->post('status');
 		$dosen_pembimbing_utama = $this->input->post('dosen_pembimbing_utama');
 		$dosen_pembimbing_kedua = $this->input->post('dosen_pembimbing_kedua');
-
-		// Cek apakah data id dan status ada
-		if (!$id || !$status) {
+		if (!$id) {
 			echo json_encode(array('status' => false, 'message' => 'Invalid data.'));
 			return;
 		}
 
-		// Persiapkan data untuk di-update
 		$data_update = array(
 			'dosen_pembimbing_utama' => $dosen_pembimbing_utama,
 			'dosen_pembimbing_kedua' => $dosen_pembimbing_kedua,
-			'status_pengajuan' => $status
 		);
-
-		// Update status di database
 		$update = $this->M_publikasi->update_status($id, $data_update);
 
 		if ($update) {
-			// Jika update berhasil
 			echo json_encode(array('status' => true, 'message' => 'Status berhasil diperbarui.'));
 		} else {
-			// Jika update gagal
 			echo json_encode(array('status' => false, 'message' => 'Gagal memperbarui status.'));
 		}
 	}

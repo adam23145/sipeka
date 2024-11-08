@@ -2,7 +2,7 @@
 if (!defined('BASEPATH')) exit('No direct script access allowed');
 date_default_timezone_set('Asia/Jakarta');
 
-class Mbkm extends CI_Controller
+class Sempro_mbkm extends CI_Controller
 {
 
     function __construct()
@@ -96,20 +96,6 @@ class Mbkm extends CI_Controller
                                 </select>
                             </div>';
 
-                // Cek status_pengajuan
-                if ($mhs->status_pengajuan == 'Menunggu') {
-                    $modalHtml .= '<label for="status_' . $mhs->id . '">Status:</label>
-                   <select name="status" class="form-control status-dropdown" data-id="' . $mhs->id . '">
-                       <option value="Menunggu" ' . ($mhs->status_pengajuan == 'Menunggu' ? 'selected' : '') . '>Menunggu</option>
-                       <option value="Diproses" ' . ($mhs->status_pengajuan == 'Diproses' ? 'selected' : '') . '>Diproses</option>
-                       <option value="Ditolak" ' . ($mhs->status_pengajuan == 'Ditolak' ? 'selected' : '') . '>Ditolak</option>
-                   </select>';
-                } else {
-                    $modalHtml .= '<div class="alert alert-info" role="alert">
-                        Status Pengajuan: ' . $mhs->status_pengajuan . '
-                   </div>';
-                }
-
                 $modalHtml .= '</div>
                         <div class="modal-footer">';
                 if ($mhs->status_pengajuan == 'Menunggu') {
@@ -122,13 +108,13 @@ class Mbkm extends CI_Controller
             </div>';
 
 
-                if ($mhs->status_pengajuan == 'Menunggu') {
+                if ($mhs->status_pengajuan == 'Menunggu' && $mhs->dosen_pembimbing_utama == null) {
                     $nestedData['konfirmasi'] = '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalKonfirmasi' . $mhs->id . '">
                                 Konfirmasi
                                 </button>' . $modalHtml;
                 } else {
                     $nestedData['konfirmasi'] = '<div class="alert alert-info" role="alert">
-                                Status Pengajuan: ' . $mhs->status_pengajuan . '
+                                Status Pengajuan: ' . $mhs->status_pengajuan . ' dosen konfirmasi
                             </div>';
                 }
 
@@ -168,12 +154,11 @@ class Mbkm extends CI_Controller
     public function update_status()
     {
         $id = $this->input->post('id');
-        $status = $this->input->post('status');
         $dosen_pembimbing_utama = $this->input->post('dosen_pembimbing_utama');
         $dosen_pembimbing_kedua = $this->input->post('dosen_pembimbing_kedua');
 
         // Cek apakah data id dan status ada
-        if (!$id || !$status) {
+        if (!$id) {
             echo json_encode(array('status' => false, 'message' => 'Invalid data.'));
             return;
         }
@@ -182,7 +167,6 @@ class Mbkm extends CI_Controller
         $data_update = array(
             'dosen_pembimbing_utama' => $dosen_pembimbing_utama,
             'dosen_pembimbing_kedua' => $dosen_pembimbing_kedua,
-            'status_pengajuan' => $status
         );
 
         // Update status di database

@@ -14,11 +14,11 @@ class M_mbkm extends CI_Model
         // Filter berdasarkan status jika diberikan
         if ($status) {
             $this->db->where('UPPER(status_pengajuan)', strtoupper($status)); // Case-insensitive
-        }else {
+        } else {
             $this->db->where('UPPER(status_pengajuan)', 'MENUNGGU');
         }
 
-        $query = $this->db->get('mbkm_riset');
+        $query = $this->db->get('sempro_mbkm_riset');
 
         if ($query->num_rows() > 0) {
             return $query->result();
@@ -35,11 +35,11 @@ class M_mbkm extends CI_Model
         // Filter berdasarkan status jika diberikan
         if ($status) {
             $this->db->where('UPPER(status_pengajuan)', strtoupper($status)); // Case-insensitive
-        }else {
+        } else {
             $this->db->where('UPPER(status_pengajuan)', 'MENUNGGU');
         }
 
-        $query = $this->db->get('mbkm_riset');
+        $query = $this->db->get('sempro_mbkm_riset');
         return $query->num_rows();
     }
 
@@ -56,12 +56,12 @@ class M_mbkm extends CI_Model
         // Filter berdasarkan status jika diberikan
         if ($status) {
             $this->db->where('UPPER(status_pengajuan)', strtoupper($status)); // Case-insensitive
-        }else {
+        } else {
             $this->db->where('UPPER(status_pengajuan)', 'MENUNGGU');
         }
 
         $this->db->order_by('tanggal_pengajuan', 'DESC');
-        $query = $this->db->get('mbkm_riset');
+        $query = $this->db->get('sempro_mbkm_riset');
 
         if ($query->num_rows() > 0) {
             return $query->result();
@@ -84,28 +84,29 @@ class M_mbkm extends CI_Model
             $this->db->where('UPPER(status_pengajuan)', 'MENUNGGU');
         }
 
-        $query = $this->db->get('mbkm_riset');
+        $query = $this->db->get('sempro_mbkm_riset');
         return $query->num_rows();
     }
 
     public function get_all($search = null)
     {
-        $this->db->distinct(); // Mark query to take unique data
-        $this->db->where('jabatan', 'Dosen'); // Add condition for position
-
-        // If a search term is provided, filter the results
+        $this->db->select('nip, nama');
+        $this->db->where('jabatan', 'Dosen');
+        
         if ($search) {
-            // Use UPPER() for case-insensitive search
-            $this->db->like('UPPER(nama)', strtoupper($search)); // Use 'like' for partial matching
+            $this->db->like('UPPER(nama)', strtoupper($search));
         }
-
-        $query = $this->db->get('m_dosen'); // Get all unique lecturer data from the 'm_dosen' table
+    
+        $this->db->where('createddate =', "(SELECT MAX(createddate) FROM m_dosen AS sub WHERE sub.nip = m_dosen.nip)", FALSE); 
+    
+        $query = $this->db->get('m_dosen');
         return $query->result();
     }
+    
 
     public function update_status($id, $data)
     {
         $this->db->where('id', $id);
-        return $this->db->update('mbkm_riset', $data);
+        return $this->db->update('sempro_mbkm_riset', $data);
     }
 }

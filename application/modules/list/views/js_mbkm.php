@@ -5,7 +5,7 @@
             "processing": true,
             "serverSide": true,
             "ajax": {
-                "url": "<?php echo site_url('list/mbkm/get_data'); ?>",
+                "url": "<?php echo site_url('list/Sempro_mbkm/get_data'); ?>",
                 "type": "POST",
                 "data": function(d) {
                     // Kirim CSRF Token
@@ -60,7 +60,7 @@
             $(selector).select2({
                 placeholder: 'Pilih Dosen',
                 ajax: {
-                    url: "<?php echo site_url('list/mbkm/fetch_dosen_select2'); ?>",
+                    url: "<?php echo site_url('list/Sempro_mbkm/fetch_dosen_select2'); ?>",
                     dataType: 'json',
                     delay: 250,
                     data: function(params) {
@@ -69,6 +69,7 @@
                         };
                     },
                     processResults: function(data) {
+                        console.log(data);
                         return {
                             results: data,
                         };
@@ -93,7 +94,6 @@
     function confirmAction(mhsId) {
         const utama = $('#dosen_pembimbing_utama_' + mhsId).val();
         const kedua = $('#dosen_pembimbing_kedua_' + mhsId).val();
-        const status = $('.status-dropdown[data-id="' + mhsId + '"]').val();
 
         if (status != "Ditolak" && !utama) {
             Swal.fire({
@@ -103,23 +103,6 @@
             });
             return;
         }
-
-        if (!status) {
-            Swal.fire({
-                icon: 'warning',
-                title: 'Peringatan',
-                text: 'Status harus diisi!'
-            });
-            return;
-        } else if (status == "Menunggu") {
-            Swal.fire({
-                icon: 'warning',
-                title: 'Peringatan',
-                text: 'Status harus diisi!'
-            });
-            return;
-        }
-
         $.ajax({
             url: "<?= base_url('list/mbkm/update_status') ?>",
             type: "POST",
@@ -127,7 +110,6 @@
                 id: mhsId,
                 dosen_pembimbing_utama: utama,
                 dosen_pembimbing_kedua: kedua,
-                status: status,
                 '<?= $this->security->get_csrf_token_name() ?>': '<?= $this->security->get_csrf_hash() ?>'
             },
             dataType: "json",

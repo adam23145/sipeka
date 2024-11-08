@@ -52,29 +52,12 @@
     function confirmAction(mhsId) {
         const utama = $('#dosen_pembimbing_utama_' + mhsId).val();
         const kedua = $('#dosen_pembimbing_kedua_' + mhsId).val();
-        const status = $('.status-dropdown[data-id="' + mhsId + '"]').val();
 
-        if (status != "Ditolak" && !utama) {
+        if (!utama) {
             Swal.fire({
                 icon: 'warning',
                 title: 'Peringatan',
                 text: 'Dosen Pembimbing Utama harus diisi!'
-            });
-            return;
-        }
-
-        if (!status) {
-            Swal.fire({
-                icon: 'warning',
-                title: 'Peringatan',
-                text: 'Status harus diisi!'
-            });
-            return;
-        } else if (status == "Menunggu") {
-            Swal.fire({
-                icon: 'warning',
-                title: 'Peringatan',
-                text: 'Status harus diisi!'
             });
             return;
         }

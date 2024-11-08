@@ -3,19 +3,19 @@
         <div class="col-12">
             <div class="card card-primary card-outline">
                 <div class="card-header">
-                    <h4>Publikasi</h4>
+                    <h4>Sempro Mbkm</h4>
                 </div>
                 <div class="card-body table-responsive p-4">
                     <table id="table_pengajuan" class="table table-striped table-bordered">
                         <thead>
                             <tr>
-                                <th>Jenis Tugas Akhir</th>
-                                <th>Judul Tugas Akhir</th>
+                                <th>Judul Mbkm</th>
                                 <th>Nama Mahasiswa</th>
                                 <th>NIM</th>
                                 <th>Tanggal Pengajuan</th>
                                 <th>Dosen Pembimbing</th>
                                 <th>Status Pengajuan</th>
+                                <th>Dokumen</th>
                             </tr>
                         </thead>
                     </table>
