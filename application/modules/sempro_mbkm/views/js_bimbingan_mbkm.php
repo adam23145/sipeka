@@ -18,7 +18,7 @@
 
         function fetchDataMbkmRiset() {
             $.ajax({
-                url: '<?php echo base_url("publikasi/Bimbingan_mbkm/getDataMbkmRiset"); ?>',
+                url: '<?php echo base_url("sempro_mbkm/Bimbingan_mbkm/getDataMbkmRiset"); ?>',
                 type: 'GET',
                 dataType: 'json',
                 success: function(response) {
@@ -81,7 +81,7 @@
             console.log('Form Data:', formData);
 
             $.ajax({
-                url: '<?php echo base_url("publikasi/Bimbingan_mbkm/submit"); ?>',
+                url: '<?php echo base_url("sempro_mbkm/Bimbingan_mbkm/submit"); ?>',
                 type: 'POST',
                 data: formData,
                 dataType: 'json',
@@ -108,7 +108,7 @@
 
         function loadLogBimbingan() {
             $.ajax({
-                url: '<?php echo base_url("publikasi/Bimbingan_mbkm/getLogBimbingan"); ?>',
+                url: '<?php echo base_url("sempro_mbkm/Bimbingan_mbkm/getLogBimbingan"); ?>',
                 type: 'GET',
                 dataType: 'json',
                 success: function(response) {

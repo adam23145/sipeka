@@ -113,4 +113,9 @@ class M_publikasi extends CI_Model
         $query = $this->db->get('bimbingan_publikasi');
         return $query->result();
     }
+    public function countBimbingan($id_publikasi)
+    {
+        $this->db->where('id_publikasi', $id_publikasi);
+        return $this->db->count_all_results('bimbingan_publikasi');
+    }
 }

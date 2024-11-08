@@ -31,10 +31,7 @@ class Publikasi extends CI_Controller
 		$limit = $this->input->post('length');
 		$start = $this->input->post('start');
 		$search = $this->input->post('search')['value'];
-		$status = $this->input->post('status'); // Status filter dari dropdown
-		if (empty($status)) {
-			$status = 'Disetujui';
-		}
+		$status = 'Diproses'; 
 
 		$username = $this->session->userdata['logged_in']['username'];
 		$list = $this->M_publikasi->get_all($limit, $start, $search, $status,$username);

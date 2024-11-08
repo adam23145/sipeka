@@ -4,11 +4,11 @@
             "processing": true,
             "serverSide": true,
             "ajax": {
-                "url": "<?php echo site_url('publikasi/mbkm/get_data'); ?>",
+                "url": "<?php echo site_url('sempro_mbkm/DoneMbkm/get_data'); ?>",
                 "type": "POST",
                 "data": function(d) {
                     d['<?= $this->security->get_csrf_token_name() ?>'] = '<?= $this->security->get_csrf_hash() ?>';
-                    d['status'] = $('#filter-konfirmasi').val(); 
+                    d['status'] = 'Acc'; 
                 }
             },
             "columns": [{
@@ -54,7 +54,7 @@
         var csrfHash = '<?php echo $this->security->get_csrf_hash(); ?>';
 
         $.ajax({
-            url: "<?php echo base_url('publikasi/Bimbingan_mbkm/setIdBimbinganMbkm'); ?>",
+            url: "<?php echo base_url('sempro_mbkm/Bimbingan_mbkm/setIdBimbinganMbkm'); ?>",
             type: "POST",
             data: {
                 id: id,
@@ -62,7 +62,7 @@
             },
             success: function(response) {
                 // console.log("ID bimbingan_mbkm berhasil disimpan di sesi");
-                window.location.href = "<?php echo base_url('publikasi/Bimbingan_mbkm'); ?>";
+                window.location.href = "<?php echo base_url('sempro_mbkm/Bimbingan_mbkm'); ?>";
             },
             error: function(xhr, status, error) {
                 console.error("Error: " + error);

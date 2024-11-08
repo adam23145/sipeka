@@ -25,7 +25,7 @@ class M_mbkm extends CI_Model
             $this->db->group_end();
         }
 
-        $query = $this->db->get('mbkm_riset');
+        $query = $this->db->get('sempro_mbkm_riset');
 
         if ($query->num_rows() > 0) {
             return $query->result();
@@ -50,7 +50,7 @@ class M_mbkm extends CI_Model
             $this->db->group_end();
         }
 
-        $query = $this->db->get('mbkm_riset');
+        $query = $this->db->get('sempro_mbkm_riset');
         return $query->num_rows();
     }
 
@@ -78,7 +78,7 @@ class M_mbkm extends CI_Model
         }
 
         $this->db->order_by('tanggal_pengajuan', 'DESC');
-        $query = $this->db->get('mbkm_riset');
+        $query = $this->db->get('sempro_mbkm_riset');
 
         if ($query->num_rows() > 0) {
             return $query->result();
@@ -108,7 +108,7 @@ class M_mbkm extends CI_Model
             $this->db->group_end();
         }
 
-        $query = $this->db->get('mbkm_riset');
+        $query = $this->db->get('sempro_mbkm_riset');
         return $query->num_rows();
     }
 
@@ -129,7 +129,7 @@ class M_mbkm extends CI_Model
     public function getMbkmRisetData($bimbingan_mbkm_id)
     {
         $this->db->where('id', $bimbingan_mbkm_id);
-        $query = $this->db->get('mbkm_riset');
+        $query = $this->db->get('sempro_mbkm_riset');
 
         if ($query->num_rows() > 0) {
             return $query->result();
@@ -139,12 +139,12 @@ class M_mbkm extends CI_Model
     }
     public function saveBimbingan($data)
     {
-        return $this->db->insert('bimbingan_mbkm', $data);
+        return $this->db->insert('bimbingan_sempro_mbkm', $data);
     }
     public function checkStatus($id_mbkm)
     {
         $this->db->select('status_pengajuan');
-        $this->db->from('mbkm_riset');
+        $this->db->from('sempro_mbkm_riset');
         $this->db->where('id', $id_mbkm);
         $query = $this->db->get();
 
@@ -158,12 +158,18 @@ class M_mbkm extends CI_Model
     {
         $this->db->set('status_pengajuan', $status);
         $this->db->where('id', $id_mbkm);
-        return $this->db->update('mbkm_riset');
+        return $this->db->update('sempro_mbkm_riset');
     }
     public function getLogBimbingan($id_bimbingan_form)
     {
         $this->db->where('id_mbkm', $id_bimbingan_form);
-        $query = $this->db->get('bimbingan_mbkm'); 
+        $query = $this->db->get('bimbingan_sempro_mbkm');
         return $query->result();
+    }
+    public function countBimbingan($id_mbkm)
+    {
+        $this->db->where('id_mbkm', $id_mbkm);
+        $this->db->from('bimbingan_sempro_mbkm');
+        return $this->db->count_all_results();
     }
 }

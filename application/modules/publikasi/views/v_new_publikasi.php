@@ -9,14 +9,15 @@
                     <table id="table_pengajuan" class="table table-striped table-bordered">
                         <thead>
                             <tr>
-                                <th>No</th>
-                                <th>Tanggal Pengajuan</th>
+                                <th>No</th> 
                                 <th>NIM</th>
-                                <th>Jenis Tugas Akhir</th>
-                                <th>Judul Tugas Akhir</th>
                                 <th>Nama Mahasiswa</th>
-                                <th>Dokumen</th>
-                                <th>Actions</th>
+                                <th>Tanggal Pengajuan</th>
+                                <th>Judul Tugas Akhir</th>
+                                <th>Jenis Tugas Akhir</th>
+                                <th>Dosen Pembimbing</th>
+                                <th>Dokumen Pendukung</th>
+                                <th>Konfirmasi</th>
                             </tr>
                         </thead>
                     </table>

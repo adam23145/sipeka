@@ -2,7 +2,7 @@
 if (!defined('BASEPATH')) exit('No direct script access allowed');
 date_default_timezone_set('Asia/Jakarta');
 
-class Mbkm extends CI_Controller
+class DoneMbkm extends CI_Controller
 {
 
     function __construct()
@@ -21,8 +21,8 @@ class Mbkm extends CI_Controller
     {
         $this->breadcrumb->add('Data Mbkm', 'Mbkm');
         $data = array(
-            'thisContent'     => 'publikasi/v_mbkm',
-            'thisJs'        => 'publikasi/js_mbkm',
+            'thisContent'     => 'sempro_mbkm/v_done_mbkm',
+            'thisJs'        => 'sempro_mbkm/js_done_mbkm',
         );
         $this->parser->parse('template/template', $data);
     }
@@ -40,7 +40,7 @@ class Mbkm extends CI_Controller
 
         $limit = $this->input->post('length');
         $start = $this->input->post('start');
-        $konfirmasi_status = $this->input->post('status');
+        $konfirmasi_status = 'Acc';
 
         $order = isset($this->input->post('order')[0]['column']) ? $columns[$this->input->post('order')[0]['column']] : $columns[0];
         $dir = isset($this->input->post('order')[0]['dir']) ? $this->input->post('order')[0]['dir'] : 'asc';
