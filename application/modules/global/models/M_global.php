@@ -190,8 +190,11 @@ class M_global extends CI_Model
 	}
 	public function get_submission_details_by_nim($nim)
 	{
-		// Define the raw SQL query
-		$query = "SELECT title, submission_code FROM title_submission WHERE nim = ?";
+		// Define the raw SQL query with JOIN and additional condition on status_bimb
+		$query = "SELECT ts.title, ts.submission_code
+              FROM title_submission ts
+              LEFT JOIN log_bimbingan_skripsi lb ON ts.submission_code = lb.submission_code
+              WHERE ts.nim = ? AND lb.status_bimb = 'Setuju Sidang'";
 
 		// Execute the query with parameter binding
 		$result = $this->db->query($query, array($nim))->row_array();
@@ -202,5 +205,13 @@ class M_global extends CI_Model
 		} else {
 			return null; // Return null if no result found
 		}
+	}
+	public function get_submission_details_by_nim_and_acc($nim)
+	{
+		// Query untuk mengambil data dari ajuan_tugas_akhir dengan kondisi nim dan status 'ACC'
+		$query = "SELECT * FROM ajuan_tugas_akhir WHERE nim = ? AND status_pengajuan = 'Acc'";
+
+		// Eksekusi query dengan parameter binding
+		return $this->db->query($query, array($nim))->row_array();
 	}
 }

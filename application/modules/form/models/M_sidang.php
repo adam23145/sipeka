@@ -13,9 +13,9 @@ class M_sidang extends CI_Model
     public function check_existing_submission_by_nim($nim)
     {
         $this->db->where('nim', $nim);
-        $this->db->order_by('id', 'DESC'); // Urutkan berdasarkan ID secara menurun
-        $this->db->limit(1); // Ambil hanya satu baris dengan ID terbesar
-        $query = $this->db->get('pengajuan_sidang'); // Ganti dengan nama tabel yang sesuai
+        $this->db->order_by('id', 'DESC');
+        $this->db->limit(1);
+        $query = $this->db->get('pengajuan_sidang'); 
         return $query->row_array();
     }
 

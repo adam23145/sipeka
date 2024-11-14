@@ -121,36 +121,36 @@
       <div class="small-box bg-warning">
         <div class="inner">
           <h3>{newmbkm}</h3>
-          <p>Bimbingan Sempro Mbkm Baru</p>
+          <p>Bimbingan Mbkm Baru</p>
         </div>
         <div class="icon">
           <i class="ion ion-person-add"></i>
         </div>
-        <a href="<?php echo base_url();?>sempro_mbkm/NewMbkm" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+        <a href="<?php echo base_url();?>mbkm/newmbkm" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
       </div>
     </div>
     <div class="col-lg-4">
       <div class="small-box bg-primary">
         <div class="inner">
           <h3>{mbkm}</h3>
-          <p>Proses Bimbingan Sempro Mbkm</p>
+          <p>Proses Bimbingan Mbkm</p>
         </div>
         <div class="icon">
           <i class="ion ion-calendar"></i>
         </div>
-        <a href="<?php echo base_url();?>sempro_mbkm/mbkm" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+        <a href="<?php echo base_url();?>mbkm/mbkm" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
       </div>
     </div>
     <div class="col-lg-4">
       <div class="small-box bg-success">
         <div class="inner">
           <h3>{donembkm}</h3>
-          <p>Selesai Bimbingan Sempro mbkm</p>
+          <p>Selesai Bimbingan mbkm</p>
         </div>
         <div class="icon">
           <i class="ion ion-calendar"></i>
         </div>
-        <a href="<?php echo base_url();?>sempro_mbkm/DoneMbkm" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+        <a href="<?php echo base_url();?>mbkm/DoneMbkm" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
       </div>
     </div>
   </div>

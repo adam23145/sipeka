@@ -112,7 +112,7 @@ class M_dashboard_dosen extends CI_Model
 		$this->db->or_where('dosen_pembimbing_kedua', $username);
 		$this->db->group_end(); 
 
-		return $this->db->count_all_results('sempro_mbkm_riset');
+		return $this->db->count_all_results('mbkm_riset');
 	}
 	public function publikasiNew($username)
 	{
@@ -153,7 +153,7 @@ class M_dashboard_dosen extends CI_Model
 		$this->db->or_where('dosen_pembimbing_kedua', $username);
 		$this->db->group_end(); 
 
-		return $this->db->count_all_results('sempro_mbkm_riset');
+		return $this->db->count_all_results('mbkm_riset');
 	}
 	public function mbkm($username)
 	{
@@ -163,7 +163,7 @@ class M_dashboard_dosen extends CI_Model
 		$this->db->or_where('dosen_pembimbing_kedua', $username);
 		$this->db->group_end(); 
 
-		return $this->db->count_all_results('sempro_mbkm_riset');
+		return $this->db->count_all_results('mbkm_riset');
 	}
 	
 	public function donembkm($username)
@@ -174,6 +174,6 @@ class M_dashboard_dosen extends CI_Model
 		$this->db->or_where('dosen_pembimbing_kedua', $username);
 		$this->db->group_end(); 
 
-		return $this->db->count_all_results('sempro_mbkm_riset');
+		return $this->db->count_all_results('mbkm_riset');
 	}
 }

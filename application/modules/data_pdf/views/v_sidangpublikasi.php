@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewpayslip" content="width=device-width, initial-scale=1">
     <title>Form Kelayakan Mengikuti Sidang</title>
     <style>
         @page {
@@ -47,14 +47,19 @@
 </head>
 
 <body>
+    <div class="barcode">
+        <img src="https://barcode.tec-it.com/barcode.ashx?data=<?= urlencode($nim); ?>&code=QRCode&translate-esc=on&eclevel=L" alt="NIM Barcode">
+    </div>
     <hr style="border-top: 1px solid black;">
     <hr style="border-top: 1px solid black;">
-    <table>
+    <table width="100%">
         <tr>
             <td align="left">
                 <table>
                     <tr>
-                        <td><img src="<?= base_url('public/assets/core/images/logo1.png'); ?>" width="120px"></td>
+                        <td>
+                            <img src="<?= base_url('public/assets/core/images/logo1.png'); ?>" width="120px">
+                        </td>
                         <td style="padding-left: 25px" align="center">
                             <span style="font-size:17px;font-weight:normal;">KEMENTERIAN PENDIDIKAN DAN KEBUDAYAAN</span><br>
                             <span style="font-size:17px;font-weight:bold;">UNIVERSITAS TRUNOJOYO MADURA</span><br>
@@ -71,10 +76,10 @@
     <hr style="border-top: 1px solid black;">
     <hr style="border-top: 1px solid black;">
 
-    <table>
+    <table width="100%">
         <tr>
             <td align="center">
-                <span style="font-weight: bold;text-decoration: underline;">SURAT KELAYAKAN SEMINAR PROPOSAL</span>
+                <span style="font-weight: bold;text-decoration: underline;">SURAT KELAYAKAN SIDANG PUBLIKASI</span>
             </td>
         </tr>
         <tr>
@@ -118,9 +123,11 @@
         </tr>
         <tr>
             <td>
-                <table border="1" style="font-size: 14px">
+                <table border="1" width="100%" style="font-size: 14px">
                     <tr>
-                        <td>Catatan Pembimbing</td>
+                        <td align="left">
+                            Catatan Pembimbing
+                        </td>
                     </tr>
                     <tr>
                         <td>
@@ -132,9 +139,6 @@
             </td>
         </tr>
         <tr>
-            <td>&nbsp;</td>
-        </tr>
-        <tr>
             <td align="center">
                 Mengetahui,
             </td>
@@ -143,8 +147,12 @@
             <td>
                 <table width="100%">
                     <tr>
-                        <td align="center" width="50%">Pembimbing</td>
-                        <td align="center" width="50%">Ketua Program Studi</td>
+                        <td align="center" width="50%">
+                            Pembimbing
+                        </td>
+                        <td align="center" width="50%">
+                            Ketua Program Studi
+                        </td>
                     </tr>
                     <tr>
                         <td>&nbsp;</td>
@@ -153,26 +161,25 @@
                         <td>&nbsp;</td>
                     </tr>
                     <tr>
-                        <td>&nbsp;</td>
+                        <td align="center" style="text-decoration: underline;" width="50%">
+                            <?php echo $nama ?>
+                        </td>
+                        <td align="center" style="text-decoration: underline;" width="50%">
+                            <?php echo $namakoor ?>
+                        </td>
                     </tr>
                     <tr>
-                        <td align="center" style="text-decoration: underline;" width="50%"><?php echo $nama ?></td>
-                        <td align="center" style="text-decoration: underline;" width="50%"><?php echo $namakoor ?></td>
-                    </tr>
-                    <tr>
-                        <td align="center" width="50%">NIP. <?php echo $dosbing ?></td>
-                        <td align="center" width="50%">NIP. <?php echo $nipkoor ?></td>
+                        <td align="center" width="50%">
+                            NIP. <?php echo $dosbing ?>
+                        </td>
+                        <td align="center" width="50%">
+                            NIP. <?php echo $nipkoor ?>
+                        </td>
                     </tr>
                 </table>
             </td>
         </tr>
     </table>
-    <!-- Barcode di kiri bawah -->
-    <div class="barcode">
-        <img src="https://barcode.tec-it.com/barcode.ashx?data=<?= urlencode($subcode); ?>&code=QRCode&translate-esc=on&eclevel=L" alt="NIM Barcode">
-    </div>
-
-    <!-- Script untuk memunculkan dialog print otomatis -->
     <script type="text/javascript">
         window.onload = function() {
             window.print();

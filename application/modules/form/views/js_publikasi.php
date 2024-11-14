@@ -89,5 +89,25 @@
             });
         });
 
+        // Fetch Dosen data for Select2
+        // function initSelect2(selector) {
+        //     $(selector).select2({
+        //         placeholder: 'Pilih Dosen',
+        //         ajax: {
+        //             url: "<?php echo site_url('form/form_publikasi/fetch_dosen_select2'); ?>",
+        //             dataType: 'json',
+        //             delay: 250,
+        //             processResults: function(data) {
+        //                 return {
+        //                     results: data
+        //                 };
+        //             },
+        //             cache: true
+        //         }
+        //     });
+        // }
+
+        // initSelect2('#dosen_pembimbing_utama');
+        // initSelect2('#dosen_pembimbing_kedua');
     });
 </script>

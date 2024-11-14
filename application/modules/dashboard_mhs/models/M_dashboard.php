@@ -50,7 +50,7 @@ class M_dashboard extends CI_Model {
 	public function count_mbkm($nim)
 	{
         $this->db->where('nim', $nim); 
-		$query = $this->db->get('sempro_mbkm_riset');
+		$query = $this->db->get('mbkm_riset');
 		return $query->num_rows();
 	}
 	

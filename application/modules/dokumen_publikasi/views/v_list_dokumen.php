@@ -1,21 +1,18 @@
-<div class="container-fluid mt-4">
+<div class="container-fluid">
     <div class="row">
         <div class="col-12">
             <div class="card card-primary card-outline">
                 <div class="card-header">
-                    <h4 class="card-title">Data Mbkm</h4>
+                    <h4 class="card-title">List Dokumen</h4>
                 </div>
                 <div class="card-body table-responsive p-4">
-                    <table id="table-pengajuan" class="table table-striped table-bordered">
+                    <table id="submissionTable" class="table table-bordered table-striped">
                         <thead>
                             <tr>
                                 <th>No</th>
-                                <th>NIM</th>
-                                <th class="wrap-text">Nama Mahasiswa</th>
-                                <th>Tanggal Pengajuan</th>
-                                <th class="wrap-text">Mbkm</th>
+                                <th>Judul</th>
                                 <th>Dokumen</th>
-                                <th>Actions</th>
+                                <th>Aksi</th>
                             </tr>
                         </thead>
                     </table>

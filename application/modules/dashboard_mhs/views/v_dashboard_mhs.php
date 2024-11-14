@@ -79,7 +79,7 @@
         <center>
           <div class="inner">
             <h4>{mbkm}</h4>
-            <p>Sempro Mbkm</p>
+            <p>Mbkm</p>
           </div>
         </center>
         <div class="icon">

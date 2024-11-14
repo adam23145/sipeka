@@ -27,11 +27,15 @@ class form_sidang extends CI_Controller
         $subm_id = 'FKIS1605-' . $majorcode . $token . date("dhs");
         $major_name = $this->M_global->get_jurusan2($nim);
         $submission_details = $this->M_global->get_submission_details_by_nim($nim);
+        $publikasi_details = $this->M_global->get_submission_details_by_nim_and_acc($nim);
 
         // Cek apakah data pertama ada dan tidak kosong
         if (!empty($submission_details) && isset($submission_details['title'])) {
             $title = $submission_details['title'];
             $submission_code = $submission_details['submission_code'];
+        } else if (!empty($publikasi_details) && isset($publikasi_details['judul_tugas_akhir'])) {
+            $title = $publikasi_details['judul_tugas_akhir'];
+            $submission_code = '';
         } else {
             $title = '';
             $submission_code = '';
@@ -58,8 +62,8 @@ class form_sidang extends CI_Controller
             'csrf_token_hash' => $this->security->get_csrf_hash(),
             'judul' => $title,
             'submission_code' => $submission_code,
-            'dosbing' => $dosbing,       // Tambahkan ini jika Anda ingin menggunakannya di view
-            'dosen_p' => $dosen_p        // Tambahkan ini jika Anda ingin menggunakannya di view
+            'dosbing' => $dosbing,
+            'dosen_p' => $dosen_p
         );
 
         $this->parser->parse('template/template', $data);
@@ -74,7 +78,11 @@ class form_sidang extends CI_Controller
         $existing_submission = $this->M_sidang->check_existing_submission_by_nim($nim);
 
         // Cek apakah submission_code ada di log_bimbingan_skripsi dan status_bimb == 'Setuju Sidang'
-        $is_submission_approved = $this->M_sidang->check_submission_approval($submission_code);
+        if ($submission_code) {
+            $is_submission_approved = $this->M_sidang->check_submission_approval($submission_code);
+        }else{
+            $is_submission_approved = true;   
+        }
 
         if ($is_submission_approved) {
             if ($existing_submission) {
