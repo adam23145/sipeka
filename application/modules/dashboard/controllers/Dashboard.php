@@ -53,7 +53,6 @@ class Dashboard extends CI_Controller
 		$data_revisi	= $this->M_dashboard->get_revisi($jur, $lvl);
 		$data_rv		= $this->M_dashboard->get_count_rev($jur, $lvl);
 		$data_app		= $this->M_dashboard->get_count_app($userid, $lvl, $jur);
-		$data_skripsiriset = $this->M_dashboard->count_skripsiriset();
 		$data_mbkm 		= $this->M_dashboard->count_mbkm($jur);
 		$data_publikasi = $this->M_dashboard->count_publikasi($jur);
 		$newsempro 		= $this->M_dashboard->get_newsempro($userid, $lvl, $jur);
@@ -93,7 +92,6 @@ class Dashboard extends CI_Controller
 			'bskripsipr'	=> $proses[0]['jmlproses'],
 			'bskripsiend'	=> $selesai[0]['jmlend'],
 			'jmlall'		=> $data_all[0]['jmlall'],
-			'jmlskripsiriset'	=> $data_skripsiriset,
 			'jmlmbkm'		=> $data_mbkm,
 			'jmlpublikasi'		=> $data_publikasi,
 			'ayat'			=> $ayat[0]['jml'],

@@ -247,6 +247,12 @@
                 </a>
               </li>
               <li class="nav-item">
+                <a href="<?php echo base_url(); ?>data_master/data_mbkm" <?= ($seg2 == "data_mbkm") ? 'class="nav-link active"' : 'class="nav-link"'; ?>>
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Master Mbkm</p>
+                </a>
+              </li>
+              <li class="nav-item">
                 <a href="<?php echo base_url(); ?>data_master/data_prodi" <?= ($seg2 == "data_prodi") ? 'class="nav-link active"' : 'class="nav-link"'; ?>>
                   <i class="far fa-circle nav-icon"></i>
                   <p>Master Prodi</p>
@@ -474,9 +480,21 @@
                 </a>
               </li>
               <li class="nav-item">
+                <a href="<?php echo base_url(); ?>history/mbkm" <?= ($seg2 == "mbkm") ? 'class="nav-link active"' : 'class="nav-link"'; ?>>
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Histori Pengajuan Mbkm</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?php echo base_url(); ?>history/MbkmSempro" <?= ($seg2 == "MbkmSempro") ? 'class="nav-link active"' : 'class="nav-link"'; ?>>
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Histori Sempro Mbkm</p>
+                </a>
+              </li>
+              <li class="nav-item">
                 <a href="<?php echo base_url(); ?>history/publikasi" <?= ($seg2 == "publikasi") ? 'class="nav-link active"' : 'class="nav-link"'; ?>>
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Historis Publikasi</p>
+                  <p>Histori Publikasi</p>
                 </a>
               </li>
 
@@ -489,7 +507,7 @@
               <li class="nav-item">
                 <a href="<?php echo base_url(); ?>history/sidang" <?= ($seg2 == "sidang") ? 'class="nav-link active"' : 'class="nav-link"'; ?>>
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Historis Pengajuan Sidang</p>
+                  <p>Histori Pengajuan Sidang</p>
                 </a>
               </li>
               <li class="nav-item">
@@ -533,7 +551,7 @@
             <a href="#" <?= ($seg1 == "dokumen_publikasi") ? 'class="nav-link active"' : 'class="nav-link"'; ?>>
               <i class="nav-icon fa fa-file"></i>
               <p>
-                Dokumen Publikasi
+                Dokumen Publikasimbkm
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
@@ -541,11 +559,12 @@
               <li class="nav-item">
                 <a href="<?php echo base_url(); ?>dokumen_publikasi/List_dokumen" <?= ($seg2 == "List_dokumen") ? 'class="nav-link active"' : 'class="nav-link"'; ?>>
                   <i class="far fa-circle nav-icon"></i>
-                  <p>File Dokumen Publikasi</p>
+                  <p>File Dokumen</p>
                 </a>
               </li>
             </ul>
           </li>
+
           <li <?= ($seg1 == "hafalan") ? 'class="nav-item has-treeview menu-open"' : 'class="nav-item has-treeview"'; ?>>
             <a href="#" <?= ($seg1 == "hafalan") ? 'class="nav-link active"' : 'class="nav-link"'; ?>>
               <i class="nav-icon fa fa-file-contract"></i>
@@ -598,18 +617,20 @@
                   <p>Pengajuan Skripsi</p>
                 </a>
               </li>
-              <!-- <li class="nav-item">
-                <a href="<?php echo base_url(); ?>list/skripsi_riset" <?= ($seg4 == "skripsi_riset") ? 'class="nav-link active"' : 'class="nav-link"'; ?>>
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Pengajuan Skripsi</p>
-                </a>
-              </li> -->
               <li class="nav-item">
-                <a href="<?php echo base_url(); ?>list/publikasi" <?= ($seg2 == "publikasi") ? 'class="nav-link active"' : 'class="nav-link"'; ?>>
+                <a href="<?php echo base_url(); ?>list/Mbkm" <?= ($seg2 == "Mbkm") ? 'class="nav-link active"' : 'class="nav-link"'; ?>>
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Publikasi ilmiah</p>
+                  <p>Pengajuan Mbkm</p>
                 </a>
               </li>
+              <?php if ($userlevel == 'Koordinator Prodi') { ?>
+                <li class="nav-item">
+                  <a href="<?php echo base_url(); ?>list/publikasi" <?= ($seg2 == "publikasi") ? 'class="nav-link active"' : 'class="nav-link"'; ?>>
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Publikasi ilmiah</p>
+                  </a>
+                </li>
+              <?php } ?>
               <li class="nav-item">
                 <a href="<?php echo base_url(); ?>list/list_pengajuan/list_data/Revisi" <?= ($seg4 == "Revisi") ? 'class="nav-link active"' : 'class="nav-link"'; ?>>
                   <i class="far fa-circle nav-icon"></i>
@@ -932,6 +953,39 @@
           </li>
         <?php } ?>
         <?php if ($userlevel == 'Dosen') { ?>
+          <li <?= ($seg1 == "mbkm") ? 'class="nav-item has-treeview menu-open"' : 'class="nav-item has-treeview"'; ?>>
+            <a href="#" <?= ($seg1 == "mbkm") ? 'class="nav-link active"' : 'class="nav-link"'; ?>>
+              <i class="nav-icon fas fa-tasks"></i>
+              <p>
+                Bimbingan Mbkm
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="<?php echo base_url(); ?>mbkm/NewMbkm" <?= ($seg2 == "NewMbkm") ? 'class="nav-link active"' : 'class="nav-link"'; ?>>
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Bimbingan Baru</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?php echo base_url(); ?>mbkm/mbkm" <?= ($this->uri->segment(2) == "mbkm") ? 'class="nav-link active"' : 'class="nav-link"'; ?>>
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>
+                    List Bimbingan
+                  </p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?php echo base_url(); ?>mbkm/DoneMbkm" <?= ($this->uri->segment(2) == "DoneMbkm") ? 'class="nav-link active"' : 'class="nav-link"'; ?>>
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>
+                    History Bimbingan
+                  </p>
+                </a>
+              </li>
+            </ul>
+          </li>
           <li <?= ($seg1 == "publikasi") ? 'class="nav-item has-treeview menu-open"' : 'class="nav-item has-treeview"'; ?>>
             <a href="#" <?= ($seg1 == "publikasi") ? 'class="nav-link active"' : 'class="nav-link"'; ?>>
               <i class="nav-icon fas fa-tasks"></i>
