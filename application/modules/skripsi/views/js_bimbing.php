@@ -105,8 +105,9 @@
 						confirmButtonColor: '#d33',
 						confirmButtonText: 'Oke',
 						allowOutsideClick: false,
+					}).then((result) => {
+						$('#btn-submit').attr('disabled', false);
 					});
-					$('#btn-submit').attr('disabled', false);
 				} else if (data.status === 'success') {
 					setTimeout(function() {
 						Swal.fire({
