@@ -239,25 +239,26 @@ class M_dashboard extends CI_Model
 		$data 		= $this->db->query($query)->result_array();
 		return $data;
 	}
-	public function count_skripsiriset()
+	
+	public function publikasiNew($jur)
 	{
 		$this->db->where('status_pengajuan', 'Menunggu');
-		$query = $this->db->get('skripsi_riset');
-		return $query->num_rows();
+		$this->db->where('prodi', $jur);
+
+		return $this->db->count_all_results('ajuan_tugas_akhir');
 	}
-	public function count_mbkm($jur)
+	public function publikasi($jur)
 	{
-		$this->db->where('status_pengajuan', 'Menunggu');
-        $this->db->where('prodi', $jur); 
-		$query = $this->db->get('mbkm_riset');
-		return $query->num_rows();
+		$this->db->where('status_pengajuan', 'Diproses');
+		$this->db->where('prodi', $jur);
+		return $this->db->count_all_results('ajuan_tugas_akhir');
 	}
 	
-	public function count_publikasi($jur)
+	public function donepublikasi($jur)
 	{
-		$this->db->where('status_pengajuan', 'Menunggu');
-        $this->db->where('prodi', $jur); 
-		$query = $this->db->get('ajuan_tugas_akhir');
-		return $query->num_rows();
+		$this->db->where('status_pengajuan', 'Acc');
+		$this->db->where('prodi', $jur);
+		return $this->db->count_all_results('ajuan_tugas_akhir');
 	}
+	
 }

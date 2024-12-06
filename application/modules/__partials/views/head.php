@@ -22,3 +22,11 @@
 <link rel="stylesheet" href="<?php echo base_url(); ?>public/assets/core/css/adminlte.min.css">
 <!-- Google Font: Source Sans Pro -->
 <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+<!-- Tambahkan jQuery terlebih dahulu -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- Tambahkan Select2 CSS di dalam <head> -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+
+<!-- Tambahkan Select2 JS setelah jQuery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
