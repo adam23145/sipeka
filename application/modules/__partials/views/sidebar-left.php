@@ -445,6 +445,12 @@
                 </a>
               </li>
               <li class="nav-item">
+                <a href="<?php echo base_url(); ?>form/Form_semprombkm" <?= ($seg2 == "Form_semprombkm") ? 'class="nav-link active"' : 'class="nav-link"'; ?>>
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Form Sempro Mbkm</p>
+                </a>
+              </li>
+              <li class="nav-item">
                 <a href="<?php echo base_url(); ?>form/form_sidang" <?= ($seg2 == "form_sidang") ? 'class="nav-link active"' : 'class="nav-link"'; ?>>
                   <i class="far fa-circle nav-icon"></i>
                   <p>Form Sidang</p>
@@ -486,6 +492,18 @@
                 </a>
               </li>
               <li class="nav-item">
+                <a href="<?php echo base_url(); ?>history/historismbkmsempro" <?= ($seg2 == "historismbkmsempro") ? 'class="nav-link active"' : 'class="nav-link"'; ?>>
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Histori Mbkm Sempro</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?php echo base_url(); ?>history/historismbkmskripsi" <?= ($seg2 == "historismbkmskripsi") ? 'class="nav-link active"' : 'class="nav-link"'; ?>>
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Histori Mbkm Skripsi</p>
+                </a>
+              </li>
+              <li class="nav-item">
                 <a href="<?php echo base_url(); ?>history/publikasi" <?= ($seg2 == "publikasi") ? 'class="nav-link active"' : 'class="nav-link"'; ?>>
                   <i class="far fa-circle nav-icon"></i>
                   <p>Histori Publikasi</p>
@@ -517,6 +535,23 @@
               </li>
               <li class="nav-item">
                 <a href="<?php echo base_url(); ?>dokumen/list_dokumen" <?= ($seg2 == "list_dokumen") ? 'class="nav-link active"' : 'class="nav-link"'; ?>>
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>File Dokumen</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li <?= ($seg1 == "dokumen_mbkm") ? 'class="nav-item has-treeview menu-open"' : 'class="nav-item has-treeview"'; ?>>
+            <a href="#" <?= ($seg1 == "dokumen_mbkm") ? 'class="nav-link active"' : 'class="nav-link"'; ?>>
+              <i class="nav-icon fa fa-file"></i>
+              <p>
+                Dokumen Mbkm
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="<?php echo base_url(); ?>dokumen_mbkm/List_dokumen" <?= ($seg2 == "List_dokumen") ? 'class="nav-link active"' : 'class="nav-link"'; ?>>
                   <i class="far fa-circle nav-icon"></i>
                   <p>File Dokumen</p>
                 </a>
@@ -705,7 +740,64 @@
               </li>
             </ul>
           </li>
-
+          <li <?= ($seg1 == "report_mbkm" && ($seg2 == "mbkmsempro_new" || $seg2 == "mbkmsempro" || $seg2 == "mbkmsempro_done")) ? 'class="nav-item has-treeview menu-open"' : 'class="nav-item has-treeview"'; ?>>
+            <a href="#" <?= ($seg1 == "report_mbkm" && ($seg2 == "mbkmsempro_new" || $seg2 == "mbkmsempro" || $seg2 == "mbkmsempro_done")) ? 'class="nav-link active"' : 'class="nav-link"'; ?>>
+              <i class="nav-icon fas fa-tasks"></i>
+              <p>
+                Sempro Mbkm
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="<?php echo base_url(); ?>report_mbkm/mbkmsempro_new" <?= ($seg2 == "mbkmsempro_new") ? 'class="nav-link active"' : 'class="nav-link"'; ?>>
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Req Sempro Mbkm</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?php echo base_url(); ?>report_mbkm/mbkmsempro" <?= ($seg2 == "mbkmsempro") ? 'class="nav-link active"' : 'class="nav-link"'; ?>>
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Proses Sempro Mbkm</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?php echo base_url(); ?>report_mbkm/mbkmsempro_done" <?= ($seg2 == "mbkmsempro_done") ? 'class="nav-link active"' : 'class="nav-link"'; ?>>
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Selesai Sempro Mbkm</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li <?= ($seg1 == "report_mbkm" && ($seg2 == "mbkmskripsi_new" || $seg2 == "mbkmskripsi" || $seg2 == "mbkmskripsi_done")) ? 'class="nav-item has-treeview menu-open"' : 'class="nav-item has-treeview"'; ?>>
+            <a href="#" <?= ($seg1 == "report_mbkm" && ($seg2 == "mbkmskripsi_new" || $seg2 == "mbkmskripsi" || $seg2 == "mbkmskripsi_done")) ? 'class="nav-link active"' : 'class="nav-link"'; ?>>
+              <i class="nav-icon fas fa-tasks"></i>
+              <p>
+                Skripsi Mbkm
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="<?php echo base_url(); ?>report_mbkm/mbkmskripsi_new" <?= ($seg2 == "mbkmskripsi_new") ? 'class="nav-link active"' : 'class="nav-link"'; ?>>
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Req Skripsi Mbkm</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?php echo base_url(); ?>report_mbkm/mbkmskripsi" <?= ($seg2 == "mbkmskripsi") ? 'class="nav-link active"' : 'class="nav-link"'; ?>>
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Proses Skripsi Mbkm</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?php echo base_url(); ?>report_mbkm/mbkmskripsi_done" <?= ($seg2 == "mbkmskripsi_done") ? 'class="nav-link active"' : 'class="nav-link"'; ?>>
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Selesai Skripsi Mbkm</p>
+                </a>
+              </li>
+            </ul>
+          </li>
           <li <?= ($seg1 == "hafalan") ? 'class="nav-item has-treeview menu-open"' : 'class="nav-item has-treeview"'; ?>>
             <a href="#" <?= ($seg1 == "hafalan") ? 'class="nav-link active"' : 'class="nav-link"'; ?>>
               <i class="nav-icon fa fa-file-contract"></i>
@@ -1033,8 +1125,8 @@
               </li>
             </ul>
           </li>
-          <li <?= ($seg1 == "mbkm") ? 'class="nav-item has-treeview menu-open"' : 'class="nav-item has-treeview"'; ?>>
-            <a href="#" <?= ($seg1 == "mbkm") ? 'class="nav-link active"' : 'class="nav-link"'; ?>>
+          <li <?= ($seg1 == "mbkm" && ($seg2 == "Mbkmsempro_new" || $seg2 == "Mbkmsempro" || $seg2 == "Mbkmsempro_done"))  ? 'class="nav-item has-treeview menu-open"' : 'class="nav-item has-treeview"'; ?>>
+            <a href="#" <?= ($seg1 == "mbkm" && ($seg2 == "Mbkmsempro_new" || $seg2 == "Mbkmsempro" || $seg2 == "Mbkmsempro_done")) ? 'class="nav-link active"' : 'class="nav-link"'; ?>>
               <i class="nav-icon fas fa-tasks"></i>
               <p>
                 Sempro Mbkm
@@ -1058,6 +1150,35 @@
                 <a href="<?php echo base_url(); ?>mbkm/Mbkmsempro_done" <?= ($seg2 == "Mbkmsempro_done") ? 'class="nav-link active"' : 'class="nav-link"'; ?>>
                   <i class="far fa-circle nav-icon"></i>
                   <p>List Sempro</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li <?= ($seg1 == "mbkm" && ($seg2 == "Mbkmskripsi_new" || $seg2 == "Mbkmskripsi" || $seg2 == "Mbkmskripsi_done"))  ? 'class="nav-item has-treeview menu-open"' : 'class="nav-item has-treeview"'; ?>>
+            <a href="#" <?= ($seg1 == "mbkm" && ($seg2 == "Mbkmskripsi_new" || $seg2 == "Mbkmskripsi" || $seg2 == "Mbkmskripsi_done")) ? 'class="nav-link active"' : 'class="nav-link"'; ?>>
+              <i class="nav-icon fas fa-tasks"></i>
+              <p>
+                Skripsi Mbkm
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="<?php echo base_url(); ?>mbkm/Mbkmskripsi_new" <?= ($seg2 == "Mbkmskripsi_new") ? 'class="nav-link active"' : 'class="nav-link"'; ?>>
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Bimbingan Baru</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?php echo base_url(); ?>mbkm/Mbkmskripsi" <?= ($seg2 == "Mbkmskripsi") ? 'class="nav-link active"' : 'class="nav-link"'; ?>>
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>List Bimbingan Skripsi</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?php echo base_url(); ?>mbkm/Mbkmskripsi_done" <?= ($seg2 == "Mbkmskripsi_done") ? 'class="nav-link active"' : 'class="nav-link"'; ?>>
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>List Skripsi</p>
                 </a>
               </li>
             </ul>
