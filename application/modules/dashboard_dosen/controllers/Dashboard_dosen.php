@@ -31,6 +31,15 @@ class Dashboard_dosen extends CI_Controller {
 		$baru 	= $this->M_dashboard_dosen->get_baru($nip, $jbt);
 		$proses	= $this->M_dashboard_dosen->get_pr($nip);
 		$selesai= $this->M_dashboard_dosen->get_end($nip);
+		$publikasinew = $this->M_dashboard_dosen->publikasiNew($username);
+		$publikasi = $this->M_dashboard_dosen->publikasi($username);
+		$donepublikasi = $this->M_dashboard_dosen->donepublikasi($username);
+		$newsempro2 = $this->M_dashboard_dosen->sempronewmbkbm($username);
+		$sempro = $this->M_dashboard_dosen->semprombkbm($username);
+		$semprodone = $this->M_dashboard_dosen->semprodonembkbm($username);
+		$newskripsi = $this->M_dashboard_dosen->skripsinewmbkbm($username);
+		$skripsi = $this->M_dashboard_dosen->skripsimbkbm($username);
+		$skripsidone = $this->M_dashboard_dosen->skripsidonembkbm($username);
 		$ayat 				= $this->M_dashboard_dosen->cek_ayat($nip);
 		$hadist				= $this->M_dashboard_dosen->cek_hadist($nip);
 		$kk 				= $this->M_dashboard_dosen->cek_kk($nip);
@@ -47,6 +56,15 @@ class Dashboard_dosen extends CI_Controller {
 			'bsemproend'	=> $selesai_sem[0]['jmlend_sem'],
 			'ayat'			=> $ayat[0]['jml'],
 			'hadist'		=> $hadist[0]['jml'],
+			'publikasinew' => $publikasinew,
+			'publikasi' => $publikasi,
+			'donepublikasi'=> $donepublikasi,
+			'sempronew'=> $newsempro2,
+			'sempro'=> $sempro,
+			'semprodone'=> $semprodone,
+			'skripsinew'=> $newskripsi,
+			'skripsi'=> $skripsi,
+			'skripsidone'=> $skripsidone,
 			'kk'			=> $kk[0]['jml'],
 			'qq'			=> $qq[0]['jml'],
 		);

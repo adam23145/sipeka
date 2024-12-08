@@ -79,7 +79,7 @@ class M_dashboard extends CI_Model
 		} else if ($lvl == 'Admin Prodi') {
 			$query 		= "SELECT count(*) as jmlall FROM title_submission WHERE  jurusan='$jur'";
 			$data 		= $this->db->query($query)->result_array();
-		}else {
+		} else {
 			$query 		= "SELECT count(*) as jmlall FROM title_submission WHERE  jurusan='$jur' AND loker='$lvl' ";
 			$data 		= $this->db->query($query)->result_array();
 		}
@@ -239,7 +239,7 @@ class M_dashboard extends CI_Model
 		$data 		= $this->db->query($query)->result_array();
 		return $data;
 	}
-	
+
 	public function publikasiNew($jur)
 	{
 		$this->db->where('status_pengajuan', 'Menunggu');
@@ -253,12 +253,110 @@ class M_dashboard extends CI_Model
 		$this->db->where('prodi', $jur);
 		return $this->db->count_all_results('ajuan_tugas_akhir');
 	}
-	
+
 	public function donepublikasi($jur)
 	{
 		$this->db->where('status_pengajuan', 'Acc');
 		$this->db->where('prodi', $jur);
 		return $this->db->count_all_results('ajuan_tugas_akhir');
 	}
-	
+	public function newmbkbm($posisi_berkas, $jur)
+	{
+		if (!empty($jur)) {
+			$this->db->where('prodi', $jur);
+		}
+		$this->db->where('posisi_berkas', $posisi_berkas);
+		$this->db->where('status_pengajuan_judul', 'Menunggu');
+		return $this->db->count_all_results('mbkm_riset');
+	}
+	public function revisimbkm($posisi_berkas, $jur)
+	{
+		if (!empty($jur)) {
+			$this->db->where('prodi', $jur);
+		}
+		$this->db->where('posisi_berkas', $posisi_berkas);
+		$this->db->where('status_pengajuan_judul', 'Revisi');
+		return $this->db->count_all_results('mbkm_riset');
+	}
+	public function tolakmbkm($posisi_berkas, $jur)
+	{
+		if (!empty($jur)) {
+			$this->db->where('prodi', $jur);
+		}
+		$this->db->where('posisi_berkas', $posisi_berkas);
+		$this->db->where('status_pengajuan_judul', 'Ditolak');
+		return $this->db->count_all_results('mbkm_riset');
+	}
+
+	public function sempronewmbkbm($jur)
+	{
+		if (!empty($jur)) {
+			$this->db->where('prodi', $jur);
+		}
+		$this->db->where('status_pengajuan_sempro', null);
+		$this->db->where('posisi_berkas', 'Dosen');
+		return $this->db->count_all_results('mbkm_riset');
+	}
+
+	public function semprombkbm($jur)
+	{
+		if (!empty($jur)) {
+			$this->db->where('prodi', $jur);
+		}
+		$this->db->where('status_pengajuan_sempro', 'Menunggu');
+		return $this->db->count_all_results('mbkm_riset');
+	}
+
+	public function semprodonembkbm($jur)
+	{
+		if (!empty($jur)) {
+			$this->db->where('prodi', $jur);
+		}
+		$this->db->where('status_pengajuan_sempro', 'Acc');
+		return $this->db->count_all_results('mbkm_riset');
+	}
+
+	public function skripsinewmbkbm($jur)
+	{
+		if (!empty($jur)) {
+			$this->db->where('prodi', $jur);
+		}
+		$this->db->where('status_pengajuan_skripsi', null);
+		$this->db->where('status_pengajuan_sempro', 'Acc');
+		return $this->db->count_all_results('mbkm_riset');
+	}
+
+	public function skripsimbkbm($jur)
+	{
+		if (!empty($jur)) {
+			$this->db->where('prodi', $jur);
+		}
+		$this->db->where('status_pengajuan_skripsi', 'Menunggu');
+		return $this->db->count_all_results('mbkm_riset');
+	}
+
+	public function skripsidonembkbm($jur)
+	{
+		if (!empty($jur)) {
+			$this->db->where('prodi', $jur);
+		}
+		$this->db->where('status_pengajuan_skripsi', 'Acc');
+		return $this->db->count_all_results('mbkm_riset');
+	}
+	public function countPengajuanSidangByJurusan($jurusan)
+	{
+		$query = "
+        SELECT
+            COUNT(*) AS total
+        FROM
+            pengajuan_sidang ps
+        INNER JOIN
+            m_mahasiswa mm ON ps.nim = mm.nim
+        WHERE
+            mm.jurusan = ?
+    ";
+
+		$result = $this->db->query($query, [$jurusan])->row_array();
+		return isset($result['total']) ? $result['total'] : 0;
+	}
 }

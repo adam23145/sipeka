@@ -53,7 +53,7 @@
     </div>
   <?php } else if ($this->session->userdata['logged_in']['userlevel'] == 'Koordinator Prodi' || $this->session->userdata['logged_in']['userlevel'] == 'Sekjur' || $this->session->userdata['logged_in']['userlevel'] == 'Kajur') { ?>
     <div class="row">
-      <div class="col-lg-2">
+      <div class="col-lg-3">
         <div class="small-box bg-primary">
           <div class="inner">
             <h3>{jmlh_new}</h3>
@@ -65,33 +65,7 @@
           <a href="<?php echo base_url(); ?>list/list_pengajuan/list_data/New" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
         </div>
       </div>
-      <div class="col-lg-2">
-        <div class="small-box bg-success">
-          <div class="inner">
-            <h3>{jmlpublikasi}</h3>
-            <p>Pengajuan Publikasi</p>
-          </div>
-          <div class="icon">
-            <i class="ion ion-person-add"></i>
-          </div>
-          <a href="<?php echo base_url(); ?>/list/publikasi" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-        </div>
-      </div>
-
-      <div class="col-lg-2">
-        <div class="small-box bg-info">
-          <div class="inner">
-            <h3>{jmlmbkm}</h3>
-            <p> Judul mbkm riset</p>
-          </div>
-          <div class="icon">
-            <i class="ion ion-person-add"></i>
-          </div>
-          <a href="<?php echo base_url(); ?>/list/mbkm" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-        </div>
-      </div>
-
-      <div class="col-lg-2">
+      <div class="col-lg-3">
         <div class="small-box bg-warning">
           <div class="inner">
             <h3>{jmlrevisi}</h3>
@@ -104,7 +78,7 @@
         </div>
       </div>
 
-      <div class="col-lg-2">
+      <div class="col-lg-3">
         <div class="small-box bg-secondary">
           <div class="inner">
             <h3>{jmltolak}</h3>
@@ -117,7 +91,7 @@
         </div>
       </div>
 
-      <div class="col-lg-2">
+      <div class="col-lg-3">
         <div class="small-box bg-warning">
           <div class="inner">
             <h3>{jmlrev}</h3>
@@ -129,7 +103,8 @@
           <a href="<?php echo base_url(); ?>list/list_pengajuan/list_data/Proses" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
         </div>
       </div>
-
+    </div>
+    <div class="row">
       <div class="col-lg-12">
         <div class="small-box bg-success">
           <div class="inner">
@@ -143,10 +118,86 @@
         </div>
       </div>
     </div>
+    <div class="row">
+      <div class="col-lg-4">
+        <div class="small-box bg-primary">
+          <div class="inner">
+            <h3>{new_mbkm}</h3>
+            <p>Pengajuan Judul Mbkm</p>
+          </div>
+          <div class="icon">
+            <i class="ion ion-person-add"></i>
+          </div>
+          <a href="<?php echo base_url(); ?>list/list_pengajuanmbkm/list_data/new" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="small-box bg-warning">
+          <div class="inner">
+            <h3>{revisi_mbkm}</h3>
+            <p>Revisi Mbkm</p>
+          </div>
+          <div class="icon">
+            <i class="ion ion-calendar"></i>
+          </div>
+          <a href="<?php echo base_url(); ?>list/list_pengajuanmbkm/list_data/revisi" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+        </div>
+      </div>
 
+      <div class="col-lg-4">
+        <div class="small-box bg-secondary">
+          <div class="inner">
+            <h3>{tolak_mbkm}</h3>
+            <p>Judul Ditolak Mbkm</p>
+          </div>
+          <div class="icon">
+            <i class="ion ion-person-add"></i>
+          </div>
+          <a href="<?php echo base_url(); ?>list/list_pengajuanmbkm/list_data/ditolak" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-4">
+        <div class="small-box bg-primary"> <!-- Menggunakan warna biru -->
+          <div class="inner">
+            <h3>{publikasinew}</h3>
+            <p>Bimbingan Baru Publikasi</p>
+          </div>
+          <div class="icon">
+            <i class="ion ion-calendar"></i>
+          </div>
+          <a href="<?php echo base_url(); ?>list/publikasi" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="small-box bg-secondary"> <!-- Menggunakan warna abu-abu -->
+          <div class="inner">
+            <h3>{publikasi}</h3>
+            <p>Proses Bimbingan Publikasi</p>
+          </div>
+          <div class="icon">
+            <i class="ion ion-person-add"></i>
+          </div>
+          <a href="<?php echo base_url(); ?>list/publikasi" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="small-box bg-warning"> <!-- Menggunakan warna kuning -->
+          <div class="inner">
+            <h3>{donepublikasi}</h3>
+            <p>Selesai Bimbingan Publikasi</p>
+          </div>
+          <div class="icon">
+            <i class="ion ion-calendar"></i>
+          </div>
+          <a href="<?php echo base_url(); ?>list/publikasi" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+        </div>
+      </div>
+    </div>
   <?php } else { ?>
     <div class="row">
-      <div class="col-lg-2">
+      <div class="col-lg-3">
         <div class="small-box bg-primary">
           <div class="inner">
             <h3>{jmlh_new}</h3>
@@ -158,34 +209,7 @@
           <a href="<?php echo base_url(); ?>list/list_pengajuan/list_data/New" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
         </div>
       </div>
-
-      <div class="col-lg-2">
-        <div class="small-box bg-success">
-          <div class="inner">
-            <h3>{jmlpublikasi}</h3>
-            <p>Pengajuan Publikasi</p>
-          </div>
-          <div class="icon">
-            <i class="ion ion-person-add"></i>
-          </div>
-          <a href="<?php echo base_url(); ?>/list/publikasi" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-        </div>
-      </div>
-
-      <div class="col-lg-2">
-        <div class="small-box bg-info">
-          <div class="inner">
-            <h3>{jmlmbkm}</h3>
-            <p> Judul mbkm riset</p>
-          </div>
-          <div class="icon">
-            <i class="ion ion-person-add"></i>
-          </div>
-          <a href="<?php echo base_url(); ?>/list/mbkm" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-        </div>
-      </div>
-
-      <div class="col-lg-2">
+      <div class="col-lg-3">
         <div class="small-box bg-warning">
           <div class="inner">
             <h3>{jmlrevisi}</h3>
@@ -198,7 +222,7 @@
         </div>
       </div>
 
-      <div class="col-lg-2">
+      <div class="col-lg-3">
         <div class="small-box bg-secondary">
           <div class="inner">
             <h3>{jmltolak}</h3>
@@ -211,7 +235,7 @@
         </div>
       </div>
 
-      <div class="col-lg-2">
+      <div class="col-lg-3">
         <div class="small-box bg-warning">
           <div class="inner">
             <h3>{jmlrev}</h3>
@@ -306,7 +330,96 @@
       </div>
     </div>
   </div>
-
+  <div class="row">
+    <div class="col-lg-4">
+      <div class="small-box bg-warning">
+        <div class="inner">
+          <h3>{sempronew}</h3>
+          <p>Permintaan Bimbingan Sempro Mbkm Baru</p>
+        </div>
+        <div class="icon">
+          <i class="ion ion-calendar"></i>
+        </div>
+        <a href="<?php echo base_url(); ?>report_mbkm/mbkmsempro_new" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+      </div>
+    </div>
+    <div class="col-lg-4">
+      <div class="small-box bg-primary">
+        <div class="inner">
+          <h3>{sempro}</h3>
+          <p>Proses Bimbingan Sempro Mbkm</p>
+        </div>
+        <div class="icon">
+          <i class="ion ion-calendar"></i>
+        </div>
+        <a href="<?php echo base_url(); ?>report_mbkm/mbkmsempro" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+      </div>
+    </div>
+    <div class="col-lg-4">
+      <div class="small-box bg-success">
+        <div class="inner">
+          <h3>{semprodone}</h3>
+          <p>Selesai Bimbingan Sempro Mbkm</p>
+        </div>
+        <div class="icon">
+          <i class="ion ion-pie-graph"></i>
+        </div>
+        <a href="<?php echo base_url(); ?>report_mbkm/mbkmsempro_done" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-4">
+      <div class="small-box bg-warning">
+        <div class="inner">
+          <h3>{skripsinew}</h3>
+          <p>Permintaan Bimbingan Skripsi Mbkm Baru</p>
+        </div>
+        <div class="icon">
+          <i class="ion ion-calendar"></i>
+        </div>
+        <a href="<?php echo base_url(); ?>report_mbkm/mbkmskripsi_new" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+      </div>
+    </div>
+    <div class="col-lg-4">
+      <div class="small-box bg-primary">
+        <div class="inner">
+          <h3>{skripsi}</h3>
+          <p>Proses Bimbingan Skripsi Mbkm</p>
+        </div>
+        <div class="icon">
+          <i class="ion ion-calendar"></i>
+        </div>
+        <a href="<?php echo base_url(); ?>report_mbkm/mbkmskripsi" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+      </div>
+    </div>
+    <div class="col-lg-4">
+      <div class="small-box bg-success">
+        <div class="inner">
+          <h3>{skripsidone}</h3>
+          <p>Selesai Bimbingan Skripsi Mbkm</p>
+        </div>
+        <div class="icon">
+          <i class="ion ion-pie-graph"></i>
+        </div>
+        <a href="<?php echo base_url(); ?>report_mbkm/mbkmskripsi_done" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="small-box bg-success">
+        <div class="inner">
+          <h3>{pengajuan_sidang}</h3>
+          <p>Pengajuan Sidang</p>
+        </div>
+        <div class="icon">
+          <i class="ion ion-pie-graph"></i>
+        </div>
+        <a href="<?php echo base_url(); ?>data_master/data_sidang" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+      </div>
+    </div>
+  </div>
   <div class="row">
     <div class="col-lg-3">
       <div class="small-box bg-danger">
