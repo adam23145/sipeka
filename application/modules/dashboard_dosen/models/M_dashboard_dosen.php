@@ -104,76 +104,120 @@ class M_dashboard_dosen extends CI_Model
 		$data 		= $this->db->query($query)->result_array();
 		return $data;
 	}
-	public function countdataMbkmNew($username)
+	public function count_bimbingan_baru($prodi)
 	{
-		$this->db->where('status_pengajuan', 'Menunggu');
-		$this->db->group_start(); 
-		$this->db->where('dosen_pembimbing_utama', $username);
-		$this->db->or_where('dosen_pembimbing_kedua', $username);
-		$this->db->group_end(); 
-
+		$this->db->where('(UPPER(dosen_pembimbing) IS NULL OR UPPER(dosen_pembimbing) = \'\')');
+		$this->db->where('UPPER(prodi)', strtoupper($prodi));
 		return $this->db->count_all_results('mbkm_riset');
 	}
+
+	public function count_proses_bimbingan($prodi)
+	{
+		$this->db->where('UPPER(dosen_pembimbing) IS NOT NULL');
+		$this->db->where('UPPER(dosen_pembimbing) !=', '');
+		$this->db->where('UPPER(status_pengajuan) !=', 'ACC');
+		$this->db->where('UPPER(prodi)', strtoupper($prodi));
+		return $this->db->count_all_results('mbkm_riset');
+	}
+
+	public function count_selesai_bimbingan($prodi)
+	{
+		$this->db->where('UPPER(status_pengajuan)', 'ACC');
+		$this->db->where('UPPER(prodi)', strtoupper($prodi));
+		return $this->db->count_all_results('mbkm_riset');
+	}
+
 	public function publikasiNew($username)
 	{
 		$this->db->where('status_pengajuan', 'Menunggu');
-		$this->db->group_start(); 
+		$this->db->group_start();
 		$this->db->where('dosen_pembimbing_utama', $username);
 		$this->db->or_where('dosen_pembimbing_kedua', $username);
-		$this->db->group_end(); 
+		$this->db->group_end();
 
 		return $this->db->count_all_results('ajuan_tugas_akhir');
 	}
 	public function publikasi($username)
 	{
 		$this->db->where('status_pengajuan', 'Diproses');
-		$this->db->group_start(); 
+		$this->db->group_start();
 		$this->db->where('dosen_pembimbing_utama', $username);
 		$this->db->or_where('dosen_pembimbing_kedua', $username);
-		$this->db->group_end(); 
+		$this->db->group_end();
 
 		return $this->db->count_all_results('ajuan_tugas_akhir');
 	}
-	
+
 	public function donepublikasi($username)
 	{
 		$this->db->where('status_pengajuan', 'Acc');
-		$this->db->group_start(); 
+		$this->db->group_start();
 		$this->db->where('dosen_pembimbing_utama', $username);
 		$this->db->or_where('dosen_pembimbing_kedua', $username);
-		$this->db->group_end(); 
+		$this->db->group_end();
 
 		return $this->db->count_all_results('ajuan_tugas_akhir');
 	}
-	public function mbkmNew($username)
+	public function sempronewmbkbm($username)
 	{
-		$this->db->where('status_pengajuan', 'Menunggu');
-		$this->db->group_start(); 
-		$this->db->where('dosen_pembimbing_utama', $username);
-		$this->db->or_where('dosen_pembimbing_kedua', $username);
-		$this->db->group_end(); 
-
-		return $this->db->count_all_results('mbkm_riset');
+		$this->db->distinct(); 
+		$this->db->select('m_dosen.nip'); 
+		$this->db->from('mbkm_riset');
+		$this->db->where('mbkm_riset.status_pengajuan_sempro', null);
+		$this->db->where('posisi_berkas', 'Dosen');
+		$this->db->where('m_dosen.nama', $username);
+		$this->db->join('m_dosen', 'm_dosen.nip = mbkm_riset.dosen_pembimbing', 'inner');
+		return $this->db->count_all_results();
 	}
-	public function mbkm($username)
+	public function semprombkbm($username)
 	{
-		$this->db->where('status_pengajuan', 'Diproses');
-		$this->db->group_start(); 
-		$this->db->where('dosen_pembimbing_utama', $username);
-		$this->db->or_where('dosen_pembimbing_kedua', $username);
-		$this->db->group_end(); 
-
-		return $this->db->count_all_results('mbkm_riset');
+		$this->db->distinct(); 
+		$this->db->select('m_dosen.nip'); 
+		$this->db->from('mbkm_riset');
+		$this->db->where('status_pengajuan_sempro', 'Menunggu');
+		$this->db->where('m_dosen.nama', $username);
+		$this->db->join('m_dosen', 'm_dosen.nip = mbkm_riset.dosen_pembimbing', 'inner');
+		return $this->db->count_all_results();
 	}
-	
-	public function donembkm($username)
+	public function semprodonembkbm($username)
 	{
-		$this->db->where('status_pengajuan', 'Acc');
-		$this->db->group_start(); 
-		$this->db->where('dosen_pembimbing_utama', $username);
-		$this->db->or_where('dosen_pembimbing_kedua', $username);
-		$this->db->group_end(); 
-
-		return $this->db->count_all_results('mbkm_riset');
+		$this->db->distinct(); 
+		$this->db->select('m_dosen.nip'); 
+		$this->db->from('mbkm_riset');
+		$this->db->where('mbkm_riset.status_pengajuan_sempro', 'Acc');
+		$this->db->where('m_dosen.nama', $username);
+		$this->db->join('m_dosen', 'm_dosen.nip = mbkm_riset.dosen_pembimbing', 'inner');
+		return $this->db->count_all_results();
+	}
+	public function skripsinewmbkbm($username)
+	{
+		$this->db->distinct(); 
+		$this->db->select('m_dosen.nip'); 
+		$this->db->from('mbkm_riset');
+		$this->db->where('mbkm_riset.status_pengajuan_skripsi', null);
+		$this->db->where('mbkm_riset.status_pengajuan_sempro', 'Acc');
+		$this->db->where('m_dosen.nama', $username);
+		$this->db->join('m_dosen', 'm_dosen.nip = mbkm_riset.dosen_pembimbing', 'inner');
+		return $this->db->count_all_results();
+	}
+	public function skripsimbkbm($username)
+	{
+		$this->db->distinct(); 
+		$this->db->select('m_dosen.nip'); 
+		$this->db->from('mbkm_riset');
+		$this->db->where('status_pengajuan_skripsi', 'Menunggu');
+		$this->db->where('m_dosen.nama', $username);
+		$this->db->join('m_dosen', 'm_dosen.nip = mbkm_riset.dosen_pembimbing', 'inner');
+		return $this->db->count_all_results();
+	}
+	public function skripsidonembkbm($username)
+	{
+		$this->db->distinct(); 
+		$this->db->select('m_dosen.nip'); 
+		$this->db->from('mbkm_riset');
+		$this->db->where('status_pengajuan_skripsi', 'Acc');
+		$this->db->where('m_dosen.nama', $username);
+		$this->db->join('m_dosen', 'm_dosen.nip = mbkm_riset.dosen_pembimbing', 'inner');
+		return $this->db->count_all_results();
 	}
 }

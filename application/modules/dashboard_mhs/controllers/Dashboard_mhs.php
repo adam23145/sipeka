@@ -26,7 +26,6 @@ class Dashboard_mhs extends CI_Controller {
 		$hadist				= $this->M_dashboard->cek_hadist($nim);
 		$kk 				= $this->M_dashboard->cek_kk($nim);
 		$qq 				= $this->M_dashboard->cek_qq($nim);
-		$mbkm 				= $this->M_dashboard->count_mbkm($nim);
 		$tugas_akhir 		= $this->M_dashboard->count_publikasi($nim);
 
 		if($jml[0]['jml']  <= 0){
@@ -48,7 +47,6 @@ class Dashboard_mhs extends CI_Controller {
 			'hadist'				=> $hadist[0]['jml'],
 			'kk'					=> $kk[0]['jml'],
 			'qq'					=> $qq[0]['jml'],
-			'mbkm'					=> $mbkm,
 			'tugas_akhir'					=> $tugas_akhir,
 		);
 		$this->parser->parse('template/template', $data);

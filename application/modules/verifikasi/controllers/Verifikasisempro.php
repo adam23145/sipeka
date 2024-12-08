@@ -35,6 +35,22 @@ class Verifikasisempro extends CI_Controller
             return;
         }
 
+        // Cek status_pengajuan_judul di tabel mbkm_riset
+        $this->db->where('submission_code', $submission_code);
+        $query = $this->db->get('mbkm_riset');
+
+        if ($query->num_rows() == 0) {
+            echo '<div class="alert alert-danger">Data tidak ditemukan di mbkm_riset.</div>';
+            return;
+        }
+
+        $row = $query->row();
+        if ($row->status_pengajuan_sempro != 'Acc') {
+            echo '<div class="alert alert-danger">Status pengajuan judul belum disetujui (Acc).</div>';
+            return;
+        }
+
+        // Pengecekan barcode
         $exists = $this->M_verifikasisempro->is_barcode_exists($submission_code);
 
         if ($exists) {
