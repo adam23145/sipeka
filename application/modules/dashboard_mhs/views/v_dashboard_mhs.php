@@ -75,20 +75,6 @@
   </div>
   <div class="row">
     <div class="col-lg-6">
-      <div class="small-box bg-success" style="background-color: #4CAF50;"> <!-- Warna hijau -->
-        <center>
-          <div class="inner">
-            <h4>{mbkm}</h4>
-            <p>Mbkm</p>
-          </div>
-        </center>
-        <div class="icon">
-          <i class="ion ion-person-add"></i>
-        </div>
-        <a href="<?php echo base_url(); ?>history/mbkm" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-      </div>
-    </div>
-    <div class="col-lg-6">
       <div class="small-box bg-primary" style="background-color: #2196F3;"> <!-- Warna biru -->
         <center>
           <div class="inner">
