@@ -5,7 +5,7 @@
                 <div class="card-header">
                     <h3 class="card-title">Data Pengajuan Sidang</h3>
                 </div>
-                
+
                 <div id="disini" class="col-md-12"></div>
                 <div class="card-body table-responsive p-3">
                     <table id="table_sidang" class="table table-striped table-bordered">
@@ -71,21 +71,31 @@
 
                     <div class="form-group" id="edit_pembimbing_group">
                         <label for="edit_pembimbing">Dosen Pembimbing 2</label>
-                        <select class="form-control select2" id="edit_pembimbing" name="pembimbing">
-                        </select>
+                        <div>
+                            <select class="form-control select2" id="edit_pembimbing" name="pembimbing" style="width: 100%;">
+                                <option value="">Pilih Pembimbing</option>
+                            </select>
+                        </div>
                     </div>
 
                     <div class="form-group" id="edit_penguji1_group">
                         <label for="edit_penguji1">Dosen Penguji 1</label>
-                        <select class="form-control select2" id="edit_penguji1" name="penguji1">
-                        </select>
+                        <div>
+                            <select class="form-control select2" id="edit_penguji1" name="penguji1" style="width: 100%;">
+                                <option value="">Pilih Penguji 1</option>
+                            </select>
+                        </div>
                     </div>
 
                     <div class="form-group" id="edit_penguji2_group">
                         <label for="edit_penguji2">Dosen Penguji 2</label>
-                        <select class="form-control select2" id="edit_penguji2" name="penguji2">
-                        </select>
+                        <div>
+                            <select class="form-control select2" id="edit_penguji2" name="penguji2" style="width: 100%;">
+                                <option value="">Pilih Penguji 2</option>
+                            </select>
+                        </div>
                     </div>
+
 
                     <button type="submit" class="btn btn-primary">Save changes</button>
                 </form>

@@ -29,18 +29,24 @@ class Data_sidang extends CI_Controller
 	}
 	public function get_data()
 	{
+		$username 		= $this->session->userdata['logged_in']['username'];
+		if ($username == 'Admin Prodi HBS') {
+			$jur = 'Hukum Bisnis Syariah';
+		} else if ($username == 'Admin Prodi ES') {
+			$jur = 'Ekonomi Syariah';
+		}
 		$limit = $this->input->post('length');
 		$start = $this->input->post('start');
-		$search = $this->input->post('search')['value']; // Ensure this is set correctly
+		$search = $this->input->post('search')['value'];
 
-		$list = $this->M_sidang->get_all($limit, $start, $search);
-		$totalData = $this->M_sidang->count_all();
-		$totalFiltered = $this->M_sidang->count_filtered($search);
+		$list = $this->M_sidang->get_all($limit, $start, $search,$jur);
+		$totalData = $this->M_sidang->count_all($jur);
+		$totalFiltered = $this->M_sidang->count_filtered($search,$jur);
 
 		$data = array();
 		foreach ($list as $item) {
 			if ($item->status == 2) {
-				$action = ''; 
+				$action = '';
 			} else {
 				$action = '<button class="btn btn-primary edit-btn" data-id="' . $item->id . '">Edit</button>';
 			}
