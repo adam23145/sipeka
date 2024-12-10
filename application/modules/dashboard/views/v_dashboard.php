@@ -335,7 +335,7 @@
       <div class="small-box bg-warning">
         <div class="inner">
           <h3>{sempronew}</h3>
-          <p>Permintaan Bimbingan Sempro Mbkm Baru</p>
+          <p>Permintaan Bimbingan Sempro Mbkm Riset Baru</p>
         </div>
         <div class="icon">
           <i class="ion ion-calendar"></i>
@@ -347,7 +347,7 @@
       <div class="small-box bg-primary">
         <div class="inner">
           <h3>{sempro}</h3>
-          <p>Proses Bimbingan Sempro Mbkm</p>
+          <p>Proses Bimbingan Sempro Mbkm Riset</p>
         </div>
         <div class="icon">
           <i class="ion ion-calendar"></i>
@@ -359,7 +359,7 @@
       <div class="small-box bg-success">
         <div class="inner">
           <h3>{semprodone}</h3>
-          <p>Selesai Bimbingan Sempro Mbkm</p>
+          <p>Selesai Bimbingan Sempro Mbkm Riset</p>
         </div>
         <div class="icon">
           <i class="ion ion-pie-graph"></i>
@@ -373,7 +373,7 @@
       <div class="small-box bg-warning">
         <div class="inner">
           <h3>{skripsinew}</h3>
-          <p>Permintaan Bimbingan Skripsi Mbkm Baru</p>
+          <p>Permintaan Bimbingan Mbkm Riset Baru</p>
         </div>
         <div class="icon">
           <i class="ion ion-calendar"></i>
@@ -385,7 +385,7 @@
       <div class="small-box bg-primary">
         <div class="inner">
           <h3>{skripsi}</h3>
-          <p>Proses Bimbingan Skripsi Mbkm</p>
+          <p>Proses Bimbingan Mbkm Riset</p>
         </div>
         <div class="icon">
           <i class="ion ion-calendar"></i>
@@ -397,7 +397,7 @@
       <div class="small-box bg-success">
         <div class="inner">
           <h3>{skripsidone}</h3>
-          <p>Selesai Bimbingan Skripsi Mbkm</p>
+          <p>Selesai Bimbingan Mbkm Riset</p>
         </div>
         <div class="icon">
           <i class="ion ion-pie-graph"></i>

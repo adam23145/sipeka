@@ -160,63 +160,69 @@ class M_dashboard_dosen extends CI_Model
 	}
 	public function sempronewmbkbm($username)
 	{
-		$this->db->distinct(); 
 		$this->db->select('m_dosen.nip'); 
 		$this->db->from('mbkm_riset');
 		$this->db->where('mbkm_riset.status_pengajuan_sempro', null);
 		$this->db->where('posisi_berkas', 'Dosen');
-		$this->db->where('m_dosen.nama', $username);
+		$this->db->where('mbkm_riset.status_pengajuan_judul !=', 'Ditolak');
+        $nama_upper = strtoupper(str_replace(' ', '', $username));
+        $this->db->where("UPPER(REPLACE(m_dosen.nama, ' ', '')) =", $nama_upper);
 		$this->db->join('m_dosen', 'm_dosen.nip = mbkm_riset.dosen_pembimbing', 'inner');
 		return $this->db->count_all_results();
 	}
 	public function semprombkbm($username)
 	{
-		$this->db->distinct(); 
 		$this->db->select('m_dosen.nip'); 
 		$this->db->from('mbkm_riset');
-		$this->db->where('status_pengajuan_sempro', 'Menunggu');
-		$this->db->where('m_dosen.nama', $username);
+		$this->db->where('mbkm_riset.status_pengajuan_sempro', 'Menunggu');
+		$this->db->where('mbkm_riset.status_pengajuan_judul !=', 'Ditolak');
+        $nama_upper = strtoupper(str_replace(' ', '', $username));
+        $this->db->where("UPPER(REPLACE(m_dosen.nama, ' ', '')) =", $nama_upper);
 		$this->db->join('m_dosen', 'm_dosen.nip = mbkm_riset.dosen_pembimbing', 'inner');
 		return $this->db->count_all_results();
 	}
 	public function semprodonembkbm($username)
 	{
-		$this->db->distinct(); 
 		$this->db->select('m_dosen.nip'); 
 		$this->db->from('mbkm_riset');
 		$this->db->where('mbkm_riset.status_pengajuan_sempro', 'Acc');
-		$this->db->where('m_dosen.nama', $username);
+		$this->db->where('mbkm_riset.status_pengajuan_judul !=', 'Ditolak');
+        $nama_upper = strtoupper(str_replace(' ', '', $username));
+        $this->db->where("UPPER(REPLACE(m_dosen.nama, ' ', '')) =", $nama_upper);
 		$this->db->join('m_dosen', 'm_dosen.nip = mbkm_riset.dosen_pembimbing', 'inner');
 		return $this->db->count_all_results();
 	}
 	public function skripsinewmbkbm($username)
 	{
-		$this->db->distinct(); 
 		$this->db->select('m_dosen.nip'); 
 		$this->db->from('mbkm_riset');
 		$this->db->where('mbkm_riset.status_pengajuan_skripsi', null);
+		$this->db->where('mbkm_riset.status_pengajuan_judul !=', 'Ditolak');
 		$this->db->where('mbkm_riset.status_pengajuan_sempro', 'Acc');
-		$this->db->where('m_dosen.nama', $username);
+        $nama_upper = strtoupper(str_replace(' ', '', $username));
+        $this->db->where("UPPER(REPLACE(m_dosen.nama, ' ', '')) =", $nama_upper);
 		$this->db->join('m_dosen', 'm_dosen.nip = mbkm_riset.dosen_pembimbing', 'inner');
 		return $this->db->count_all_results();
 	}
 	public function skripsimbkbm($username)
 	{
-		$this->db->distinct(); 
 		$this->db->select('m_dosen.nip'); 
 		$this->db->from('mbkm_riset');
 		$this->db->where('status_pengajuan_skripsi', 'Menunggu');
-		$this->db->where('m_dosen.nama', $username);
+		$this->db->where('mbkm_riset.status_pengajuan_judul !=', 'Ditolak');
+        $nama_upper = strtoupper(str_replace(' ', '', $username));
+        $this->db->where("UPPER(REPLACE(m_dosen.nama, ' ', '')) =", $nama_upper);
 		$this->db->join('m_dosen', 'm_dosen.nip = mbkm_riset.dosen_pembimbing', 'inner');
 		return $this->db->count_all_results();
 	}
 	public function skripsidonembkbm($username)
 	{
-		$this->db->distinct(); 
 		$this->db->select('m_dosen.nip'); 
 		$this->db->from('mbkm_riset');
 		$this->db->where('status_pengajuan_skripsi', 'Acc');
-		$this->db->where('m_dosen.nama', $username);
+		$this->db->where('mbkm_riset.status_pengajuan_judul !=', 'Ditolak');
+        $nama_upper = strtoupper(str_replace(' ', '', $username));
+        $this->db->where("UPPER(REPLACE(m_dosen.nama, ' ', '')) =", $nama_upper);
 		$this->db->join('m_dosen', 'm_dosen.nip = mbkm_riset.dosen_pembimbing', 'inner');
 		return $this->db->count_all_results();
 	}
