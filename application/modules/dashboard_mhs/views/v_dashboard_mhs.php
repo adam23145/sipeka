@@ -15,6 +15,23 @@
       </div>
     </div>
   </div>
+  
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="small-box bg-warning">
+        <center>
+          <div class="inner">
+            <h4>{status_pengajuan}</h4>
+            <p>Status Pengajuan Judul Mbkm Riset</p>
+          </div>
+        </center>
+        <div class="icon">
+          <i class="ion ion-person-add"></i>
+        </div>
+        <a href="<?php echo base_url(); ?>history/HistorisMbkm" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+      </div>
+    </div>
+  </div>
   <div class="row">
     <div class="col-lg-3">
       <div class="small-box bg-danger">
@@ -86,6 +103,20 @@
           <i class="ion ion-person-add"></i>
         </div>
         <a href="<?php echo base_url(); ?>history/publikasi" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <div class="small-box bg-primary" style="background-color: #2196F3;"> <!-- Warna biru -->
+        <center>
+          <div class="inner">
+            <h4>{mbkm_count}</h4>
+            <p>Mbkm</p>
+          </div>
+        </center>
+        <div class="icon">
+          <i class="ion ion-person-add"></i>
+        </div>
+        <a href="<?php echo base_url(); ?>history/HistorisMbkm" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
       </div>
     </div>
   </div>
