@@ -1,12 +1,12 @@
 <?php
 if (!defined('BASEPATH')) exit('No direct script access allowed');
 
-class Data_mbkm extends CI_Controller
+class Data_publikasi extends CI_Controller
 {
     public function __construct()
     {
         parent::__construct();
-        $this->load->model('M_mbkm');
+        $this->load->model('M_publikasi');
         if (!$this->session->userdata('logged_in')) {
             redirect('login');
         }
@@ -15,8 +15,8 @@ class Data_mbkm extends CI_Controller
     public function index()
     {
         $data = [
-            'thisContent' => 'data_master/v_mbkm',
-            'thisJs'      => 'data_master/js_mbkm',
+            'thisContent' => 'data_master/v_publikasi',
+            'thisJs'      => 'data_master/js_publikasi',
         ];
         $this->parser->parse('template/template', $data);
     }
@@ -37,20 +37,20 @@ class Data_mbkm extends CI_Controller
 				$jur = 'Ekonomi Syariah';
 			}
 		}
-        $dataMbkm = $this->M_mbkm->fetch_data($searchValue, $orderColumn, $orderDir, $start, $length,$jur );
-        $totalRecords = $this->M_mbkm->count_all();
-        $totalFiltered = $this->M_mbkm->count_filtered($searchValue,$jur);
+        $dataPublikasi = $this->M_publikasi->fetch_data($searchValue, $orderColumn, $orderDir, $start, $length,$jur );
+        $totalRecords = $this->M_publikasi->count_all();
+        $totalFiltered = $this->M_publikasi->count_filtered($searchValue,$jur);
 
         $data = [];
         $no = $start + 1;
-        foreach ($dataMbkm as $row) {
+        foreach ($dataPublikasi as $row) {
             $data[] = [
                 $no++,
-                $row->judul,
+                $row->judul_tugas_akhir,
                 $row->nim,
                 $row->prodi,
                 $row->tanggal_pengajuan,
-                $row->dosen_pembimbing,
+                $row->dosen_pembimbing_utama,
                 $row->id,
             ];
         }
@@ -68,12 +68,12 @@ class Data_mbkm extends CI_Controller
     public function fetch_dosen_select2()
     {
         $search = $this->input->get('search'); 
-        $dosen = $this->M_mbkm->get_all_dosen($search);
+        $dosen = $this->M_publikasi->get_all_dosen($search);
     
         $data = array();
         foreach ($dosen as $row) {
             $data[] = array(
-                'id' => $row->nip,  // Pastikan id adalah NIP, bukan nama
+                'id' => $row->nama,  // Pastikan id adalah NIP, bukan nama
                 'text' => $row->nama
             );
         }
@@ -89,11 +89,11 @@ class Data_mbkm extends CI_Controller
         $dosen_pembimbing = $this->input->post('dosen_pembimbing');
 
         $data = [
-            'judul' => $judul,
-            'dosen_pembimbing' => $dosen_pembimbing,
+            'judul_tugas_akhir' => $judul,
+            'dosen_pembimbing_utama' => $dosen_pembimbing,
         ];
 
-        $this->M_mbkm->update($id, $data);
+        $this->M_publikasi->update($id, $data);
 
         echo json_encode(['success' => true, 'message' => 'Data berhasil diperbarui']);
     }

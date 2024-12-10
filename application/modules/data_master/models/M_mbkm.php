@@ -1,70 +1,77 @@
 <?php
 class M_mbkm extends CI_Model
 {
-    private $table = 'mbkm_riset'; // Nama tabel di database
+    private $table = 'mbkm_riset';
 
-    /**
-     * Mengambil data dengan filter, pagination, dan sorting
-     */
-    public function fetch_data($searchValue, $orderColumn, $orderDir, $start, $length)
+    public function fetch_data($searchValue, $orderColumn, $orderDir, $start, $length, $jur)
     {
-        // Kolom untuk pengurutan (sesuaikan indeks dengan kolom tabel)
-        $columns = ['submission_code', 'nim', 'tanggal_pengajuan', 'dosen_pembimbing', 'posisi_berkas'];
+        $columns = ['judul', 'nim', 'prodi', 'tanggal_pengajuan', 'dosen_pembimbing'];
 
         $this->db->select('*')->from($this->table);
+        $this->db->where('status_pengajuan_skripsi', 'Acc');
+        if ($jur) {
+            $this->db->where('prodi', $jur);
+        }
 
-        // Filter pencarian
         if (!empty($searchValue)) {
             $this->db->group_start()
-                ->like('submission_code', $searchValue)
+                ->like('judul', $searchValue)
                 ->or_like('nim', $searchValue)
+                ->or_like('prodi', $searchValue)
                 ->or_like('tanggal_pengajuan', $searchValue)
-                ->or_like('dosen_pembimbing', $searchValue)
-                ->or_like('posisi_berkas', $searchValue)
                 ->group_end();
         }
 
-        // Sorting
         if (isset($columns[$orderColumn])) {
             $this->db->order_by($columns[$orderColumn], $orderDir);
         }
 
-        // Pagination
         $this->db->limit($length, $start);
 
         return $this->db->get()->result();
     }
 
-    /**
-     * Menghitung total data tanpa filter
-     */
     public function count_all()
     {
         return $this->db->count_all($this->table);
     }
+    public function get_all_dosen($search = null)
+    {
+        $this->db->select('nip, nama');
+        $this->db->where('jabatan', 'Dosen');
 
-    /**
-     * Menghitung total data setelah filter
-     */
-    public function count_filtered($searchValue)
+        if ($search) {
+            $this->db->like('UPPER(nama)', strtoupper($search));
+        }
+
+        $this->db->where('createddate =', "(SELECT MAX(createddate) FROM m_dosen AS sub WHERE sub.nip = m_dosen.nip)", FALSE);
+
+        $query = $this->db->get('m_dosen');
+        return $query->result();
+    }
+    public function count_filtered($searchValue, $jur)
     {
         $this->db->from($this->table);
+        if ($jur) {
+            $this->db->where('prodi', $jur);
+        }
 
+        $this->db->where('status_pengajuan_skripsi', 'Acc');
         if (!empty($searchValue)) {
             $this->db->group_start()
-                ->like('submission_code', $searchValue)
+                ->like('judul', $searchValue)
                 ->or_like('nim', $searchValue)
+                ->or_like('prodi', $searchValue)
                 ->or_like('tanggal_pengajuan', $searchValue)
-                ->or_like('dosen_pembimbing', $searchValue)
-                ->or_like('posisi_berkas', $searchValue)
                 ->group_end();
         }
 
         return $this->db->count_all_results();
     }
-    public function update($submission_code, $data)
+
+    public function update($id, $data)
     {
-        $this->db->where('submission_code', $submission_code);
-        $this->db->update('mbkm_riset', $data);
+        $this->db->where('id', $id);
+        $this->db->update($this->table, $data);
     }
 }
