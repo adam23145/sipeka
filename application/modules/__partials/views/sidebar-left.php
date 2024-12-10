@@ -74,6 +74,18 @@
                 </a>
               </li>
               <li class="nav-item">
+                <a href="<?php echo base_url(); ?>data_master/data_mbkm" <?= ($seg2 == "data_mbkm") ? 'class="nav-link active"' : 'class="nav-link"'; ?>>
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Master Mbkm</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?php echo base_url(); ?>data_master/data_publikasi" <?= ($seg2 == "data_publikasi") ? 'class="nav-link active"' : 'class="nav-link"'; ?>>
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Master Publikasi</p>
+                </a>
+              </li>
+              <li class="nav-item">
                 <a href="<?php echo base_url(); ?>data_master/data_sidang" <?= ($seg2 == "data_sidang") ? 'class="nav-link active"' : 'class="nav-link"'; ?>>
                   <i class="far fa-circle nav-icon"></i>
                   <p>Master Sidang</p>
@@ -226,6 +238,18 @@
                 <a href="<?php echo base_url(); ?>data_master/data_login" <?= ($seg2 == "data_login") ? 'class="nav-link active"' : 'class="nav-link"'; ?>>
                   <i class="far fa-circle nav-icon"></i>
                   <p>Master login</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?php echo base_url(); ?>data_master/data_mbkm" <?= ($seg2 == "data_mbkm") ? 'class="nav-link active"' : 'class="nav-link"'; ?>>
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Master Mbkm</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?php echo base_url(); ?>data_master/data_publikasi" <?= ($seg2 == "data_publikasi") ? 'class="nav-link active"' : 'class="nav-link"'; ?>>
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Master Publikasi</p>
                 </a>
               </li>
               <li class="nav-item">
@@ -441,13 +465,13 @@
               <li class="nav-item">
                 <a href="<?php echo base_url(); ?>form/form_judulmbkm" <?= ($seg2 == "form_judulmbkm") ? 'class="nav-link active"' : 'class="nav-link"'; ?>>
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Form Judul Mbkm</p>
+                  <p>Form Judul Mbkm Riset</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="<?php echo base_url(); ?>form/Form_semprombkm" <?= ($seg2 == "Form_semprombkm") ? 'class="nav-link active"' : 'class="nav-link"'; ?>>
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Form Sempro Mbkm</p>
+                  <p>Form Sempro Mbkm Riset</p>
                 </a>
               </li>
               <li class="nav-item">
@@ -486,21 +510,21 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="<?php echo base_url(); ?>history/historismbkm" <?= ($seg2 == "historismbkm") ? 'class="nav-link active"' : 'class="nav-link"'; ?>>
+                <a href="<?php echo base_url(); ?>history/HistorisMbkm" <?= ($seg2 == "HistorisMbkm") ? 'class="nav-link active"' : 'class="nav-link"'; ?>>
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Histori Mbkm Judul</p>
+                  <p>Histori Mbkm Riset Judul</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="<?php echo base_url(); ?>history/historismbkmsempro" <?= ($seg2 == "historismbkmsempro") ? 'class="nav-link active"' : 'class="nav-link"'; ?>>
+                <a href="<?php echo base_url(); ?>history/HistorisMbkmSempro" <?= ($seg2 == "HistorisMbkmSempro") ? 'class="nav-link active"' : 'class="nav-link"'; ?>>
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Histori Mbkm Sempro</p>
+                  <p>Histori Mbkm Riset Sempro</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="<?php echo base_url(); ?>history/historismbkmskripsi" <?= ($seg2 == "historismbkmskripsi") ? 'class="nav-link active"' : 'class="nav-link"'; ?>>
+                <a href="<?php echo base_url(); ?>history/HistorisMbkmSkripsi" <?= ($seg2 == "HistorisMbkmSkripsi") ? 'class="nav-link active"' : 'class="nav-link"'; ?>>
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Histori Mbkm Skripsi</p>
+                  <p>Histori Mbkm Riset</p>
                 </a>
               </li>
               <li class="nav-item">
@@ -643,19 +667,19 @@
               <li class="nav-item">
                 <a href="<?php echo base_url(); ?>list/list_pengajuanmbkm/list_data/new" <?= ($seg2 == 'list_pengajuanmbkm' && $seg4 == "new") ? 'class="nav-link active"' : 'class="nav-link"'; ?>>
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Pengajuan Judul Mbkm</p>
+                  <p>Pengajuan Judul Mbkm Riset</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="<?php echo base_url(); ?>list/list_pengajuanmbkm/list_data/revisi" <?= ($seg2 == 'list_pengajuanmbkm' && $seg4 == "revisi") ? 'class="nav-link active"' : 'class="nav-link"'; ?>>
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Mbkm Revisi</p>
+                  <p>Mbkm Riset Revisi</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="<?php echo base_url(); ?>list/list_pengajuanmbkm/list_data/ditolak" <?= ($seg2 == 'list_pengajuanmbkm' && $seg4 == "ditolak") ? 'class="nav-link active"' : 'class="nav-link"'; ?>>
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Mbkm Tolak</p>
+                  <p>Mbkm Riset Tolak</p>
                 </a>
               </li>
               <?php if ($userlevel == 'Koordinator Prodi') { ?>
@@ -744,7 +768,7 @@
             <a href="#" <?= ($seg1 == "report_mbkm" && ($seg2 == "mbkmsempro_new" || $seg2 == "mbkmsempro" || $seg2 == "mbkmsempro_done")) ? 'class="nav-link active"' : 'class="nav-link"'; ?>>
               <i class="nav-icon fas fa-tasks"></i>
               <p>
-                Sempro Mbkm
+                Sempro Mbkm Riset
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
@@ -752,19 +776,19 @@
               <li class="nav-item">
                 <a href="<?php echo base_url(); ?>report_mbkm/mbkmsempro_new" <?= ($seg2 == "mbkmsempro_new") ? 'class="nav-link active"' : 'class="nav-link"'; ?>>
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Req Sempro Mbkm</p>
+                  <p>Req Sempro Mbkm Riset</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="<?php echo base_url(); ?>report_mbkm/mbkmsempro" <?= ($seg2 == "mbkmsempro") ? 'class="nav-link active"' : 'class="nav-link"'; ?>>
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Proses Sempro Mbkm</p>
+                  <p>Proses Sempro Mbkm Riset</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="<?php echo base_url(); ?>report_mbkm/mbkmsempro_done" <?= ($seg2 == "mbkmsempro_done") ? 'class="nav-link active"' : 'class="nav-link"'; ?>>
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Selesai Sempro Mbkm</p>
+                  <p>Selesai Sempro Mbkm Riset</p>
                 </a>
               </li>
             </ul>
@@ -773,7 +797,7 @@
             <a href="#" <?= ($seg1 == "report_mbkm" && ($seg2 == "mbkmskripsi_new" || $seg2 == "mbkmskripsi" || $seg2 == "mbkmskripsi_done")) ? 'class="nav-link active"' : 'class="nav-link"'; ?>>
               <i class="nav-icon fas fa-tasks"></i>
               <p>
-                Skripsi Mbkm
+                Mbkm Riset
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
@@ -781,19 +805,19 @@
               <li class="nav-item">
                 <a href="<?php echo base_url(); ?>report_mbkm/mbkmskripsi_new" <?= ($seg2 == "mbkmskripsi_new") ? 'class="nav-link active"' : 'class="nav-link"'; ?>>
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Req Skripsi Mbkm</p>
+                  <p>Req Mbkm Riset</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="<?php echo base_url(); ?>report_mbkm/mbkmskripsi" <?= ($seg2 == "mbkmskripsi") ? 'class="nav-link active"' : 'class="nav-link"'; ?>>
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Proses Skripsi Mbkm</p>
+                  <p>Proses Mbkm Riset</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="<?php echo base_url(); ?>report_mbkm/mbkmskripsi_done" <?= ($seg2 == "mbkmskripsi_done") ? 'class="nav-link active"' : 'class="nav-link"'; ?>>
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Selesai Skripsi Mbkm</p>
+                  <p>Selesai Mbkm Riset</p>
                 </a>
               </li>
             </ul>
@@ -1129,7 +1153,7 @@
             <a href="#" <?= ($seg1 == "mbkm" && ($seg2 == "Mbkmsempro_new" || $seg2 == "Mbkmsempro" || $seg2 == "Mbkmsempro_done")) ? 'class="nav-link active"' : 'class="nav-link"'; ?>>
               <i class="nav-icon fas fa-tasks"></i>
               <p>
-                Sempro Mbkm
+                Sempro Mbkm Riset
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
@@ -1158,7 +1182,7 @@
             <a href="#" <?= ($seg1 == "mbkm" && ($seg2 == "Mbkmskripsi_new" || $seg2 == "Mbkmskripsi" || $seg2 == "Mbkmskripsi_done")) ? 'class="nav-link active"' : 'class="nav-link"'; ?>>
               <i class="nav-icon fas fa-tasks"></i>
               <p>
-                Skripsi Mbkm
+              Mbkm Riset
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
@@ -1172,13 +1196,13 @@
               <li class="nav-item">
                 <a href="<?php echo base_url(); ?>mbkm/Mbkmskripsi" <?= ($seg2 == "Mbkmskripsi") ? 'class="nav-link active"' : 'class="nav-link"'; ?>>
                   <i class="far fa-circle nav-icon"></i>
-                  <p>List Bimbingan Skripsi</p>
+                  <p>List Bimbingan Mbkm Riset</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="<?php echo base_url(); ?>mbkm/Mbkmskripsi_done" <?= ($seg2 == "Mbkmskripsi_done") ? 'class="nav-link active"' : 'class="nav-link"'; ?>>
                   <i class="far fa-circle nav-icon"></i>
-                  <p>List Skripsi</p>
+                  <p>List Mbkm Riset</p>
                 </a>
               </li>
             </ul>
